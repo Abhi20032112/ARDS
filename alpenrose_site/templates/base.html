@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Default Title (can be overridden by each page) -->
+  <title>{% block title %}Alpenrose Digital Solutions{% endblock %}</title>
+
+  <!-- Default Meta Description -->
+  <meta name="description" content="{% block meta_description %}Alpenrose Digital Solutions - Professional Website Design, Digital Marketing, and IT solutions to grow your brand.{% endblock %}">
+
+  <!-- Keywords (optional but still useful) -->
+  <meta name="keywords" content="web design, digital marketing, branding, IT solutions, Alpenrose Digital Solutions">
+
+  <!-- Author -->
+  <meta name="author" content="Alpenrose Digital Solutions">
+
+  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="{% block og_title %}Alpenrose Digital Solutions{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Grow your brand with modern web design, marketing, and IT strategies.{% endblock %}">
+  <meta property="og:image" content="{% static 'images/Logo.png' %}">
+  <meta property="og:url" content="https://ards.in">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}Alpenrose Digital Solutions{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Professional Website Design & Digital Marketing.{% endblock %}">
+  <meta name="twitter:image" content="{% static 'images/Logo.png' %}">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+  <!-- Main JS -->
+  <script defer src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+
+  {% block content %}
+  {% endblock %}
+
+</body>
+</html>

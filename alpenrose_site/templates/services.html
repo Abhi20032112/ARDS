@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Services | Alpenrose Digital Solutions</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Explore Alpenrose Digital Solutions services: modern website design, digital ad campaigns, and creative brand identity solutions to grow your business online.">
+  <meta name="keywords" content="web design services, responsive websites, digital ad campaigns, branding solutions, logo design, UI UX design, ecommerce websites, Alpenrose Digital Solutions, best web design India, digital marketing services">
+  <meta name="author" content="Alpenrose Digital Solutions">
+
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:title" content="Services | Alpenrose Digital Solutions">
+  <meta property="og:description" content="Discover our web design, ad campaigns, and brand identity services designed to make your business stand out.">
+  <meta property="og:image" content="{% static 'images/Logo.png' %}">
+  <meta property="og:url" content="https://ards.in/services">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Services | Alpenrose Digital Solutions">
+  <meta name="twitter:description" content="Alpenrose Digital Solutions offers web design, digital ad campaigns, and creative branding solutions.">
+  <meta name="twitter:image" content="{% static 'images/Logo.png' %}">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{% static 'css/services.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/Logo.png' %}" alt="Alpenrose Digital Solutions Logo" class="logo-img" />
+      <span class="company">Alpenrose Digital Solutions</span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'feedback' %}">Feedback</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="fade-in">We Grow Your Brand Like It’s Our Own</h1>
+      <p class="fade-in delay">Digital design. Strategy. Flair.</p>
+      <a href="#" class="btn">Let’s Work Together</a>
+    </div>
+    <div class="gradient-overlay"></div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Website Design</h3>
+        <p>Responsive, modern websites tailored to your brand.</p>
+      </div>
+      <div class="card">
+        <h3>Ad Campaigns</h3>
+        <p>We drive traffic with strategic, data-driven campaigns.</p>
+      </div>
+      <div class="card">
+        <h3>Brand Identity</h3>
+        <p>Logos, voice, and visuals that build trust and style.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Alpenrose Digital Solutions. All rights reserved.</p>
+    <p>
+      <a href="#">Facebook</a> | 
+      <a href="#">Instagram</a> | 
+      <a href="#">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,178 @@
+/* ========== Base Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== Typography & Body ========== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: #1e293b;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ========== Navbar (shared styles) ========== */
+.navbar {
+  background: linear-gradient(to right, #4b76d8, #091529);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #facc15;
+}
+
+.logo-img {
+  width: 36px;
+  height: 36px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #f9fafb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #facc15;
+}
+
+/* ========== Contact Hero ========== */
+.contact-hero {
+  background: linear-gradient(135deg, #6d28d9, #f472b6);
+  color: white;
+  text-align: center;
+  padding: 100px 10% 60px;
+}
+
+.contact-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.contact-hero p {
+  font-size: 1.1rem;
+  color: #fdf4ff;
+}
+
+/* ========== Contact Form Section ========== */
+.contact-form {
+  padding: 60px 10%;
+  background-color: #ffffff;
+}
+
+form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input,
+textarea {
+  padding: 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #c084fc;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button {
+  background-color: #facc15;
+  color: #1e293b;
+  font-weight: 600;
+  padding: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #fbbf24;
+  transform: scale(1.05);
+}
+
+/* ========== Footer ========== */
+.footer {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 30px 10%;
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: #facc15;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+/* ========== Animations ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.fade-in.delay {
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Responsive ========== */
+@media screen and (max-width: 768px) {
+  .contact-hero h1 {
+    font-size: 2rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,238 @@
+/* ========== Base Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== Typography & Body ========== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: #1e293b;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ========== Navbar (shared style from index.css) ========== */
+.navbar {
+  background: linear-gradient(to right, #4b76d8, #091529);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #facc15;
+}
+
+.logo-img {
+  width: 36px;
+  height: 36px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #f9fafb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #facc15;
+}
+
+/* ========== About Hero Section ========== */
+.about-hero {
+  background: linear-gradient(135deg, #6ee7b7, #93c5fd);
+  color: #1e293b;
+  text-align: center;
+  padding: 100px 10% 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #475569;
+}
+
+.hero-animation {
+  max-width: 300px;
+}
+
+/* Floating Shapes */
+.floating-shape {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-color: #bae6fd;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 6s infinite ease-in-out;
+}
+
+.shape1 {
+  top: 10%;
+  left: 5%;
+}
+
+.shape2 {
+  bottom: 5%;
+  right: 10%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ========== About Cards ========== */
+.about-content {
+  background-color: #ffffff;
+  padding: 60px 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.card {
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+  padding: 30px;
+  width: 300px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: #0f172a;
+}
+
+.card p,
+.card ul {
+  color: #475569;
+  font-size: 1rem;
+}
+
+.card ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+/* ========== Footer ========== */
+.footer {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 30px 10%;
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: #facc15;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+/* ========== Animations ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.fade-in.delay {
+  animation-delay: 0.5s;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 1s forwards;
+}
+
+.slide-up.delay {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Responsive ========== */
+@media screen and (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content {
+    flex-direction: column;
+  }
+
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

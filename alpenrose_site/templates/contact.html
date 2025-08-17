@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us | Alpenrose Digital Solutions</title>
+  <meta name="description" content="Get in touch with Alpenrose Digital Solutions for website design, digital marketing, SEO, branding, and creative solutions. Let's bring your ideas to life.">
+  <meta name="keywords" content="contact Alpenrose Digital Solutions, web design agency contact, digital marketing company India, SEO services, branding solutions, creative agency contact, website development support">
+  <meta name="author" content="Alpenrose Digital Solutions" />
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/Logo.png' %}" alt="Alpenrose Digital Solutions Logo" class="logo-img" />
+      <span class="company">Alpenrose Digital Solutions</span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'feedback' %}">Feedback</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="contact-hero">
+    <h1 class="fade-in">Let’s Build Something Beautiful</h1>
+    <p class="fade-in delay">Have an idea? A dream? A design that’s waiting to be born? Let’s talk.</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-form">
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Alpenrose Digital Solutions. All rights reserved.</p>
+    <p>
+      <a href="#">Facebook</a> | 
+      <a href="#">Instagram</a> | 
+      <a href="#">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
+{% endblock %}

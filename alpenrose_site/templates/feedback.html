@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Client Feedback & Testimonials | Alpenrose Digital Solutions</title>
+  <meta name="description" content="Read genuine client feedback and testimonials for Alpenrose Digital Solutions. Discover how our digital marketing, web design, and branding services helped businesses grow.">
+  <meta name="keywords" content="Alpenrose Digital Solutions reviews, client testimonials, digital marketing feedback, website design reviews, branding feedback, customer stories, SEO testimonials, marketing agency India">
+  <meta name="author" content="Alpenrose Digital Solutions" />
+  <link rel="stylesheet" href="{% static 'css/feedback.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/Logo.png' %}" alt="Alpenrose Digital Solutions Logo" class="logo-img" />
+      <span class="company">Alpenrose Digital Solutions</span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'feedback' %}">Feedback</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="feedback-hero">
+    <h1 class="fade-in">What Our Clients Say</h1>
+    <p class="fade-in delay">Real stories. Real results. Real relationships.</p>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="testimonial-card slide-up">
+      <blockquote>“Alpenrose Digital completely transformed our online presence. Their creativity and care are unmatched.”</blockquote>
+      <cite>- Priya, GreenNest</cite>
+    </div>
+    <div class="testimonial-card slide-up delay">
+      <blockquote>“We saw a 40% increase in engagement within weeks. Their strategy is pure magic.”</blockquote>
+      <cite>- Aakash, Startup Incubator</cite>
+    </div>
+    <div class="testimonial-card slide-up delay-2">
+      <blockquote>“From branding to execution, they made our vision come alive. Highly recommended!”</blockquote>
+      <cite>- Disha, Artistry Co.</cite>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Alpenrose Digital Solutions. All rights reserved.</p>
+    <p>
+      <a href="#">Facebook</a> | 
+      <a href="#">Instagram</a> | 
+      <a href="#">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
+{% endblock %}

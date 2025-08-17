@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us | Alpenrose Digital Solutions</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Learn more about Alpenrose Digital Solutions – a creative web design and digital marketing agency in India, dedicated to helping brands grow with innovation and strategy.">
+  <meta name="keywords" content="about Alpenrose Digital Solutions, creative agency India, web design company, digital marketing experts, branding agency, IT consulting, SEO strategy">
+  <meta name="author" content="Alpenrose Digital Solutions">
+
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:title" content="About Us | Alpenrose Digital Solutions">
+  <meta property="og:description" content="Discover our mission, values, and expertise in web design, digital marketing, and IT solutions.">
+  <meta property="og:image" content="{% static 'images/Logo.png' %}">
+  <meta property="og:url" content="https://ards.in/about">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About Us | Alpenrose Digital Solutions">
+  <meta name="twitter:description" content="We’re a creative digital agency helping brands grow with web design, SEO, and marketing solutions.">
+  <meta name="twitter:image" content="{% static 'images/Logo.png' %}">
+
+  <!-- Styles & Fonts -->
+  <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/Logo.png' %}" alt="Alpenrose Digital Solutions Logo" class="logo-img" />
+      <span class="company">Alpenrose Digital Solutions</span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'feedback' %}">Feedback</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="about-page">
+
+    <!-- Hero Section with Floating Shapes -->
+    <section class="about-hero">
+      <div class="floating-shape shape1"></div>
+      <div class="floating-shape shape2"></div>
+
+      <div class="hero-content">
+        <div class="hero-text fade-in">
+          <h1>Who We Are</h1>
+          <p>We’re not just a digital agency—we’re your creative growth partner.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Cards -->
+    <section class="about-content">
+      <div class="card slide-up">
+        <h2>Our Mission</h2>
+        <p>To empower brands with bold design, smart strategy, and a whole lot of heart. We build digital experiences that connect, convert, and inspire.</p>
+      </div>
+      <div class="card slide-up delay">
+        <h2>Our Values</h2>
+        <ul>
+          <li><strong>✨ Creativity:</strong> We think beyond the template.</li>
+          <li><strong>🤝 Integrity:</strong> We build trust through transparency.</li>
+          <li><strong>🚀 Excellence:</strong> We deliver results that matter.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer fade-in">
+      <p>&copy; 2025 Alpenrose Digital Solutions. All rights reserved.</p>
+      <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">LinkedIn</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Lottie script -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</body>
+</html>
+{% endblock %}
