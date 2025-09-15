@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 224 71% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71% 4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71% 4%;
+  --primary: 262 84% 58%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 262 84% 58%;
+  --radius: 0.75rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: hsl(var(--foreground));
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #a259ff 100%);
+}
+
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
+}
+
+.floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.section-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.section-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.section-divider .shape-fill {
+  fill: #f9fafb;
+}
+
+.page-container {
+  background-color: #f9fafb;
+}
+
+/* Smooth scroll for in-page anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fade-in utilities for page load */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse for primary CTAs */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Simple ripple effect for buttons (JS toggles ripple span) */
+.ripple-container { position: relative; overflow: hidden; }
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255,255,255,0.35);
+  animation: ripple 600ms linear;
+}
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .floating-animation,
+  .pulse,
+  .fade-in,
+  .card-hover,
+  .ripple { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Mobile simplifications */
+@media (max-width: 640px) {
+  .card-hover:hover { transform: none; box-shadow: none; }
+  .pulse { animation-duration: 3s; }
+}
+
+/* nav link underline animation */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, rgba(99,102,241,1), rgba(168,85,247,1));
+  transition: width 220ms cubic-bezier(.2,.8,.2,1);
+}
+.nav-underline:hover::after,
+.nav-underline.active::after { width: 100%; }
+
+/* subtle animated background wave */
+.bg-wave {
+  background-size: 200% 200%;
+  animation: wave 20s linear infinite;
+}
+@keyframes wave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* tilt hover for cards */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 350ms cubic-bezier(.2,.8,.2,1), box-shadow 350ms;
+}
+.tilt-card:hover {
+  transform: perspective(900px) rotateX(4deg) rotateY(-6deg) translateY(-6px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card { transition: none; transform: none; box-shadow: none; }
+}
