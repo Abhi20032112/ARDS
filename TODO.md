@@ -1,0 +1,10 @@
+- [x] Import slide images in HomePage.jsx
+- [x] Update ManualSlider slides array to use imported images
+- [ ] Run dev server to verify slider works
+- [x] Update src/components/Navbar.jsx to use Lucide icons instead of FontAwesome
+- [x] Update src/components/Navbar.jsx to display icons on desktop
+- [x] Add hover scale animation to navbar links
+- [x] Update src/components/Footer.jsx to add Lucide icons to quick links
+- [x] Add stagger animations to footer grid columns
+- [x] Add hover scale animation to footer links
+- [x] Run dev server to verify animations and icons work
