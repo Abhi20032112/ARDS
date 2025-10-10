@@ -10,7 +10,7 @@ import project2Image from '../assets/project2.jpg';
 import project3Image from '../assets/project3.jpg';
 import project4Image from '../assets/project4.jpg';
 import project5Image from '../assets/project5.jpg';
-import project6Image from '../assets/project6.jpg'; // You missed this one
+import project6Image from '../assets/project6.jpg';
 
 const OurWorkPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -154,40 +154,6 @@ const OurWorkPage = () => {
                   <button key={index} onClick={() => goToSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-indigo-600 w-8' : 'bg-gray-300 hover:bg-gray-400'}`} />
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn} className="text-center mb-16">
-              <h2 className="text-xl lg:text-5xl font-extrabold gradient-text mb-6">All Projects</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Browse through our complete portfolio of successful digital marketing projects.</p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden card-hover cursor-pointer group"
-                  onClick={() => goToSlide(index)}
-                >
-                  <div className="relative h-56">
-                    <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400" alt={project.title} src={project.image} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4">
-                      <span className="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold">{project.category}</span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed truncate group-hover:truncate-none">{project.description}</p>
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </div>
         </section>

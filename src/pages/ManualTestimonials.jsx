@@ -36,13 +36,13 @@ export default function ManualTestimonials({ testimonials }) {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-gray-900">{t.name}</h3>
-                <p className="text-sm text-gray-600">{new Date(t.submittedAt).toLocaleDateString()}</p>
+                <p className="text-sm text-gray-600">{new Date(t.date).toLocaleDateString()}</p>
               </div>
             </div>
 
-            <div className="flex items-center mb-4">{/* static 5 stars for now */}
+            <div className="flex items-center mb-4">
               {Array.from({ length: 5 }).map((_, idx) => (
-                <span key={idx} className={`h-4 w-4 inline-block rounded-full ${idx < 5 ? 'bg-yellow-400' : 'bg-gray-300'} mr-2`} />
+                <span key={idx} className={`h-4 w-4 inline-block rounded-full ${idx < t.rating ? 'bg-yellow-400' : 'bg-gray-300'} mr-2`} />
               ))}
             </div>
 

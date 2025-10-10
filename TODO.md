@@ -1,10 +1,10 @@
-- [x] Import slide images in HomePage.jsx
-- [x] Update ManualSlider slides array to use imported images
-- [ ] Run dev server to verify slider works
-- [x] Update src/components/Navbar.jsx to use Lucide icons instead of FontAwesome
-- [x] Update src/components/Navbar.jsx to display icons on desktop
-- [x] Add hover scale animation to navbar links
-- [x] Update src/components/Footer.jsx to add Lucide icons to quick links
-- [x] Add stagger animations to footer grid columns
-- [x] Add hover scale animation to footer links
-- [x] Run dev server to verify animations and icons work
+# TODO: Redesign OurWorkPage.jsx
+
+## Approved Plan Breakdown
+- [x] Update hero section with parallax background, animated particles, and new title/subtitle
+- [x] Add Impact Metrics section after hero with scrollable stats cards
+- [x] Replace slider with a teaser card for the top project (flip animation on hover)
+- [x] Implement filterable masonry grid for all projects with 3D tilt effects and overlays
+- [x] Redesign CTA section with split layout (form teaser and testimonial)
+- [x] Update overall styling to dark theme (bg-gray-900, purple/cyan accents)
+- [x] Ensure responsiveness and refine animations

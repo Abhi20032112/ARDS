@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import {
   Facebook,
   Instagram,
@@ -13,7 +12,7 @@ import {
   Wrench,
   Briefcase,
   Star,
-  MessageSquare
+  Users
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
@@ -45,12 +44,12 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'About', path: '/about', icon: Info },
-    { name: 'Services', path: '/services', icon: Wrench },
-    { name: 'Our Work', path: '/our-work', icon: Briefcase },
-    { name: 'Testimonials', path: '/testimonials', icon: Star },
-    { name: 'Feedback', path: '/feedback', icon: MessageSquare },
-    { name: 'Contact', path: '/contact', icon: Phone },
+    { name: 'About', id: 'about', icon: Info },
+    { name: 'Services', id: 'services', icon: Wrench },
+    { name: 'Work', id: 'work', icon: Briefcase },
+    { name: 'Clients', id: 'clients', icon: Star },
+    { name: 'Team', id: 'team', icon: Users },
+    { name: 'Contact', id: 'contact', icon: Phone },
   ];
 
   const containerVariants = {
@@ -100,10 +99,10 @@ const Footer = () => {
         viewport={{ once: true, amount: 0.2 }}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Logo + About */}
           <motion.div variants={itemVariants} className="space-y-4 col-span-1 md:col-span-2 lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-4">
+            <a href="#hero" className="flex items-center space-x-4">
               <img
                 src={logo}
                 alt="Alpenrose Digital Solutions Logo"
@@ -112,7 +111,7 @@ const Footer = () => {
               <span className="font-bold text-gray-800 text-xl">
                 Alpenrose Digital Solutions
               </span>
-            </Link>
+            </a>
             <p className="text-gray-600 text-sm">
               Your partner in digital excellence. We grow brands with passion and precision.
             </p>
@@ -125,7 +124,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-indigo-600 hover:drop-shadow-[0_0_6px_rgba(99,102,241,0.6)] transition duration-300 transform hover:scale-110"
+                  className="text-gray-400 hover:text-indigo-600 hover:drop-shadow-[0_0_6px_rgba(99,102,241,0.6)] transition duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label={social.label}
                 >
                   <Tooltip text={social.label}>
@@ -142,13 +141,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                <Link
-                  to={link.path}
-                  className="text-gray-600 hover:text-indigo-600 transition-all duration-200 text-sm font-medium inline-flex items-center space-x-2 hover:scale-105"
+                <a
+                  href={`#${link.id}`}
+                  className="text-gray-600 hover:text-indigo-600 transition-all duration-200 text-sm font-medium inline-flex items-center space-x-2 hover:scale-105 hover:animate-bounce"
                 >
                   {link.icon && <link.icon className="h-4 w-4 text-gray-500" />}
                   <span>{link.name}</span>
-                </Link>
+                </a>
                 </li>
               ))}
             </ul>

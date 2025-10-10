@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Tooltip from '@/components/ui/tooltip';
-import { Home, Info, Wrench, Star, Phone, MessageSquare, Briefcase } from 'lucide-react';
+import { Home, Info, Wrench, Star, Phone, Users, Briefcase } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
 
   const navItems = [
     { name: 'Home', path: '/', icon: Home },
-    { name: 'About Us', path: '/about', icon: Info },
+    { name: 'About', path: '/about', icon: Info },
     { name: 'Services', path: '/services', icon: Wrench },
-    { name: 'Our Work', path: '/our-work', icon: Briefcase },
-    { name: 'Testimonials', path: '/testimonials', icon: Star },
-    { name: 'Feedback', path: '/feedback', icon: MessageSquare },
+    { name: 'Work', path: '/work', icon: Briefcase },
+    { name: 'Clients', path: '/clients', icon: Star },
+    { name: 'Feedback', path: '/feedback', icon: Star },
+    { name: 'Team', path: '/team', icon: Users },
     { name: 'Contact', path: '/contact', icon: Phone },
   ];
-
-  const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
     let lastScroll = 0;
@@ -42,13 +40,19 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav id="site-nav" className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm transition-all duration-300">
+    <motion.nav
+      id="site-nav"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm transition-all duration-300"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-20">
           <Link to="/" className="flex items-center space-x-3 shrink-0 overflow-hidden">
-            <img 
-              src={logo} 
-              alt="Alpenrose Digital Solutions Logo" 
+            <img
+              src={logo}
+              alt="Alpenrose Digital Solutions Logo"
               className="h-12 w-auto"
             />
             <span className="font-bold text-gray-800 text-base sm:text-xl md:text-2xl whitespace-nowrap">
@@ -62,7 +66,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`relative text-sm font-semibold nav-underline transition-all duration-300 rounded-md whitespace-nowrap hover:scale-105 ${isActive(item.path) ? 'active text-indigo-600' : 'text-gray-600 hover:text-indigo-600'}`}
+                  className="relative text-sm font-semibold nav-underline transition-all duration-300 rounded-md whitespace-nowrap hover:scale-105 hover:shadow-[0_0_10px_rgba(99,102,241,0.5)] text-gray-600 hover:text-indigo-600"
                 >
                   <span className="inline-flex items-center space-x-2">
                     {item.icon && (
@@ -70,14 +74,6 @@ const Navbar = () => {
                     )}
                     <span className="whitespace-nowrap">{item.name}</span>
                   </span>
-                {isActive(item.path) && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-indigo-600"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
                 </Link>
             ))}
           </div>
@@ -98,26 +94,22 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200/50"
+            className="absolute top-0 right-0 w-full h-screen bg-gradient-to-r from-indigo-500 to-purple-600 text-white z-50 md:hidden"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="px-2 pt-20 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2.5 rounded-md text-sm font-semibold transition-all duration-200 hover:scale-105 ${
-                    isActive(item.path)
-                      ? 'text-indigo-700 bg-indigo-50'
-                      : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
-                  }`}
+                  className="block px-3 py-2.5 rounded-md text-sm font-semibold transition-all duration-200 hover:scale-105 text-white hover:text-gray-200"
                 >
                   <span className="inline-flex items-center space-x-3">
-                    {item.icon && <item.icon className="h-4 w-4 text-gray-500" />}
+                    {item.icon && <item.icon className="h-4 w-4 text-white" />}
                     <span>{item.name}</span>
                   </span>
                 </Link>
@@ -126,7 +118,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

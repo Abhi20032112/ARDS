@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, Megaphone, Code, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ServicesPage = () => {
@@ -50,6 +50,20 @@ const ServicesPage = () => {
       description: 'Reliable and scalable IT infrastructure services for seamless business operations.',
       details: 'We provide end-to-end IT infrastructure solutions including server management, cloud setup, network security, and system monitoring to ensure your business runs smoothly and securely.',
       features:  ['Server Setup & Management', 'Cloud Infrastructure', 'Network Security', 'System Monitoring'],
+    },
+    {
+      icon: Megaphone,
+      title: 'Political Campaign Management',
+      description: 'Strategic digital campaign management for political candidates to engage voters and amplify messages.',
+      details: 'Our political campaign services leverage digital tools to create compelling narratives, target key demographics, and drive voter engagement through social media, advertising, and content strategies.',
+      features: ['Social Media Strategy', 'Targeted Advertising', 'Content Creation', 'Voter Engagement'],
+    },
+    {
+      icon: Code,
+      title: 'Web Development',
+      description: 'Custom web development solutions to build modern, responsive, and user-friendly websites.',
+      details: 'From concept to deployment, we create scalable websites using the latest technologies, ensuring optimal performance, security, and user experience.',
+      features: ['Responsive Design', 'Custom Development', 'E-commerce Solutions', 'SEO Optimization'],
     },
   ];
 
