@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -129,7 +130,10 @@ const Contact = () => {
           <motion.div {...fadeIn} transition={{...fadeIn.transition, delay: 0.2}} className="bg-white rounded-3xl p-8 shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+                <motion.div
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                   <input
                     type="text"
@@ -138,11 +142,14 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 focus:shadow-lg"
                     placeholder="Your Name"
                   />
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  whileFocus={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                   <input
                     type="email"
@@ -151,12 +158,15 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 focus:shadow-lg"
                     placeholder="your@email.com"
                   />
-                </div>
+                </motion.div>
               </div>
-              <div>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
                 <input
                   type="tel"
@@ -164,11 +174,14 @@ const Contact = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 focus:shadow-lg"
                   placeholder="+91 1234567890"
                 />
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                 <textarea
                   id="message"
@@ -177,23 +190,34 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 focus:shadow-lg resize-none"
                   placeholder="Tell us about your project..."
                 ></textarea>
-              </div>
-              <button
+              </motion.div>
+              <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
+                <Send className="ml-2 h-4 w-4" />
+              </Button>
             </form>
           </motion.div>
         </div>
 
         <motion.div {...fadeIn} className="mt-16 text-center">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" alt="Office" className="w-full h-64 object-cover rounded-3xl shadow-2xl" loading="lazy" />
+          <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+            <motion.img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab"
+              alt="Office"
+              className="w-full h-64 object-cover"
+              loading="lazy"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.6 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          </div>
         </motion.div>
       </div>
     </section>

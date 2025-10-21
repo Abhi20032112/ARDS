@@ -2,8 +2,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Users, Award, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AnimatedNumber from '@/components/AnimatedNumber';
 import vikrantImage from '../assets/Vikrant.jpeg';
 import abhiImage from '../assets/Abhijeet.jpeg';
 
@@ -48,25 +49,92 @@ const TeamPage = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
               {teamMembers.map((member, index) => (
                 <motion.div
                   key={member.name}
                   initial={{ opacity: 0, scale: 0.8, y: 50 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  whileHover={{ scale: 1.05, y: -10 }}
                   transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-3xl shadow-lg p-8 card-hover text-center"
+                  className="bg-white rounded-3xl shadow-lg p-8 card-hover text-center group"
                 >
                   <div className="relative w-32 h-32 mx-auto mb-6">
-                    <img className="w-full h-full rounded-full object-cover shadow-lg" alt={member.name} src={member.image} />
+                    <motion.img
+                      className="w-full h-full rounded-full object-cover shadow-lg"
+                      alt={member.name}
+                      src={member.image}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </div>
                   <h3 className="font-bold text-2xl text-gray-900 mb-2">{member.name}</h3>
                   <p className="text-lg text-indigo-600 font-medium mb-4">{member.role}</p>
-                  <p className="text-gray-600 leading-relaxed">{member.bio}</p>
+                  <motion.p
+                    className="text-gray-600 leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: index * 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    {member.bio}
+                  </motion.p>
                 </motion.div>
               ))}
             </div>
+
+            <motion.div {...fadeIn} className="text-center mb-16">
+              <h3 className="text-3xl font-bold text-gray-900 mb-12">Team Statistics</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <motion.div
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  className="bg-white rounded-3xl p-8 shadow-lg card-hover tilt-card"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mb-6 shadow-md">
+                    <Users className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-4xl font-bold text-gray-900 mb-2">
+                    <AnimatedNumber value={2} suffix="" />
+                  </div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-4">Core Team Members</h4>
+                  <p className="text-gray-600">
+                    Dedicated professionals driving innovation and excellence.
+                  </p>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  className="bg-white rounded-3xl p-8 shadow-lg card-hover tilt-card"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl mb-6 shadow-md">
+                    <Award className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-4xl font-bold text-gray-900 mb-2">
+                    <AnimatedNumber value={5} suffix="+" />
+                  </div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-4">Years Experience</h4>
+                  <p className="text-gray-600">
+                    Combined expertise in digital marketing and technology.
+                  </p>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  className="bg-white rounded-3xl p-8 shadow-lg card-hover tilt-card"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-md">
+                    <TrendingUp className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-4xl font-bold text-gray-900 mb-2">
+                    <AnimatedNumber value={100} suffix="%" />
+                  </div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-4">Client Satisfaction</h4>
+                  <p className="text-gray-600">
+                    Committed to delivering exceptional results for every client.
+                  </p>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </section>
 

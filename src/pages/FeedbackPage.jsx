@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const FeedbackPage = () => {
@@ -76,7 +76,10 @@ const FeedbackPage = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+                    <motion.div
+                      whileFocus={{ scale: 1.02 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                       <input
                         type="text"
@@ -85,10 +88,13 @@ const FeedbackPage = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 focus:shadow-lg"
                       />
-                    </div>
-                    <div>
+                    </motion.div>
+                    <motion.div
+                      whileFocus={{ scale: 1.02 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                       <input
                         type="email"
@@ -97,25 +103,32 @@ const FeedbackPage = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 focus:shadow-lg"
                       />
-                    </div>
+                    </motion.div>
                   </div>
                   <div>
                     <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-2">Rating</label>
-                    <select
-                      id="rating"
-                      name="rating"
-                      value={formData.rating}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                    >
-                      <option value={5}>5 Stars</option>
-                      <option value={4}>4 Stars</option>
-                      <option value={3}>3 Stars</option>
-                      <option value={2}>2 Stars</option>
-                      <option value={1}>1 Star</option>
-                    </select>
+                    <div className="flex space-x-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <motion.button
+                          key={star}
+                          type="button"
+                          onClick={() => setFormData(prev => ({ ...prev, rating: star }))}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="focus:outline-none"
+                        >
+                          <Star
+                            className={`h-8 w-8 ${
+                              star <= formData.rating
+                                ? 'text-yellow-400 fill-current'
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        </motion.button>
+                      ))}
+                    </div>
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
@@ -133,6 +146,7 @@ const FeedbackPage = () => {
                   <div className="text-center">
                     <Button type="submit" size="lg" className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
                       Submit Feedback
+                      <Send className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
                 </form>

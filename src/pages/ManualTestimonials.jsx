@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 
 export default function ManualTestimonials({ testimonials }) {
   const [index, setIndex] = useState(0);
@@ -40,11 +40,29 @@ export default function ManualTestimonials({ testimonials }) {
               </div>
             </div>
 
-            <div className="flex items-center mb-4">
+            <motion.div 
+              className="flex items-center mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, staggerChildren: 0.1 }}
+              viewport={{ once: true }}
+            >
               {Array.from({ length: 5 }).map((_, idx) => (
-                <span key={idx} className={`h-4 w-4 inline-block rounded-full ${idx < t.rating ? 'bg-yellow-400' : 'bg-gray-300'} mr-2`} />
+                <motion.div
+                  key={idx}
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Star
+                    className={`h-5 w-5 ${
+                      idx < t.rating
+                        ? 'text-yellow-400 fill-current'
+                        : 'text-gray-300'
+                    }`}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <p className="text-gray-700 leading-relaxed italic flex-grow">"{t.message}"</p>
           </motion.div>
@@ -52,20 +70,24 @@ export default function ManualTestimonials({ testimonials }) {
       </div>
 
       <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col space-y-2">
-        <button
+        <motion.button
           aria-label="Prev testimonials"
           onClick={() => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length)}
-          className="bg-white/90 text-gray-800 p-2 rounded-full shadow hover:scale-105 transition"
+          whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,1)' }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-white/90 text-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
         >
           ‹
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           aria-label="Next testimonials"
           onClick={() => setIndex((i) => (i + 1) % testimonials.length)}
-          className="bg-white/90 text-gray-800 p-2 rounded-full shadow hover:scale-105 transition"
+          whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,1)' }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-white/90 text-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
         >
           ›
-        </button>
+        </motion.button>
       </div>
     </div>
   );

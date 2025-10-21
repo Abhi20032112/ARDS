@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ExternalLink, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, ArrowRight, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Lightbox from '@/components/Lightbox';
 
 import project1Image from '../assets/project1.jpg';
 import project2Image from '../assets/project2.jpg';
@@ -12,8 +13,20 @@ import project4Image from '../assets/project4.jpg';
 import project5Image from '../assets/project5.jpg';
 import project6Image from '../assets/project6.jpg';
 
+// Lazy load images
+const lazyLoadImage = (src) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(src);
+    img.src = src;
+  });
+};
+
 const OurWorkPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState('');
+  const [lightboxAlt, setLightboxAlt] = useState('');
 
   const projects = [
     {
@@ -70,6 +83,16 @@ const OurWorkPage = () => {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + projects.length) % projects.length);
   const goToSlide = (index) => setCurrentSlide(index);
 
+  const openLightbox = (image, alt) => {
+    setLightboxImage(image);
+    setLightboxAlt(alt);
+    setLightboxOpen(true);
+  };
+
+  const categories = ['All', ...new Set(projects.map(p => p.category))];
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const filteredProjects = selectedCategory === 'All' ? projects : projects.filter(p => p.category === selectedCategory);
+
   const fadeIn = {
     initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
@@ -85,76 +108,103 @@ const OurWorkPage = () => {
       </Helmet>
 
       <div className="page-container">
-        <section className="hero-gradient py-24 text-white text-center">
+        <section className="parallax-bg py-24 text-white text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="space-y-6"
+            className="relative z-10 space-y-6"
           >
-            <h1 className="text-4xl lg:text-6xl font-extrabold">Our Work</h1>
-            <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              className="text-4xl lg:text-6xl font-extrabold reveal-fade"
+            >
+              Our Work
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto reveal-fade stagger-1"
+            >
               Discover how we've helped businesses transform their digital presence and achieve extraordinary results.
-            </p>
+            </motion.p>
           </motion.div>
         </section>
 
-        <section className="py-24">
+        <section className="py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-white">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0.5, x: 200 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0.5, x: -200 }}
-                    transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                    className="grid grid-cols-1 lg:grid-cols-2"
+            <motion.div {...fadeIn} className="text-center mb-12">
+              <h2 className="text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent mb-6">Featured Projects</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Explore our most impactful work across various industries</p>
+            </motion.div>
+
+            <motion.div className="flex justify-center mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
+              <div className="flex flex-wrap gap-4">
+                {categories.map((category) => (
+                  <motion.button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${selectedCategory === category ? 'bg-indigo-600 text-white shadow-lg' : category === 'All' ? 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm' : 'bg-white text-indigo-600 hover:bg-indigo-50 shadow-sm'}`}
                   >
-                    <div className="relative h-80 lg:h-auto">
-                      <img className="w-full h-full object-cover" alt={projects[currentSlide].title} src={projects[currentSlide].image} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-6 left-6">
-                        <span className="bg-indigo-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold">
-                          {projects[currentSlide].category}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-8 lg:p-12 flex flex-col justify-center">
-                      <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                        {projects[currentSlide].title}
-                      </h3>
-                      <p className="text-gray-600 text-lg mb-6 leading-relaxed">
-                        {projects[currentSlide].description}
-                      </p>
-                      <div className="space-y-4 mb-8">
-                        <h4 className="text-lg font-semibold text-gray-900">Key Results:</h4>
-                        <ul className="space-y-2">
-                          {projects[currentSlide].results.map((result, index) => (
-                            <li key={index} className="flex items-center text-gray-700">
-                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full mr-3 shrink-0"></div>
-                              {result}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <Button variant="outline" className="w-fit font-semibold border-indigo-200 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700">
-                        View Case Study
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-                <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 z-10 backdrop-blur-sm"><ChevronLeft className="h-6 w-6" /></button>
-                <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 z-10 backdrop-blur-sm"><ChevronRight className="h-6 w-6" /></button>
-              </div>
-              <div className="flex justify-center mt-8 space-x-3">
-                {projects.map((_, index) => (
-                  <button key={index} onClick={() => goToSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-indigo-600 w-8' : 'bg-gray-300 hover:bg-gray-400'}`} />
+                    {category}
+                  </motion.button>
                 ))}
               </div>
-            </div>
+            </motion.div>
+
+            <motion.div
+              layout
+              className="masonry-grid gap-8"
+              initial={false}
+              animate={{ opacity: 1 }}
+              transition={{ staggerChildren: 0.1 }}
+            >
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  whileHover={{ scale: 1.02, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer tilt-card reveal-fade stagger-2"
+                >
+                  <div className="relative h-64 overflow-hidden" onClick={() => openLightbox(project.image, project.title)}>
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
+                        {project.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                    <div className="space-y-2 mb-4">
+                      <h4 className="font-semibold text-gray-900 text-sm">Key Results:</h4>
+                      {project.results.slice(0, 2).map((result, idx) => (
+                        <div key={idx} className="flex items-center text-gray-700 text-sm">
+                          <TrendingUp className="h-4 w-4 mr-2 text-green-500 flex-shrink-0" />
+                          {result}
+                        </div>
+                      ))}
+                    </div>
+                    <Button variant="outline" size="sm" className="w-full border-indigo-200 text-indigo-600 hover:bg-indigo-50">
+                      View Case Study
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
@@ -171,6 +221,13 @@ const OurWorkPage = () => {
           </motion.div>
         </section>
       </div>
+
+      <Lightbox 
+        isOpen={lightboxOpen} 
+        onClose={() => setLightboxOpen(false)} 
+        imageSrc={lightboxImage} 
+        alt={lightboxAlt} 
+      />
     </>
   );
 };

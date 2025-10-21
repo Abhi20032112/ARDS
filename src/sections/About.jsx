@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Eye, Gem, ArrowRight } from 'lucide-react';
+import { Target, Eye, Gem, ArrowRight, Users, Award, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AnimatedNumber from '@/components/AnimatedNumber';
 
 const About = () => {
   const fadeIn = {
@@ -39,9 +40,61 @@ const About = () => {
         </div>
 
         <motion.div {...fadeIn} className="text-center mb-16">
+          <h3 className="text-3xl font-bold text-gray-900 mb-12">Our Achievements & Impact</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <motion.div
+              whileHover={{ scale: 1.05, rotateY: 5 }}
+              className="bg-white rounded-3xl p-8 shadow-lg card-hover tilt-card"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mb-6 shadow-md">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-4xl font-bold text-gray-900 mb-2">
+                <AnimatedNumber value={50} suffix="+" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">Happy Clients</h4>
+              <p className="text-gray-600">
+                Businesses we've helped transform their digital presence and achieve remarkable growth.
+              </p>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, rotateY: 5 }}
+              className="bg-white rounded-3xl p-8 shadow-lg card-hover tilt-card"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl mb-6 shadow-md">
+                <TrendingUp className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-4xl font-bold text-gray-900 mb-2">
+                <AnimatedNumber value={300} suffix="%" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">Average ROI</h4>
+              <p className="text-gray-600">
+                Average return on investment our clients experience through our digital marketing strategies.
+              </p>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, rotateY: 5 }}
+              className="bg-white rounded-3xl p-8 shadow-lg card-hover tilt-card"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-md">
+                <Award className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-4xl font-bold text-gray-900 mb-2">
+                <AnimatedNumber value={25} suffix="+" />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">Projects Completed</h4>
+              <p className="text-gray-600">
+                Successful projects delivered across various industries with measurable results.
+              </p>
+            </motion.div>
+          </div>
+
           <h3 className="text-3xl font-bold text-gray-900 mb-12">Our Core Philosophy</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-3xl p-8 shadow-lg card-hover">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-white rounded-3xl p-8 shadow-lg card-hover"
+            >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md">
                 <Target className="h-8 w-8 text-white" />
               </div>
@@ -49,8 +102,11 @@ const About = () => {
               <p className="text-gray-600">
                 To empower businesses with cutting-edge digital marketing strategies that drive growth, engagement, and measurable success in the ever-evolving online landscape.
               </p>
-            </div>
-            <div className="bg-white rounded-3xl p-8 shadow-lg card-hover">
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-white rounded-3xl p-8 shadow-lg card-hover"
+            >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md">
                 <Eye className="h-8 w-8 text-white" />
               </div>
@@ -58,8 +114,11 @@ const About = () => {
               <p className="text-gray-600">
                 To be the leading digital marketing partner for businesses worldwide, recognized for our innovative approach, exceptional results, and unwavering commitment to client success.
               </p>
-            </div>
-            <div className="bg-white rounded-3xl p-8 shadow-lg card-hover">
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-white rounded-3xl p-8 shadow-lg card-hover"
+            >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md">
                 <Gem className="h-8 w-8 text-white" />
               </div>
@@ -67,7 +126,7 @@ const About = () => {
               <p className="text-gray-600">
                 Integrity, innovation, collaboration, and excellence. We believe in building long-term partnerships based on trust, transparency, and mutual growth.
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 

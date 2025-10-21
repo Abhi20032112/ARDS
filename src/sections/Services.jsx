@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, Megaphone, Code, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AnimatedNumber from '@/components/AnimatedNumber';
 
 const Services = () => {
   const [expandedService, setExpandedService] = useState(null);
@@ -94,12 +95,13 @@ const Services = () => {
               key={service.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.03, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
               transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden card-hover group"
+              className="bg-white rounded-3xl shadow-lg overflow-hidden card-hover group tilt-card reveal-fade stagger-1"
             >
               <div className="p-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md icon-spin">
                   <service.icon className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>

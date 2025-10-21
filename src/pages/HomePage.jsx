@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, TrendingUp, Clock, Star, Zap, Target } from 'lucide-react';
+import { ArrowRight, Users, TrendingUp, Clock, Star, Zap, Target, Briefcase, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedNumber from '@/components/AnimatedNumber';
 import AnimatedTypewriter from '@/components/AnimatedTypewriter';
@@ -11,6 +11,15 @@ import { Swiper, SwiperSlide } from 'swiper/react'; // Keep this import if neede
 import slide1 from '/src/assets/slide1.jpg';
 import slide2 from '/src/assets/slide2.jpg';
 import slide3 from '/src/assets/slide3.jpg';
+
+// Lazy load images
+const lazyLoadImage = (src) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(src);
+    img.src = src;
+  });
+};
 
 const HomePage = () => {
   const metrics = [
@@ -85,20 +94,58 @@ const HomePage = () => {
     <>
       <Helmet>
         <title>Alpenrose Digital Solutions - We Grow Your Brand Like It's Our Own</title>
-        <meta name="description" content="Complete digital marketing agency specializing in social media management, ad campaigns, and branding. Transform your business with our expert digital solutions." />
+        <meta name="description" content="Best digital marketing agency in Patna, India. Expert SEO services, social media marketing, and branding for digital growth." />
+        <meta property="og:title" content="Alpenrose Digital Solutions - Best Digital Marketing Agency in Patna" />
+        <meta property="og:description" content="Best digital marketing agency in Patna, India. Expert SEO services, social media marketing, and branding for digital growth." />
+        <meta property="og:image" content="/src/assets/logo.png" />
+        <meta property="og:url" content="https://alpenrose-digital.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Alpenrose Digital Solutions",
+            "url": "https://alpenrose-digital.com",
+            "logo": "/src/assets/logo.png",
+            "description": "Complete digital marketing agency specializing in social media management, ad campaigns, and branding.",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91-1234567890",
+              "contactType": "customer service"
+            },
+            "sameAs": [
+              "https://www.facebook.com/alpenrose",
+              "https://www.instagram.com/alpenrose",
+              "https://www.linkedin.com/company/alpenrose"
+            ]
+          })}
+        </script>
       </Helmet>
 
       <div className="page-container">
-        <section className="relative hero-gradient text-white overflow-hidden">
+        <section className="relative hero-gradient text-white overflow-hidden parallax-bg">
+          <div className="particles">
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={i}
+                className="particle"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 10}s`,
+                  animationDuration: `${10 + Math.random() * 10}s`,
+                }}
+              />
+            ))}
+          </div>
           <div className="absolute inset-0 bg-black/40"></div>
-          
+
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
-                className="space-y-8 z-10 text-center lg:text-left"
+                className="space-y-8 z-10 text-center lg:text-left reveal-fade"
               >
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
                   <AnimatedTypewriter texts={["We Grow Your Brand", "Like It's Our Own"]} />
@@ -107,11 +154,11 @@ const HomePage = () => {
                   A complete digital marketing agency specializing in social media management, ad campaigns, and branding. Transform your business with our expert solutions.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Button asChild size="lg" pulse className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                     <Link to="/contact">
-                        Get Started
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                     </Link>
+                  <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
+                    <Link to="/contact">
+                      Get Started
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
                   </Button>
                 </div>
               </motion.div>
@@ -120,11 +167,10 @@ const HomePage = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-                className="relative hidden lg:block"
-                data-aos="zoom-in"
+                className="relative hidden lg:block reveal-zoom"
               >
                 <div className="floating-animation">
-                  <div className="rounded-3xl shadow-2xl relative overflow-hidden">
+                  <div className="rounded-3xl shadow-2xl relative overflow-hidden hover-lift">
                     <ManualSlider className="w-full" />
                   </div>
                 </div>
@@ -148,9 +194,9 @@ const HomePage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  className="text-center p-8 rounded-3xl bg-white shadow-lg card-hover"
+                  className={`text-center p-8 rounded-3xl bg-white shadow-lg card-hover reveal-fade stagger-${index + 1}`}
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-5 shadow-md">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-5 shadow-md icon-spin">
                     <metric.icon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-5xl font-extrabold gradient-text mb-2">
@@ -170,8 +216,16 @@ const HomePage = () => {
                 Why Choose Alpenrose?
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                We blend creative ingenuity with strategic precision, powered by cutting-edge technology to deliver unparalleled results for your brand.
+                As the best digital marketing agency in Patna, India, we excel in SEO services, social media marketing, and branding strategies. Our team blends creative ingenuity with strategic precision. We leverage cutting-edge technology for digital growth and online branding. This ensures performance marketing success. Trust us to deliver unparalleled results for your brand.
               </p>
+              <div className="mt-8">
+                <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                  <Link to="/contact">
+                    Grow Your Brand with Alpenrose Today
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </div>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -183,9 +237,9 @@ const HomePage = () => {
                   whileHover={{ scale: 1.03, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
                   transition={{ duration: 0.35, delay: index * 0.2, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  className="bg-gray-50 p-8 rounded-3xl shadow-lg card-hover border border-gray-200/50 tilt-card"
+                  className={`bg-gray-50 p-8 rounded-3xl shadow-lg card-hover border border-gray-200/50 tilt-card reveal-fade stagger-${index + 1}`}
                 >
-                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl mb-6 shadow-md">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl mb-6 shadow-md icon-spin">
                     <feature.icon className="h-7 w-7 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
@@ -196,16 +250,85 @@ const HomePage = () => {
           </div>
         </section>
 
+        <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div {...fadeIn} className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">
+                Explore Our Work & Insights
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Discover our latest projects and stay updated with industry trends through our blog.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-white rounded-3xl shadow-lg overflow-hidden hover-lift group cursor-pointer"
+              >
+                <div className="relative h-48 bg-gradient-to-r from-indigo-500 to-purple-600">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Briefcase className="h-16 w-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Portfolio</h3>
+                  <p className="text-gray-600 mb-6">See how we've helped businesses thrive with our digital marketing expertise.</p>
+                  <Link
+                    to="/work"
+                    className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-semibold group-hover:translate-x-1 transition-transform"
+                  >
+                    View Projects
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-white rounded-3xl shadow-lg overflow-hidden hover-lift group cursor-pointer"
+              >
+                <div className="relative h-48 bg-gradient-to-r from-teal-500 to-cyan-600">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <BookOpen className="h-16 w-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Blog</h3>
+                  <p className="text-gray-600 mb-6">Get insights, tips, and trends from our digital marketing experts.</p>
+                  <Link
+                    to="/blog"
+                    className="inline-flex items-center text-teal-600 hover:text-teal-700 font-semibold group-hover:translate-x-1 transition-transform"
+                  >
+                    Read Articles
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         <section className="py-24 hero-gradient">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div {...fadeIn} className="text-white space-y-8">
+            <motion.div {...fadeIn} className="text-white space-y-8 reveal-fade">
               <h2 className="text-4xl lg:text-5xl font-extrabold">
                 Ready to Transform Your Brand?
               </h2>
               <p className="text-lg text-white/90 max-w-2xl mx-auto">
                 Join hundreds of successful businesses who trust Alpenrose Digital Solutions to drive their growth.
               </p>
-              <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
                 <Link to="/contact">
                   Start Your Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
