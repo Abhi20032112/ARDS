@@ -94,9 +94,9 @@ const HomePage = () => {
     <>
       <Helmet>
         <title>Alpenrose Digital Solutions - Best Digital Marketing Agency Worldwide</title>
-        <meta name="description" content="Best digital marketing agency worldwide. Global branding and marketing solutions for startups and enterprises." />
+        <meta name="description" content="Best digital marketing agency worldwide and in Patna, India. Global branding and marketing solutions for startups and enterprises." />
         <meta property="og:title" content="Alpenrose Digital Solutions - Best Digital Marketing Agency Worldwide" />
-        <meta property="og:description" content="Best digital marketing agency worldwide. Global branding and marketing solutions for startups and enterprises." />
+        <meta property="og:description" content="Best digital marketing agency worldwide and in Patna, India. Global branding and marketing solutions for startups and enterprises." />
         <meta property="og:image" content="/src/assets/logo.png" />
         <meta property="og:url" content="https://alpenrose-digital.com" />
         <meta name="twitter:card" content="summary_large_image" />
