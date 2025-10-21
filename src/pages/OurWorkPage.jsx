@@ -89,9 +89,7 @@ const OurWorkPage = () => {
     setLightboxOpen(true);
   };
 
-  const categories = ['All', ...new Set(projects.map(p => p.category))];
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const filteredProjects = selectedCategory === 'All' ? projects : projects.filter(p => p.category === selectedCategory);
+
 
   const fadeIn = {
     initial: { opacity: 0, y: 40 },
@@ -138,43 +136,29 @@ const OurWorkPage = () => {
         <section className="py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeIn} className="text-center mb-12">
-              <h2 className="text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent mb-6">Featured Projects</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Explore our most impactful work across various industries</p>
+              <h2 className="text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Our Portfolio</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Discover our transformative digital marketing solutions and success stories</p>
             </motion.div>
 
-            <motion.div className="flex justify-center mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-              <div className="flex flex-wrap gap-4">
-                {categories.map((category) => (
-                  <motion.button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${selectedCategory === category ? 'bg-indigo-600 text-white shadow-lg' : category === 'All' ? 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm' : 'bg-white text-indigo-600 hover:bg-indigo-50 shadow-sm'}`}
-                  >
-                    {category}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
+
 
             <motion.div
               layout
-              className="masonry-grid gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               initial={false}
               animate={{ opacity: 1 }}
               transition={{ staggerChildren: 0.1 }}
             >
-              {filteredProjects.map((project, index) => (
+              {projects.map((project, index) => (
                 <motion.div
                   key={project.id}
                   layout
                   initial={{ opacity: 0, y: 50, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ scale: 1.02, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
+                  whileHover={{ scale: 1.02, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
                   transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-3xl shadow-lg overflow-hidden group cursor-pointer tilt-card reveal-fade stagger-2"
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer reveal-fade stagger-2"
                 >
                   <div className="relative h-64 overflow-hidden" onClick={() => openLightbox(project.image, project.title)}>
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />

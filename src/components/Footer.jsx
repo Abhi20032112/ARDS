@@ -12,11 +12,16 @@ import {
   Wrench,
   Briefcase,
   Star,
-  Users
+  Users,
+  ArrowUp,
+  TrendingUp,
+  Users as UsersIcon,
+  Award
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import Tooltip from '@/components/ui/tooltip';
+import ScrollToTop from '@/components/ScrollToTop';
 import logo from '@/assets/logo.png';
 
 const Footer = () => {
@@ -91,15 +96,19 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white/95 backdrop-blur-lg border-t border-gray-200/50">
+    <footer className="bg-white text-black relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-100 opacity-90"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.05),transparent_50%)] bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.05),transparent_50%)]"></div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo + About */}
           <motion.div variants={itemVariants} className="space-y-4 col-span-1 md:col-span-2 lg:col-span-1">
             <a href="#hero" className="flex items-center space-x-4">
@@ -108,7 +117,7 @@ const Footer = () => {
                 alt="Alpenrose Digital Solutions Logo"
                 className="h-12 w-auto"
               />
-              <span className="font-bold text-gray-800 text-xl">
+              <span className="font-bold text-black text-xl">
                 Alpenrose Digital Solutions
               </span>
             </a>
@@ -124,7 +133,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-indigo-600 hover:drop-shadow-[0_0_6px_rgba(99,102,241,0.6)] transition duration-300 transform hover:scale-110 hover:rotate-12"
+                  className="text-gray-600 hover:text-indigo-600 hover:drop-shadow-[0_0_6px_rgba(99,102,241,0.6)] transition duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label={social.label}
                 >
                   <Tooltip text={social.label}>
@@ -137,32 +146,32 @@ const Footer = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <p className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Quick Links</p>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                <a
-                  href={`#${link.id}`}
-                  className="text-gray-600 hover:text-indigo-600 transition-all duration-200 text-sm font-medium inline-flex items-center space-x-2 hover:scale-105 hover:animate-bounce"
-                >
-                  {link.icon && <link.icon className="h-4 w-4 text-gray-500" />}
-                  <span>{link.name}</span>
-                </a>
-                </li>
+            <p className="text-sm font-semibold text-black tracking-wider uppercase">Quick Links</p>
+            <div className="space-y-3">
+              {quickLinks.map((link, index) => (
+                <div key={index} className="flex items-center space-x-2">
+                  <link.icon className="h-5 w-5 text-indigo-600" />
+                  <a
+                    href={`#${link.id}`}
+                    className="text-gray-600 text-sm hover:text-indigo-600 transition hover:scale-105"
+                  >
+                    {link.name}
+                  </a>
+                </div>
               ))}
-            </ul>
+            </div>
           </motion.div>
 
           {/* Contact Info */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <p className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Contact Info</p>
+            <p className="text-sm font-semibold text-black tracking-wider uppercase">Contact Info</p>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-indigo-500 shrink-0 mt-0.5" />
+                <MapPin className="h-5 w-5 text-indigo-600 shrink-0 mt-0.5" />
                 <span className="text-gray-600 text-sm">Patna, Bihar, India</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-indigo-500 shrink-0" />
+                <Mail className="h-5 w-5 text-indigo-600 shrink-0" />
                 <a
                   href="mailto:business@ards.in"
                   className="text-gray-600 text-sm hover:text-indigo-600 transition hover:scale-105"
@@ -171,7 +180,7 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-indigo-500 shrink-0" />
+                <Phone className="h-5 w-5 text-indigo-600 shrink-0" />
                 <a
                   href="tel:+919308579699"
                   className="text-gray-600 text-sm hover:text-indigo-600 transition hover:scale-105"
@@ -184,7 +193,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <p className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Stay Updated</p>
+            <p className="text-sm font-semibold text-black tracking-wider uppercase">Stay Updated</p>
             <p className="text-gray-600 text-sm">
               Subscribe to get the latest digital marketing insights.
             </p>
@@ -194,7 +203,7 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm shadow-sm"
+                className="w-full px-4 py-2 bg-gray-200 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 text-black text-sm shadow-sm"
                 aria-label="Email for newsletter"
               />
               <Button type="submit" size="sm" className="bg-indigo-600 hover:bg-indigo-700 shadow-sm">
@@ -205,10 +214,13 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-200/80 text-center">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Alpenrose Digital Solutions. All Rights Reserved.
-          </p>
+        <div className="mt-12 pt-8 border-t border-gray-300 text-center relative">
+          <div className="flex justify-center items-center space-x-4 mb-4">
+            <ScrollToTop />
+            <p className="text-gray-600 text-sm">
+              © {new Date().getFullYear()} Alpenrose Digital Solutions. All Rights Reserved.
+            </p>
+          </div>
         </div>
       </motion.div>
     </footer>

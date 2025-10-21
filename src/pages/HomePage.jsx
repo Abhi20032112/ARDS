@@ -25,7 +25,7 @@ const HomePage = () => {
   const metrics = [
     { icon: Users, value: '50+', label: 'Happy Clients' },
     { icon: TrendingUp, value: '100%', label: 'Success Rate' },
-    { icon: Clock, value: '24/7', label: 'Support' },
+    { icon: Star, value: '5+', label: 'Years Experience' },
   ];
 
   const features = [
