@@ -1,6 +1,10 @@
-# SEO Content Optimization Tasks
+# TODO: Update Homepage with New SEO Tagline and Description
 
-- [x] Change H2 "Why Choose Alpenrose?" to H1 "Best Digital Marketing Agency in Patna, Bihar, India"
-- [x] Rewrite the paragraph under the heading to include primary keyword, LSI keywords, and maintain professional tone
-- [x] Update meta description in Helmet to under 160 characters and click-attractive
-- [x] Change CTA button text to “Grow your business with Alpenrose today.”
+- [ ] Update Helmet title to "Alpenrose Digital Solutions – The Best Digital Marketing Agency in Patna"
+- [ ] Update meta description to new SEO-Friendly Description
+- [ ] Update og:title and og:description in Helmet
+- [ ] Update structured data description in Helmet
+- [ ] Replace h1 AnimatedTypewriter with new tagline as static text
+- [ ] Update hero section paragraph to new description
+- [ ] Update features section description to new description
+- [ ] Verify changes and test rendering

@@ -93,10 +93,10 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Best SEO Services in Patna Bihar India - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Discover the best digital marketing agency in Patna, Bihar, India. Expert SEO, social media, and branding services to grow your business." />
-        <meta property="og:title" content="Best SEO Services in Patna Bihar India - Alpenrose Digital Solutions" />
-        <meta property="og:description" content="Best SEO services in Patna Bihar India. Top digital marketing agency offering SEO, social media marketing, and branding for businesses in Patna." />
+        <title>Alpenrose Digital Solutions – The Best Digital Marketing Agency in Patna</title>
+        <meta name="description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond." />
+        <meta property="og:title" content="Alpenrose Digital Solutions – The Best Digital Marketing Agency in Patna" />
+        <meta property="og:description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond." />
         <meta property="og:image" content="/src/assets/logo.png" />
         <meta property="og:url" content="https://alpenrose-digital.com" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -107,7 +107,7 @@ const HomePage = () => {
             "name": "Alpenrose Digital Solutions",
             "url": "https://alpenrose-digital.com",
             "logo": "/src/assets/logo.png",
-            "description": "Complete digital marketing agency specializing in social media management, ad campaigns, and branding.",
+            "description": "Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+91-1234567890",
@@ -148,10 +148,10 @@ const HomePage = () => {
                 className="space-y-8 z-10 text-center lg:text-left reveal-fade"
               >
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-                  <AnimatedTypewriter texts={["We Grow Your Brand", "Like It's Our Own"]} />
+                  Alpenrose Digital Solutions – The Best Digital Marketing Agency in Patna
                 </h1>
                 <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  A complete digital marketing agency specializing in social media management, ad campaigns, and branding. Transform your business with our expert solutions.
+                  Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
@@ -216,7 +216,7 @@ const HomePage = () => {
                 Best Digital Marketing Agency in Patna, Bihar, India
               </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                As the best digital marketing agency in Patna, Bihar, India, we blend creative ingenuity with strategic precision, powered by cutting-edge technology to deliver unparalleled results for your brand. Our expert SEO services drive organic growth, while our social media marketing expertise engages audiences effectively. We specialize in branding and advertising, PPC campaigns, and website development to ensure your online presence stands out. Trust our online advertising strategies to elevate your business and achieve measurable success in the competitive Patna market.
+                Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
               </p>
               <div className="mt-8">
                 <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
