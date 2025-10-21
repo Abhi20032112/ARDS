@@ -93,10 +93,10 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Alpenrose Digital Solutions - Best Digital Marketing Agency Worldwide</title>
-        <meta name="description" content="Best digital marketing agency worldwide and in Patna, India. Global branding and marketing solutions for startups and enterprises." />
-        <meta property="og:title" content="Alpenrose Digital Solutions - Best Digital Marketing Agency Worldwide" />
-        <meta property="og:description" content="Best digital marketing agency worldwide and in Patna, India. Global branding and marketing solutions for startups and enterprises." />
+        <title>Best SEO Services in Patna Bihar India - Alpenrose Digital Solutions</title>
+        <meta name="description" content="Discover the best digital marketing agency in Patna, Bihar, India. Expert SEO, social media, and branding services to grow your business." />
+        <meta property="og:title" content="Best SEO Services in Patna Bihar India - Alpenrose Digital Solutions" />
+        <meta property="og:description" content="Best SEO services in Patna Bihar India. Top digital marketing agency offering SEO, social media marketing, and branding for businesses in Patna." />
         <meta property="og:image" content="/src/assets/logo.png" />
         <meta property="og:url" content="https://alpenrose-digital.com" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -212,16 +212,16 @@ const HomePage = () => {
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeIn} className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">
-                Why Choose Alpenrose?
-              </h2>
+              <h1 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">
+                Best Digital Marketing Agency in Patna, Bihar, India
+              </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                As the best digital marketing agency worldwide, we deliver global branding and marketing solutions for startups and enterprises. Our professional SEO services worldwide drive organic growth. We excel as social media marketing experts, creating engaging content marketing strategies. Partner with our creative digital agency for comprehensive digital growth. We build strong online branding that resonates globally. Trust us to elevate your brand with proven performance marketing techniques.
+                As the best digital marketing agency in Patna, Bihar, India, we blend creative ingenuity with strategic precision, powered by cutting-edge technology to deliver unparalleled results for your brand. Our expert SEO services drive organic growth, while our social media marketing expertise engages audiences effectively. We specialize in branding and advertising, PPC campaigns, and website development to ensure your online presence stands out. Trust our online advertising strategies to elevate your business and achieve measurable success in the competitive Patna market.
               </p>
               <div className="mt-8">
                 <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                   <Link to="/contact">
-                    Partner with Alpenrose to Grow Your Brand Globally
+                    Grow your business with Alpenrose today.
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>

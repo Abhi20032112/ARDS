@@ -1,13 +1,6 @@
-- [x] Change navbar background to white (#ffffff)
-- [x] Update navbar link text colors to match logo color (primary purple)
-- [x] Update logo text color to visible on white background
-- [x] Update mobile menu link colors
-- [x] Update mobile bottom nav link colors
-- [x] Update slide-out menu colors
-- [x] Increase company logo and name size
-- [x] Fix logo text hover visibility
-- [x] Ensure company name stays on one line (mobile and desktop)
-- [x] Add WhatsApp icon with +91 9308579699 globally in navbar
-- [x] Decrease company name size in mobile
-- [x] Fix duplicate import error in Navbar.jsx
-- [x] Remove WhatsApp icon globally from navbar
+# SEO Content Optimization Tasks
+
+- [x] Change H2 "Why Choose Alpenrose?" to H1 "Best Digital Marketing Agency in Patna, Bihar, India"
+- [x] Rewrite the paragraph under the heading to include primary keyword, LSI keywords, and maintain professional tone
+- [x] Update meta description in Helmet to under 160 characters and click-attractive
+- [x] Change CTA button text to “Grow your business with Alpenrose today.”
