@@ -93,10 +93,10 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Alpenrose Digital Solutions - We Grow Your Brand Like It's Our Own</title>
-        <meta name="description" content="Best digital marketing agency in Patna, India. Expert SEO services, social media marketing, and branding for digital growth." />
-        <meta property="og:title" content="Alpenrose Digital Solutions - Best Digital Marketing Agency in Patna" />
-        <meta property="og:description" content="Best digital marketing agency in Patna, India. Expert SEO services, social media marketing, and branding for digital growth." />
+        <title>Alpenrose Digital Solutions - Best Digital Marketing Agency Worldwide</title>
+        <meta name="description" content="Best digital marketing agency worldwide. Global branding and marketing solutions for startups and enterprises." />
+        <meta property="og:title" content="Alpenrose Digital Solutions - Best Digital Marketing Agency Worldwide" />
+        <meta property="og:description" content="Best digital marketing agency worldwide. Global branding and marketing solutions for startups and enterprises." />
         <meta property="og:image" content="/src/assets/logo.png" />
         <meta property="og:url" content="https://alpenrose-digital.com" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -216,12 +216,12 @@ const HomePage = () => {
                 Why Choose Alpenrose?
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                As the best digital marketing agency in Patna, India, we excel in SEO services, social media marketing, and branding strategies. Our team blends creative ingenuity with strategic precision. We leverage cutting-edge technology for digital growth and online branding. This ensures performance marketing success. Trust us to deliver unparalleled results for your brand.
+                As the best digital marketing agency worldwide, we deliver global branding and marketing solutions for startups and enterprises. Our professional SEO services worldwide drive organic growth. We excel as social media marketing experts, creating engaging content marketing strategies. Partner with our creative digital agency for comprehensive digital growth. We build strong online branding that resonates globally. Trust us to elevate your brand with proven performance marketing techniques.
               </p>
               <div className="mt-8">
                 <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                   <Link to="/contact">
-                    Grow Your Brand with Alpenrose Today
+                    Partner with Alpenrose to Grow Your Brand Globally
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
