@@ -6,12 +6,7 @@ import { ChevronLeft, ChevronRight, ExternalLink, ArrowRight, TrendingUp } from 
 import { Button } from '@/components/ui/button';
 import Lightbox from '@/components/Lightbox';
 
-import project1Image from '../assets/project1.jpg';
-import project2Image from '../assets/project2.jpg';
-import project3Image from '../assets/project3.jpg';
-import project4Image from '../assets/project4.jpg';
-import project5Image from '../assets/project5.jpg';
-import project6Image from '../assets/project6.jpg';
+// Removed fake portfolio images as per TODO-remove-fake-portfolio.md
 
 // Lazy load images
 const lazyLoadImage = (src) => {
@@ -29,54 +24,15 @@ const OurWorkPage = () => {
   const [lightboxAlt, setLightboxAlt] = useState('');
 
   const projects = [
-    {
-      id: 1,
-      title: 'E-commerce Brand Transformation',
-      category: 'Brand Identity & Social Media',
-      description: 'Complete brand makeover and social media strategy for a growing e-commerce business, resulting in a 300% increase in engagement.',
-      image: project1Image,
-      results: ['300% increase in engagement', '150% boost in sales', '50K+ new followers'],
-    },
-    {
-      id: 2,
-      title: 'Tech Startup Launch Campaign',
-      category: 'Digital Marketing & Ads',
-      description: 'Comprehensive digital marketing campaign for a tech startup launch, achieving 500K+ impressions in the first month.',
-      image: project2Image,
-      results: ['500K+ impressions', '25% conversion rate', '10,000+ app downloads'],
-    },
-    {
-      id: 3,
-      title: 'Restaurant Chain Rebranding',
-      category: 'Brand Strategy & Content',
-      description: 'Complete rebranding and content strategy for a restaurant chain, leading to a 40% increase in foot traffic across all locations.',
-      image: project3Image,
-      results: ['40% increase in foot traffic', '200% social media growth', '95% customer satisfaction'],
-    },
-    {
-      id: 4,
-      title: 'Healthcare Digital Presence',
-      category: 'Website & SEO',
-      description: 'Built a comprehensive digital presence for a healthcare provider, improving online appointment bookings by 180%.',
-      image: project4Image,
-      results: ['250% improved visibility', '180% more appointments', 'Top 3 Google rankings'],
-    },
-    {
-      id: 5,
-      title: 'Fashion Brand Influencer Campaign',
-      category: 'Social Media & Influencer Marketing',
-      description: 'Creative social media campaign for a fashion brand, reaching 2M+ people and driving significant sales growth through influencers.',
-      image: project5Image,
-      results: ['2M+ reach', '85% engagement rate', '120% sales increase'],
-    },
-    {
-      id: 6,
-      title: 'Real Estate Lead Generation',
-      category: 'Lead Generation & Ads',
-      description: 'Developed a comprehensive digital strategy for a real estate company, generating 500+ qualified leads monthly.',
-      image: project6Image,
-      results: ['500+ monthly leads', '60% conversion rate', '300% ROI improvement'],
-    },
+    // Placeholder for genuine case studies - to be added when company has real projects
+    // {
+    //   id: 1,
+    //   title: 'Coming Soon',
+    //   category: 'Case Study',
+    //   description: 'Our portfolio of successful projects will be showcased here as we complete more work for our clients.',
+    //   image: placeholderImage,
+    //   results: ['Real results coming soon'],
+    // },
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % projects.length);
@@ -101,8 +57,32 @@ const OurWorkPage = () => {
   return (
     <>
       <Helmet>
-        <title>Our Work - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Explore our portfolio of successful digital marketing projects and campaigns. See how we've helped businesses grow their online presence and achieve remarkable results." />
+        <title>Our Work | Alpenrose Digital Solutions</title>
+        <meta name="description" content="Explore our digital marketing projects and case studies. See how Alpenrose Digital Solutions helps businesses grow their online presence." />
+        <meta name="keywords" content="digital marketing projects, case studies, successful projects, digital marketing results, business growth stories" />
+        <meta property="og:title" content="Our Work | Alpenrose Digital Solutions" />
+        <meta property="og:description" content="Explore our digital marketing projects and case studies. See how Alpenrose Digital Solutions helps businesses grow their online presence." />
+        <meta property="og:image" content="/src/assets/logo.png" />
+        <meta property="og:url" content="https://ards.in/work" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Our Work - Alpenrose Digital Solutions",
+            "description": "Explore our digital marketing projects and case studies. See how we help businesses grow their online presence.",
+            "provider": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Patna",
+                "addressRegion": "Bihar",
+                "addressCountry": "India"
+              }
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="page-container">
@@ -137,58 +117,66 @@ const OurWorkPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeIn} className="text-center mb-12">
               <h2 className="text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Our Portfolio</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Discover our transformative digital marketing solutions and success stories</p>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">Our portfolio of successful projects and case studies will be showcased here as we complete more work for our clients.</p>
             </motion.div>
 
-
-
-            <motion.div
-              layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={false}
-              animate={{ opacity: 1 }}
-              transition={{ staggerChildren: 0.1 }}
-            >
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ scale: 1.02, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
-                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer reveal-fade stagger-2"
-                >
-                  <div className="relative h-64 overflow-hidden" onClick={() => openLightbox(project.image, project.title)}>
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
-                        {project.category}
-                      </span>
+            {projects.length > 0 ? (
+              <motion.div
+                layout
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                initial={false}
+                animate={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+              >
+                {projects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    whileHover={{ scale: 1.02, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer reveal-fade stagger-2"
+                  >
+                    <div className="relative h-64 overflow-hidden" onClick={() => openLightbox(project.image, project.title)}>
+                      <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
+                          {project.category}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                    <div className="space-y-2 mb-4">
-                      <h4 className="font-semibold text-gray-900 text-sm">Key Results:</h4>
-                      {project.results.slice(0, 2).map((result, idx) => (
-                        <div key={idx} className="flex items-center text-gray-700 text-sm">
-                          <TrendingUp className="h-4 w-4 mr-2 text-green-500 flex-shrink-0" />
-                          {result}
-                        </div>
-                      ))}
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                      <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                      <div className="space-y-2 mb-4">
+                        <h4 className="font-semibold text-gray-900 text-sm">Key Results:</h4>
+                        {project.results.slice(0, 2).map((result, idx) => (
+                          <div key={idx} className="flex items-center text-gray-700 text-sm">
+                            <TrendingUp className="h-4 w-4 mr-2 text-green-500 flex-shrink-0" />
+                            {result}
+                          </div>
+                        ))}
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full border-indigo-200 text-indigo-600 hover:bg-indigo-50">
+                        View Case Study
+                        <ExternalLink className="ml-2 h-4 w-4" />
+                      </Button>
                     </div>
-                    <Button variant="outline" size="sm" className="w-full border-indigo-200 text-indigo-600 hover:bg-indigo-50">
-                      View Case Study
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div {...fadeIn} className="text-center py-12">
+                <div className="max-w-2xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Coming Soon</h3>
+                  <p className="text-gray-600 mb-8">We're a new company building our portfolio. As we complete projects for our clients, we'll showcase our successful case studies and results here.</p>
+                  <p className="text-gray-500 text-sm">Check back soon to see our work in action!</p>
+                </div>
+              </motion.div>
+            )}
           </div>
         </section>
 
@@ -206,11 +194,11 @@ const OurWorkPage = () => {
         </section>
       </div>
 
-      <Lightbox 
-        isOpen={lightboxOpen} 
-        onClose={() => setLightboxOpen(false)} 
-        imageSrc={lightboxImage} 
-        alt={lightboxAlt} 
+      <Lightbox
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        imageSrc={lightboxImage}
+        alt={lightboxAlt}
       />
     </>
   );

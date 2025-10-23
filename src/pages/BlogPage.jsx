@@ -40,8 +40,32 @@ const BlogPage = () => {
   return (
     <>
       <Helmet>
-        <title>Blog - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Stay updated with the latest digital marketing trends, tips, and insights from Alpenrose Digital Solutions." />
+        <title>Digital Marketing Blog Patna | Alpenrose Digital Solutions</title>
+        <meta name="description" content="Digital marketing blog Patna - Stay updated with latest SEO, social media, and digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Bihar." />
+        <meta name="keywords" content="content marketing Patna, SEO content marketing Patna, digital marketing services Patna, best digital marketing agency Patna, marketing agency Bihar" />
+        <meta property="og:title" content="Digital Marketing Blog Patna | Alpenrose Digital Solutions" />
+        <meta property="og:description" content="Digital marketing blog Patna - Stay updated with latest SEO, social media, and digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Bihar." />
+        <meta property="og:image" content="/src/assets/logo.png" />
+        <meta property="og:url" content="https://ards.in/blog" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Digital Marketing Blog Patna",
+            "description": "Stay updated with the latest digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Patna, Bihar.",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Patna",
+                "addressRegion": "Bihar",
+                "addressCountry": "India"
+              }
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="page-container">

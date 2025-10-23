@@ -11,7 +11,6 @@ import ServicesPage from '@/pages/ServicesPage';
 import OurWorkPage from '@/pages/OurWorkPage';
 import TestimonialsPage from '@/pages/TestimonialsPage';
 import FeedbackPage from '@/pages/FeedbackPage';
-import TeamPage from '@/pages/TeamPage';
 import ContactPage from '@/pages/ContactPage';
 import BlogPage from '@/pages/BlogPage';
 import BlogPostPage from '@/pages/BlogPostPage';
@@ -32,7 +31,6 @@ function App() {
               <Route path="/work" element={<OurWorkPage />} />
               <Route path="/clients" element={<TestimonialsPage />} />
               <Route path="/feedback" element={<FeedbackPage />} />
-              <Route path="/team" element={<TeamPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />

@@ -19,7 +19,7 @@ const Navbar = () => {
     { name: 'About', path: '/about', icon: Info },
     { name: 'Services', path: '/services', icon: Wrench },
     { name: 'Work', path: '/work', icon: Briefcase },
-    { name: 'Team', path: '/team', icon: Users },
+    { name: 'Feedback', path: '/feedback', icon: MessageSquare },
     { name: 'Contact', path: '/contact', icon: Phone },
   ];
 
@@ -65,7 +65,7 @@ const Navbar = () => {
                   transition={{ type: 'spring', stiffness: 400 }}
                 />
                 <motion.span
-                  className="font-bold text-gray-900 text-lg lg:text-2xl tracking-tight hover:text-primary transition-colors duration-200 whitespace-nowrap"
+                  className="font-bold text-gray-900 text-lg lg:text-2xl tracking-tight transition-colors duration-200 whitespace-nowrap"
                   whileHover={{ scale: 1.02 }}
                 >
                   Alpenrose Digital Solutions
@@ -85,13 +85,14 @@ const Navbar = () => {
                   >
                     <Link
                       to={item.path}
-                      className="text-primary hover:text-primary-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-2"
+                      className="text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-2"
                     >
                       <item.icon className="h-4 w-4" />
                       <span>{item.name}</span>
                     </Link>
                   </motion.div>
                 ))}
+
               </div>
             </div>
 
@@ -99,7 +100,7 @@ const Navbar = () => {
             <div className="lg:hidden">
               <motion.button
                 onClick={toggleMenu}
-                className="p-2 rounded-md text-primary hover:text-primary-foreground hover:bg-gray-100 transition-colors duration-200"
+                className="p-2 rounded-md text-primary transition-colors duration-200"
                 whileTap={{ scale: 0.95 }}
               >
                 <Menu className="h-6 w-6" />
@@ -115,7 +116,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="flex flex-col items-center space-y-1 text-primary hover:text-primary-foreground transition-colors duration-200"
+                className="flex flex-col items-center space-y-1 text-primary transition-colors duration-200"
               >
                 <item.icon className="h-5 w-5" />
                 <span className="text-xs">{item.name}</span>
@@ -123,7 +124,7 @@ const Navbar = () => {
             ))}
             <motion.button
               onClick={toggleMenu}
-              className="flex flex-col items-center space-y-1 text-primary hover:text-primary-foreground transition-colors duration-200"
+              className="flex flex-col items-center space-y-1 text-primary transition-colors duration-200"
               whileTap={{ scale: 0.95 }}
             >
               <Menu className="h-5 w-5" />
@@ -157,7 +158,7 @@ const Navbar = () => {
                 <div className="flex justify-end mb-8">
                   <motion.button
                     onClick={toggleMenu}
-                    className="p-2 rounded-md text-primary hover:text-primary-foreground hover:bg-gray-100 transition-colors duration-200"
+                    className="p-2 rounded-md text-primary transition-colors duration-200"
                     whileTap={{ scale: 0.95 }}
                   >
                     <X className="h-6 w-6" />
@@ -178,7 +179,7 @@ const Navbar = () => {
                       <Link
                         to={item.path}
                         onClick={toggleMenu}
-                        className="flex items-center space-x-4 px-4 py-3 rounded-lg text-primary hover:text-primary-foreground hover:bg-gray-100 transition-all duration-200"
+                        className="flex items-center space-x-4 px-4 py-3 rounded-lg text-primary transition-all duration-200"
                       >
                         <item.icon className="h-5 w-5" />
                         <span className="font-medium">{item.name}</span>
@@ -199,7 +200,7 @@ const Navbar = () => {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary hover:text-primary-foreground transition-colors duration-200"
+                        className="text-primary transition-colors duration-200"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                       >

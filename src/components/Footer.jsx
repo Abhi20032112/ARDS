@@ -16,7 +16,8 @@ import {
   ArrowUp,
   TrendingUp,
   Users as UsersIcon,
-  Award
+  Award,
+
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
@@ -52,8 +53,7 @@ const Footer = () => {
     { name: 'About', id: 'about', icon: Info },
     { name: 'Services', id: 'services', icon: Wrench },
     { name: 'Work', id: 'work', icon: Briefcase },
-    { name: 'Clients', id: 'clients', icon: Star },
-    { name: 'Team', id: 'team', icon: Users },
+    { name: 'Feedback', id: 'feedback', icon: Star },
     { name: 'Contact', id: 'contact', icon: Phone },
   ];
 
@@ -93,6 +93,7 @@ const Footer = () => {
       href: 'https://www.youtube.com/@AlpenroseDigitalSolutions',
       label: 'YouTube',
     },
+
   ];
 
   return (
@@ -128,18 +129,21 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex space-x-4 pt-2">
               {socialLinks.map((social, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={social.href !== '#' ? '_blank' : undefined}
+                  rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
                   className="text-gray-600 hover:text-indigo-600 hover:drop-shadow-[0_0_6px_rgba(99,102,241,0.6)] transition duration-300 transform hover:scale-110 hover:rotate-12"
                   aria-label={social.label}
+                  whileHover={{ scale: 1.1, rotate: 12 }}
+                  whileTap={{ scale: 0.95 }}
+
                 >
                   <Tooltip text={social.label}>
                     <social.icon className="h-5 w-5" />
                   </Tooltip>
-                </a>
+                </motion.a>
               ))}
             </div>
           </motion.div>

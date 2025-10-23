@@ -94,49 +94,92 @@ const HomePage = () => {
     <>
       <Helmet>
         <title>Best Digital Marketing Agency in Patna | Alpenrose Digital Solutions</title>
-        <meta name="description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar. We specialize in SEO, social media management, branding, and online ad campaigns to grow your business online." />
+        <meta name="description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar. We specialize in SEO, social media management, web development, and online ad campaigns to grow your business online." />
+        <meta name="keywords" content="best digital marketing agency Patna, social media management Patna, digital marketing agency Patna, ad campaigns Patna, brand identity design Patna, web development Patna, marketing agency Bihar, digital marketing services Patna" />
         <meta property="og:title" content="Best Digital Marketing Agency in Patna | Alpenrose Digital Solutions" />
-        <meta property="og:description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar. We specialize in SEO, social media management, branding, and online ad campaigns to grow your business online." />
+        <meta property="og:description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar. We specialize in SEO, social media management, web development, and online ad campaigns to grow your business online." />
         <meta property="og:image" content="/src/assets/logo.png" />
-        <meta property="og:url" content="https://alpenrose-digital.com" />
+        <meta property="og:url" content="https://ards.in" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Alpenrose Digital Solutions",
-            "url": "https://alpenrose-digital.com",
+            "url": "https://ards.in",
             "logo": "/src/assets/logo.png",
-            "description": "Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.",
+            "description": "Leading digital marketing agency in Patna specializing in SEO, social media management, branding, and ad campaigns.",
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+91-1234567890",
+              "telephone": "+91 9308579699",
               "contactType": "customer service"
             },
             "sameAs": [
-              "https://www.facebook.com/alpenrose",
-              "https://www.instagram.com/alpenrose",
-              "https://www.linkedin.com/company/alpenrose"
+              "https://www.facebook.com/profile.php?id=61578637610542",
+              "https://www.instagram.com/alpenrosedigitalsolutions",
+              "https://www.linkedin.com/company/alpenrose-digital-solutions",
+              "https://www.youtube.com/@AlpenroseDigitalSolutions"
             ]
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Alpenrose Digital Solutions",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Patna",
+              "addressRegion": "Bihar",
+              "addressCountry": "India"
+            },
+            "telephone": "+91 9308579699",
+            "url": "https://ards.in"
           })}
         </script>
       </Helmet>
 
       <div className="page-container">
         <section className="relative hero-gradient text-white overflow-hidden parallax-bg">
+          {/* Enhanced Particles with Floating Shapes */}
           <div className="particles">
-            {[...Array(20)].map((_, i) => (
-              <div
+            {[...Array(30)].map((_, i) => (
+              <motion.div
                 key={i}
                 className="particle"
+                initial={{ y: 0, opacity: 0 }}
+                animate={{
+                  y: [0, -20, 0],
+                  opacity: [0, 1, 0],
+                  rotate: [0, 360],
+                }}
+                transition={{
+                  duration: 5 + Math.random() * 5,
+                  repeat: Infinity,
+                  delay: Math.random() * 5,
+                }}
                 style={{
                   left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 10}s`,
-                  animationDuration: `${10 + Math.random() * 10}s`,
+                  top: `${Math.random() * 100}%`,
                 }}
               />
             ))}
           </div>
+          {/* Floating Icons */}
+          <motion.div
+            className="absolute top-20 left-10 opacity-20"
+            animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <Zap className="h-12 w-12 text-white" />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-20 right-10 opacity-20"
+            animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+          >
+            <Target className="h-12 w-12 text-white" />
+          </motion.div>
           <div className="absolute inset-0 bg-black/40"></div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">
@@ -147,33 +190,67 @@ const HomePage = () => {
                 transition={{ duration: 0.9, ease: "easeOut" }}
                 className="space-y-8 z-10 text-center lg:text-left reveal-fade"
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-                  Alpenrose Digital Solutions
-                </h1>
-                <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
-                    <Link to="/contact">
-                      Get Started
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                </div>
+                <motion.h1
+                  className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight whitespace-nowrap"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                  <AnimatedTypewriter
+                    texts={["Alpenrose Digital Solutions"]}
+                    speed={100}
+                    pause={1200}
+                  />
+                </motion.h1>
+                <motion.p
+                  className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                  Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, web development, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
+                </motion.p>
+                <motion.div
+                  className="flex justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
+                      <Link to="/contact">
+                        Get Started
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </motion.div>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+                initial={{ opacity: 0, scale: 0.8, rotateY: 45 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                 className="relative hidden lg:block reveal-zoom"
               >
-                <div className="floating-animation">
+                <motion.div
+                  className="floating-animation"
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
                   <div className="rounded-3xl shadow-2xl relative overflow-hidden hover-lift">
                     <ManualSlider className="w-full" />
                   </div>
-                </div>
+                </motion.div>
+                {/* Parallax Effect on Slider */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-3xl"
+                  animate={{ x: [0, 10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity }}
+                />
               </motion.div>
             </div>
           </div>
@@ -216,7 +293,7 @@ const HomePage = () => {
                 Why Choose Us
               </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, branding, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
+                Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, web development, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
               </p>
               <div className="mt-8">
                 <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
@@ -250,74 +327,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn} className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">
-                Explore Our Work & Insights
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Discover our latest projects and stay updated with industry trends through our blog.
-              </p>
-            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                className="bg-white rounded-3xl shadow-lg overflow-hidden hover-lift group cursor-pointer"
-              >
-                <div className="relative h-48 bg-gradient-to-r from-indigo-500 to-purple-600">
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Briefcase className="h-16 w-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Portfolio</h3>
-                  <p className="text-gray-600 mb-6">See how we've helped businesses thrive with our digital marketing expertise.</p>
-                  <Link
-                    to="/work"
-                    className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-semibold group-hover:translate-x-1 transition-transform"
-                  >
-                    View Projects
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                className="bg-white rounded-3xl shadow-lg overflow-hidden hover-lift group cursor-pointer"
-              >
-                <div className="relative h-48 bg-gradient-to-r from-teal-500 to-cyan-600">
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="h-16 w-16 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Blog</h3>
-                  <p className="text-gray-600 mb-6">Get insights, tips, and trends from our digital marketing experts.</p>
-                  <Link
-                    to="/blog"
-                    className="inline-flex items-center text-teal-600 hover:text-teal-700 font-semibold group-hover:translate-x-1 transition-transform"
-                  >
-                    Read Articles
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
 
         <section className="py-24 hero-gradient">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

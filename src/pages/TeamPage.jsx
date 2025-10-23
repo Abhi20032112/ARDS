@@ -24,8 +24,44 @@ const TeamPage = () => {
   return (
     <>
       <Helmet>
-        <title>Our Team - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Meet the expert team at Alpenrose Digital Solutions. Learn about our founders and specialists dedicated to your digital success." />
+        <title>Digital Marketing Team Patna | Alpenrose Digital Solutions</title>
+        <meta name="description" content="Meet the expert digital marketing team in Patna, Bihar. Learn about our founders Vikrant Mishra and Abhijeet M Mishra, dedicated to your digital success." />
+        <meta name="keywords" content="top SEO company Patna, digital marketing agency Patna, best digital marketing agency Patna, marketing agency Bihar, digital marketing services Patna" />
+        <meta property="og:title" content="Digital Marketing Team Patna | Alpenrose Digital Solutions" />
+        <meta property="og:description" content="Meet the expert digital marketing team in Patna, Bihar. Learn about our founders Vikrant Mishra and Abhijeet M Mishra, dedicated to your digital success." />
+        <meta property="og:image" content="/src/assets/logo.png" />
+        <meta property="og:url" content="https://alpenrose-digital.com/team" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "Digital Marketing Team Patna",
+            "description": "Meet the expert team at Alpenrose Digital Solutions in Patna, Bihar. Learn about our founders and specialists dedicated to your digital success.",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Patna",
+                "addressRegion": "Bihar",
+                "addressCountry": "India"
+              },
+              "founder": [
+                {
+                  "@type": "Person",
+                  "name": "Vikrant Mishra",
+                  "jobTitle": "Founder"
+                },
+                {
+                  "@type": "Person",
+                  "name": "Abhijeet M Mishra",
+                  "jobTitle": "Head-Tech Support"
+                }
+              ]
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="page-container">

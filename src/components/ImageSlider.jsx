@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ImageSlider = ({ projects }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [[page, direction], setPage] = useState([0, 0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+      setPage([page + 1, 1]);
     }, 5000);
     return () => clearInterval(interval);
-  }, [projects.length]);
+  }, [page]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+    setPage([page + 1, 1]);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+    setPage([page - 1, -1]);
   };
 
   const slideVariants = {
@@ -40,8 +40,6 @@ const ImageSlider = ({ projects }) => {
   const swipePower = (offset, velocity) => {
     return Math.abs(offset) * velocity;
   };
-
-  const [[page, direction], setPage] = useState([0, 0]);
 
   const paginate = (newDirection) => {
     setPage([page + newDirection, newDirection]);
@@ -117,14 +115,18 @@ const ImageSlider = ({ projects }) => {
         ›
       </button>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {projects.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition ${index === currentIndex ? 'bg-white' : 'bg-white/50'}`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+        {projects.map((_, index) => {
+          const currentIndex = Math.abs(page) % projects.length;
+          const direction = index > currentIndex ? 1 : index < currentIndex ? -1 : 0;
+          return (
+            <button
+              key={index}
+              onClick={() => setPage([index, direction])}
+              className={`w-3 h-3 rounded-full transition ${index === currentIndex ? 'bg-white' : 'bg-white/50'}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          );
+        })}
       </div>
     </div>
   );

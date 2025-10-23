@@ -60,8 +60,34 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Get in touch with Alpenrose Digital Solutions. Contact us for digital marketing services, consultations, and business inquiries. We're here to help grow your business." />
+        <title>Contact Alpenrose Digital Solutions | Digital Marketing Agency Patna</title>
+        <meta name="description" content="Contact Alpenrose Digital Solutions - Best digital marketing agency in Patna, Bihar. Get in touch for social media management, ad campaigns, web development, and business consultations." />
+        <meta name="keywords" content="digital marketing services Patna, best digital marketing agency Patna, social media management Patna, web development Patna, ad campaigns Patna" />
+        <meta property="og:title" content="Contact Alpenrose Digital Solutions | Digital Marketing Agency Patna" />
+        <meta property="og:description" content="Contact Alpenrose Digital Solutions - Best digital marketing agency in Patna, Bihar. Get in touch for social media management, ad campaigns, web development, and business consultations." />
+        <meta property="og:image" content="/src/assets/logo.png" />
+        <meta property="og:url" content="https://ards.in/contact" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Alpenrose Digital Solutions",
+            "description": "Get in touch with Alpenrose Digital Solutions, the leading digital marketing agency in Patna, Bihar. Contact us for consultations and business inquiries.",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Patna",
+                "addressRegion": "Bihar",
+                "addressCountry": "India"
+              },
+              "telephone": "+91 9308579699",
+              "email": "business@ards.in"
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="page-container">

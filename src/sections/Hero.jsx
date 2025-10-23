@@ -27,10 +27,10 @@ const Hero = () => {
 
     return (
       <div className="relative">
-        <img 
-          src={slides[index]} 
-          alt={`Slide ${index + 1}`} 
-          className="w-full h-auto rounded-3xl object-cover" 
+        <img
+          src={slides[index]}
+          alt={`Slide ${index + 1}`}
+          className="w-full h-96 rounded-3xl object-cover"
           loading="lazy"
         />
         <button

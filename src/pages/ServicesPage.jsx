@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, Megaphone, Code, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, Megaphone, Code, Database, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedNumber from '@/components/AnimatedNumber';
 
@@ -66,6 +66,13 @@ const ServicesPage = () => {
       details: 'From concept to deployment, we create scalable websites using the latest technologies, ensuring optimal performance, security, and user experience.',
       features: ['Responsive Design', 'Custom Development', 'E-commerce Solutions', 'SEO Optimization'],
     },
+    {
+      icon: Database,
+      title: 'ERP & Payroll Solutions',
+      description: 'Comprehensive ERP and payroll management systems to streamline business operations and employee management.',
+      details: 'We provide end-to-end ERP and payroll solutions including system implementation, customization, integration, and ongoing support to optimize your business processes and ensure accurate payroll management.',
+      features: ['ERP Implementation', 'Payroll Management', 'System Integration', 'Custom Reporting'],
+    },
   ];
 
   const toggleExpanded = (index) => {
@@ -83,7 +90,7 @@ const ServicesPage = () => {
     <>
       <Helmet>
         <title>Our Services - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Comprehensive digital marketing services including social media management, ad campaigns, brand identity, analytics, content marketing, and digital strategy." />
+        <meta name="description" content="Comprehensive digital marketing services including social media management, ad campaigns, brand identity, analytics, content marketing, ERP & payroll solutions, and digital strategy." />
       </Helmet>
 
       <div className="page-container">

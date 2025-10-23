@@ -29,17 +29,94 @@ const AboutPage = () => {
   return (
     <>
       <Helmet>
-        <title>About Us - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Learn about Alpenrose Digital Solutions. Discover our mission, vision, values, and the expert team dedicated to driving your digital success." />
+        <title>About Alpenrose Digital Solutions | Best Digital Marketing Agency Patna</title>
+        <meta name="description" content="About Alpenrose Digital Solutions - Leading digital marketing agency in Patna, Bihar. Learn about our mission, vision, values, and expert team dedicated to driving your digital success." />
+        <meta name="keywords" content="best digital marketing agency Patna, marketing agency Bihar, digital marketing services Patna, social media management Patna, brand identity design Patna, web development Patna, top SEO company Patna" />
+        <meta property="og:title" content="About Alpenrose Digital Solutions | Best Digital Marketing Agency Patna" />
+        <meta property="og:description" content="About Alpenrose Digital Solutions - Leading digital marketing agency in Patna, Bihar. Learn about our mission, vision, values, and expert team dedicated to driving your digital success." />
+        <meta property="og:image" content="/src/assets/logo.png" />
+        <meta property="og:url" content="https://ards.in/about" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "About Alpenrose Digital Solutions",
+            "description": "Learn about Alpenrose Digital Solutions, the leading digital marketing agency in Patna, Bihar. Discover our mission, vision, values, and expert team.",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Patna",
+                "addressRegion": "Bihar",
+                "addressCountry": "India"
+              }
+            },
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://ards.in"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "About",
+                  "item": "https://ards.in/about"
+                }
+              ]
+            }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Vikrant Mishra",
+            "jobTitle": "Founder",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Patna",
+              "addressRegion": "Bihar",
+              "addressCountry": "India"
+            }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Abhijeet M Mishra",
+            "jobTitle": "Head-Tech Support",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Alpenrose Digital Solutions"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Patna",
+              "addressRegion": "Bihar",
+              "addressCountry": "India"
+            }
+          })}
+        </script>
       </Helmet>
 
       <div className="page-container">
         <section className="hero-gradient py-24 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }} className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-extrabold">About Alpenrose Digital Solutions</h1>
+              <h1 className="text-4xl lg:text-6xl font-extrabold">About Alpenrose Digital Solutions - Best Digital Marketing Agency Patna</h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-                We are a passionate team of digital experts dedicated to helping your brand shine in the crowded digital world.
+                We are a passionate team of digital experts dedicated to helping your brand shine in the crowded digital world. As the top digital marketing agency in Patna, Bihar, we specialize in social media management Patna, targeted ad campaigns Patna, and comprehensive brand identity design Patna.
               </p>
             </motion.div>
           </div>
@@ -49,16 +126,16 @@ const AboutPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <motion.div {...fadeIn}>
-                <h2 className="text-3xl lg:text-4xl font-extrabold gradient-text mb-6">The Story Behind Our Startup Journey</h2>
+                <h2 className="text-3xl lg:text-4xl font-extrabold gradient-text mb-6">The Story Behind Our Startup Journey in Patna</h2>
                 <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-                  Alpenrose Digital Solutions was born from a simple yet powerful belief: every brand, no matter how small, deserves a digital identity that reflects its ambition. What started as a few passionate minds with laptops and big ideas has grown into a close-knit team of creators, strategists, and problem-solvers — all driven by purpose and innovation.
+                  Alpenrose Digital Solutions is a top digital marketing agency in Patna, Bihar, specializing in social media management Patna, digital branding, and web development in Bihar. We help businesses of all sizes build a strong online presence with services like targeted ad campaigns Patna, content marketing Bihar, analytics & insights, political campaign management Patna, and IT infrastructure solutions Bihar.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  As a rising startup, we’ve already had the privilege to work with forward-thinking clients and bring their visions to life. Our journey is shaped by creative collaboration, a deep focus on results, and an unshakable commitment to building digital solutions that matter. We're just getting started — and the best is yet to come.
+                  As a fast-growing startup, we combine creative collaboration with data-driven strategies to deliver measurable results. Whether you need expert social media marketing Patna, professional brand identity design Bihar, or cutting-edge custom web development Patna, Alpenrose Digital Solutions is your trusted partner for succeeding in the digital landscape of Patna and Bihar.
                 </p>
               </motion.div>
               <motion.div {...fadeIn} transition={{ ...fadeIn.transition, delay: 0.2 }} className="h-96">
-                <img className="w-full h-full object-cover rounded-3xl shadow-xl" alt="A team of professionals collaborating in a modern office" src="https://images.unsplash.com/photo-1573165231977-3f0e27806045" />
+                <img className="w-full h-full object-cover rounded-3xl shadow-xl" alt="Alpenrose Digital Solutions team collaborating in modern Patna office" src="https://images.unsplash.com/photo-1573165231977-3f0e27806045" />
               </motion.div>
             </div>
           </div>
@@ -111,7 +188,7 @@ const AboutPage = () => {
                   className="text-center group"
                 >
                   <div className="relative w-32 h-32 mx-auto mb-4">
-                    <img className="w-full h-full rounded-full object-cover shadow-lg" alt={member.name} src={member.image} />
+                  <img className="w-full h-full rounded-full object-cover shadow-lg" alt={`${member.name} - ${member.role} at Alpenrose Digital Solutions Patna`} src={member.image} />
                     <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-indigo-500 transition-all duration-300 transform group-hover:scale-110"></div>
                   </div>
                   <h3 className="font-bold text-lg text-gray-900">{member.name}</h3>
@@ -125,9 +202,9 @@ const AboutPage = () => {
         <section className="py-24 hero-gradient">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div {...fadeIn} className="text-white space-y-8">
-              <h2 className="text-4xl lg:text-5xl font-extrabold">Join Us On Our Journey</h2>
+              <h2 className="text-4xl lg:text-5xl font-extrabold">Join Us On Our Journey in Patna</h2>
               <p className="text-lg text-white/90 max-w-2xl mx-auto">
-                Let's collaborate to build something truly remarkable. Your success story starts here.
+                Let's collaborate to build something truly remarkable. Your success story starts here in Patna, Bihar.
               </p>
               <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 <Link to="/contact">
