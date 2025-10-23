@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, Megaphone, Code, Database, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import AnimatedNumber from '@/components/AnimatedNumber';
 
 const ServicesPage = () => {
   const [expandedCard, setExpandedCard] = useState(null);
@@ -112,38 +111,6 @@ const ServicesPage = () => {
 
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn} className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">
-                Service Statistics
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Our track record speaks for itself - delivering exceptional results across all our services.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20">
-              {[
-                { value: '500+', label: 'Projects Completed', suffix: '+' },
-                { value: '98%', label: 'Client Satisfaction', suffix: '%' },
-                { value: '24/7', label: 'Support Available', suffix: '' },
-                { value: '50+', label: 'Happy Clients', suffix: '+' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="text-center p-8 rounded-3xl bg-white shadow-lg card-hover reveal-fade stagger-1"
-                >
-                  <h3 className="text-5xl font-extrabold gradient-text mb-2">
-                    <AnimatedNumber value={stat.value.replace(/[^\d]/g, '')} formatter={(n) => `${n}${stat.suffix}`} />
-                  </h3>
-                  <p className="text-gray-600 font-semibold text-lg">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {services.map((service, index) => (
                 <motion.div
