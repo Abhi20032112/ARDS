@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Facebook,
   Instagram,
@@ -50,11 +51,11 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'About', id: 'about', icon: Info },
-    { name: 'Services', id: 'services', icon: Wrench },
-    { name: 'Work', id: 'work', icon: Briefcase },
-    { name: 'Feedback', id: 'feedback', icon: Star },
-    { name: 'Contact', id: 'contact', icon: Phone },
+    { name: 'About', path: '/about', icon: Info },
+    { name: 'Services', path: '/services', icon: Wrench },
+    { name: 'Work', path: '/work', icon: Briefcase },
+    { name: 'Feedback', path: '/feedback', icon: Star },
+    { name: 'Contact', path: '/contact', icon: Phone },
   ];
 
   const containerVariants = {
@@ -155,12 +156,12 @@ const Footer = () => {
               {quickLinks.map((link, index) => (
                 <div key={index} className="flex items-center space-x-2">
                   <link.icon className="h-5 w-5 text-indigo-600" />
-                  <a
-                    href={`#${link.id}`}
+                  <Link
+                    to={link.path}
                     className="text-gray-600 text-sm hover:text-indigo-600 transition hover:scale-105"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
