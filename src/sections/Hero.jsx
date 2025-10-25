@@ -30,7 +30,7 @@ const Hero = () => {
         <img
           src={slides[index]}
           alt={`Slide ${index + 1}`}
-          className="w-full h-96 rounded-3xl object-cover"
+          className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-3xl object-cover"
           loading="lazy"
         />
         <button
