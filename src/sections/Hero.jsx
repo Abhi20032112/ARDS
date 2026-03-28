@@ -1,109 +1,137 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Share2, Target, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AnimatedTypewriter from '@/components/AnimatedTypewriter';
-
-import slide1 from '../assets/slide1.jpg';
-import slide2 from '../assets/slide2.jpg';
-import slide3 from '../assets/slide3.jpg';
+import DigitalUniverseCanvas from '../components/DigitalUniverseCanvas.jsx';
+import ServiceCharacter from '../components/ServiceCharacter.jsx';
 
 const Hero = () => {
-  // Manual slider component (lightweight fallback)
-  function ManualSlider() {
-    const slides = [
-      slide1,
-      slide2,
-      slide3,
-    ];
-    const [index, setIndex] = useState(0);
-    const timeoutRef = useRef(null);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
 
-    useEffect(() => {
-      const next = () => setIndex((i) => (i + 1) % slides.length);
-      timeoutRef.current = setInterval(next, 3500);
-      return () => clearInterval(timeoutRef.current);
-    }, []);
-
-    return (
-      <div className="relative">
-        <img
-          src={slides[index]}
-          alt={`Slide ${index + 1}`}
-          className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-3xl object-cover"
-          loading="lazy"
-        />
-        <button
-          aria-label="Previous"
-          onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-gray-800 p-2 rounded-full shadow hover:scale-105 transition"
-        >
-          ‹
-        </button>
-        <button
-          aria-label="Next"
-          onClick={() => setIndex((i) => (i + 1) % slides.length)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-gray-800 p-2 rounded-full shadow hover:scale-105 transition"
-        >
-          ›
-        </button>
-      </div>
-    );
-  }
-
-  const fadeIn = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
-    viewport: { once: true, amount: 0.2 }
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } }
   };
 
   return (
-    <section id="hero" className="relative hero-gradient text-white overflow-hidden">
-      <div className="absolute inset-0 bg-black/40"></div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            className="space-y-8 z-10 text-center lg:text-left"
-          >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-              <AnimatedTypewriter texts={["We Grow Your Brand", "Like It's Our Own"]} />
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              A complete digital marketing agency specializing in social media management, ad campaigns, and branding. Transform your business with our expert solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white">
-                <a href="#contact">
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
-            </div>
+    <section id="hero" className="relative universe-gradient text-white overflow-hidden pt-24 pb-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {/* Hero Content */}
+          <motion.div variants={itemVariants} className="space-y-8 text-center lg:text-left">
+            <motion.div variants={itemVariants}>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl">
+                <AnimatedTypewriter 
+                  texts={["Welcome to the", "Digital Growth Universe"]}
+                  speed={80}
+                />
+              </h1>
+            </motion.div>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl lg:text-2xl text-cyan-100/90 leading-relaxed max-w-xl mx-auto lg:mx-0 drop-shadow-md"
+            >
+              We help brands grow through creativity, technology, and data-driven strategy. 
+              Explore our universe of digital services.
+            </motion.p>
+
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start"
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button 
+                  asChild 
+                  size="lg" 
+                  className="glow-hover bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-lg px-10 py-6 rounded-2xl font-bold shadow-2xl hover:shadow-cyan-500/50 backdrop-blur-sm border border-cyan-300/30"
+                >
+                  <a href="#services" className="flex items-center gap-2">
+                    Explore Universe
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-            className="relative hidden lg:block"
-            data-aos="zoom-in"
+          {/* Hero Visual */}
+          <motion.div 
+            variants={itemVariants}
+            className="relative"
           >
-            <div className="floating-animation">
-              <div className="rounded-3xl shadow-2xl relative overflow-hidden bg-gradient-to-br from-black/20 to-transparent">
-                <ManualSlider />
-              </div>
+            <div className="relative z-20">
+              <DigitalUniverseCanvas />
+            </div>
+            
+            {/* Hero Character */}
+            <motion.div 
+              className="absolute -bottom-32 lg:-bottom-24 right-8 lg:right-16 w-64 lg:w-80 h-64 lg:h-80 z-30"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 1, duration: 1, type: 'spring' }}
+            >
+              <ServiceCharacter type="strategist" size={300} />
+            </motion.div>
+
+            {/* Floating Service Icons */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-32 lg:w-48 h-32 lg:h-48 z-20">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0"
+              >
+                {[Share2, Target, BarChart3].map((Icon, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute text-2xl text-white/60 glow-hover"
+                    style={{ 
+                      left: '50%', 
+                      top: '50%',
+                      width: '60px',
+                      height: '60px'
+                    }}
+                    initial={{ scale: 0 }}
+                    animate={{ 
+                      rotate: -360,
+                      x: [60, 80, 60][i % 3],
+                      y: [-20, 10, 30][i % 3]
+                    }}
+                    transition={{ 
+                      duration: 10 + i * 3, 
+                      repeat: Infinity,
+                      delay: i * 1
+                    }}
+                  >
+                    <Icon />
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
-      <div className="section-divider">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
+
+      {/* Cinematic Wave Divider */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+        <svg className="w-full h-32 lg:h-48 transform rotate-180 fill-current text-universe-gradient opacity-90" viewBox="0 0 1200 120">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
         </svg>
       </div>
     </section>
@@ -111,3 +139,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
