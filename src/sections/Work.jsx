@@ -15,43 +15,43 @@ const Work = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-commerce Brand Transformation',
-      category: 'E-commerce',
-      description: 'Complete digital overhaul for a fashion retailer, resulting in 300% increase in online sales.',
+      title: 'Government College – Digital Campus Transformation',
+      category: 'Education',
+      description: 'Designed and deployed comprehensive digital ecosystem for government college with 3000+ students including dynamic website, ERP for admissions/hostel, AI-powered canteen system.',
       image: project1,
-      results: ['300% increase in online sales', '150% growth in social media followers', 'Improved brand recognition by 200%']
+      results: ['80% reduction in manual administrative workload', 'Real-time student data and reporting', 'Improved transparency in hostel and canteen operations']
     },
     {
       id: 2,
-      title: 'Tech Startup Launch',
-      category: 'Technology',
-      description: 'Comprehensive marketing campaign for a SaaS startup, achieving 500+ beta users in 3 months.',
+      title: 'Smart Swimming Pool Management System',
+      category: 'Fitness',
+      description: 'AI-based biometric attendance and pool management for 1000+ daily participants with session timing, automated billing, inventory analytics.',
       image: project2,
-      results: ['500+ beta users acquired', '95% user satisfaction rate', 'Featured in 10+ tech publications']
+      results: ['Accurate attendance with zero proxy entries', 'Automated payment tracking and reporting', 'Inventory optimization and reduced losses']
     },
     {
       id: 3,
-      title: 'Restaurant Chain Expansion',
-      category: 'Hospitality',
-      description: 'Digital marketing strategy for a local restaurant chain expanding to 5 new locations.',
+      title: 'Medical Equipment Manufacturing Company – Corporate Website',
+      category: 'Healthcare',
+      description: 'Professional responsive website showcasing complete product portfolio with detailed specs and user-friendly navigation for B2B inquiries.',
       image: project3,
-      results: ['40% increase in foot traffic', '200% boost in online reservations', 'Expanded to 5 new locations successfully']
+      results: ['Strong digital presence in healthcare sector', 'Improved lead generation and client engagement', 'Clear product presentation for global audiences']
     },
     {
       id: 4,
-      title: 'Healthcare Provider Digital Presence',
-      category: 'Healthcare',
-      description: 'Building trust and visibility for a medical practice through targeted digital campaigns.',
+      title: 'Large-Scale Agro and Lab Chemical Supplier – Business Website',
+      category: 'Agriculture',
+      description: 'Scalable robust website optimized for performance, accessibility, easy content management to connect with distributors and customers.',
       image: project4,
-      results: ['250% increase in website traffic', '180% growth in patient inquiries', 'Established as local healthcare leader']
+      results: ['Enhanced brand visibility in chemicals sector', 'Simplified product discovery for customers', 'Increased inquiry conversions']
     },
     {
       id: 5,
-      title: 'Fitness Brand Rebranding',
-      category: 'Fitness',
-      description: 'Complete rebrand and digital strategy for a fitness equipment manufacturer.',
+      title: 'Security & Manpower Facility Service Provider – Digital Identity',
+      category: 'Security',
+      description: 'Modern corporate website presenting service offerings, operational strength, client portfolio to attract enterprise clients and government contracts.',
       image: project5,
-      results: ['350% increase in brand engagement', '220% growth in e-commerce sales', 'Won "Best Fitness Brand" award']
+      results: ['Professional brand positioning', 'Increased trust among corporate clients', 'Improved business inquiries and partnerships']
     },
     {
       id: 6,

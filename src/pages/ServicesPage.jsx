@@ -93,27 +93,17 @@ const ServicesPage = () => {
       </Helmet>
 
       <div className="page-container">
-        <section className="relative universe-gradient py-24 lg:py-32 text-white overflow-hidden">
-          <div className="absolute inset-0">
-            <canvas className="w-full h-full"></canvas>
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="hero-gradient py-24 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="space-y-8"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+              className="space-y-6"
             >
-              <motion.div 
-                className="inline-block px-8 py-4 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 glow-hover"
-                whileHover={{ scale: 1.05 }}
-              >
-                <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-cyan-300 via-white to-purple-300 bg-clip-text text-transparent drop-shadow-2xl">
-                  Service Universe
-                </h1>
-              </motion.div>
-              <p className="text-2xl lg:text-3xl text-cyan-100/90 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
-                Explore every digital service as its own vibrant world, complete with unique characters and environments.
+              <h1 className="text-4xl lg:text-6xl font-extrabold">Our Services</h1>
+              <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
+                Comprehensive digital marketing solutions designed to grow your business and enhance your online presence.
               </p>
             </motion.div>
           </div>
@@ -121,109 +111,60 @@ const ServicesPage = () => {
 
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12">
-              {services.map((service, index) => {
-                const serviceData = {
-                  social: { type: 'social', worldClass: 'social-world' },
-                  ads: { type: 'ads', worldClass: 'ads-world' },
-                  brand: { type: 'brand', worldClass: 'brand-world' },
-                  analytics: { type: 'analytics', worldClass: 'analytics-world' },
-                  content: { type: 'content', worldClass: 'content-world' },
-                  infrastructure: { type: 'it', worldClass: 'it-world' },
-                  political: { type: 'political', worldClass: 'political-world' },
-                  web: { type: 'web', worldClass: 'web-world' },
-                  erp: { type: 'it', worldClass: 'it-world' }
-                }[service.title.toLowerCase().replace(/ & | solutions/gi, '').replace(/ /g, '').toLowerCase()] || { type: 'social', worldClass: 'social-world' };
-
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 80 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    whileHover={{ scale: 1.05, rotateX: 10 }}
-                    transition={{ duration: 0.6, delay: index * 0.08 }}
-                    viewport={{ once: true }}
-                    className={`relative rounded-3xl p-10 shadow-2xl overflow-hidden group cursor-pointer glow-hover ${serviceData.worldClass}`}
-                  >
-                    <div className="absolute inset-0 opacity-20 group-hover:opacity-50 transition-all" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-3xl pointer-events-none" />
-                    
-                    {/* World Canvas BG */}
-                    <div className="absolute inset-0 opacity-10">
-                      <canvas className="w-full h-full"></canvas>
-                    </div>
-                    
-                    <div className="relative z-20">
-                      <div className="flex flex-col items-center space-y-8 mb-12">
-                        <ServiceCharacter type={serviceData.type} size={200} />
-                        <service.icon className="h-16 w-16 text-white/80 backdrop-blur-sm p-4 rounded-3xl bg-white/10 shadow-xl glow-hover" />
-                      </div>
-                      
-                      <div className="text-center space-y-6">
-                        <motion.h3 
-                          className="text-3xl lg:text-4xl font-black bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent drop-shadow-2xl"
-                          whileHover={{ y: -6 }}
-                        >
-                          {service.title}
-                        </motion.h3>
-                        <p className="text-xl text-white/90 leading-relaxed max-w-lg mx-auto">{service.description}</p>
-                        
-                        {/* Power Preview */}
-                        <div className="space-y-3">
-                          <h4 className="font-bold text-2xl text-white">Core Powers:</h4>
-                          <div className="grid grid-cols-2 gap-3">
-                            {service.features.slice(0, 4).map((power, pidx) => (
-                              <div key={pidx} className="flex items-center p-3 bg-white/10 rounded-2xl glow-hover hover:bg-white/20">
-                                <div className="w-3 h-3 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mr-4 animate-pulse" />
-                                <span className="text-white font-semibold">{power}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <Button
-                          onClick={() => toggleExpanded(index)}
-                          className="w-full mt-8 bg-white/20 backdrop-blur-sm border-white/30 hover:bg-white/30 hover:border-white text-white font-bold glow-hover"
-                          variant="outline"
-                        >
-                          {expandedCard === index ? 'Close Portal' : 'Enter World'}
-                          <ArrowRight className={`ml-auto h-5 w-5 transition-transform ${expandedCard === index ? 'rotate-90' : ''}`} />
-                        </Button>
-                      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.03, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
+                  transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-3xl shadow-lg overflow-hidden card-hover flex flex-col tilt-card reveal-fade stagger-1"
+                >
+                  <div className="p-8 flex-grow">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md icon-spin">
+                      <service.icon className="h-8 w-8 text-white" />
                     </div>
 
-                    {/* Expanded World Portal */}
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                    <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+
                     {expandedCard === index && (
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.9 }} 
-                        animate={{ opacity: 1, scale: 1 }} 
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        className="absolute inset-0 bg-gradient-to-t from-black/95 to-transparent/0 backdrop-blur-2xl p-12 flex flex-col z-30"
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="overflow-hidden space-y-4"
                       >
-                        <div className="flex-1 flex flex-col justify-center items-center text-center space-y-8">
-                          <ServiceCharacter type={serviceData.type} size={280} />
-                          <div>
-                            <h3 className="text-5xl font-black text-white mb-6 drop-shadow-2xl">{service.title} Realm</h3>
-                            <p className="text-2xl text-cyan-300 max-w-2xl mx-auto leading-relaxed">{service.details}</p>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
-                            {service.features.map((feat, fidx) => (
-                              <motion.div 
-                                key={fidx}
-                                className="group flex items-center p-6 bg-gradient-to-r from-white/10 to-white/5 rounded-2xl backdrop-blur-lg border border-white/20 glow-hover hover:from-white/20 hover:scale-[1.02]"
-                                whileHover={{ x: 8 }}
-                              >
-                                <div className="w-4 h-4 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full mr-6 shrink-0" />
-                                <span className="text-xl text-white font-semibold">{feat}</span>
-                              </motion.div>
+                        <p className="text-gray-700 leading-relaxed">{service.details}</p>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-gray-900">Key Features:</h4>
+                          <ul className="space-y-1">
+                            {service.features.map((feature, featureIndex) => (
+                              <li key={featureIndex} className="text-gray-600 text-sm flex items-center">
+                                <div className="w-2 h-2 bg-indigo-500 rounded-full mr-3 shrink-0"></div>
+                                {feature}
+                              </li>
                             ))}
-                          </div>
+                          </ul>
                         </div>
                       </motion.div>
                     )}
-                  </motion.div>
-                );
-              })}
+                  </div>
+                  <div className="p-8 pt-0">
+                    <Button
+                      onClick={() => toggleExpanded(index)}
+                      variant="outline"
+                      className="w-full mt-4 border-indigo-200 text-indigo-600 font-semibold hover:bg-indigo-50 hover:text-indigo-700"
+                    >
+                      {expandedCard === index ? 'Show Less' : 'Read More'}
+                      {expandedCard === index ? <ChevronUp className="ml-2 h-4 w-4" /> : <ChevronDown className="ml-2 h-4 w-4" />}
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

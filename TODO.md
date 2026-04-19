@@ -1,5 +1,10 @@
-# Task Progress: Add Google Site Verification Meta Tag to Home Page
+# Task: Add Case Studies to Work Page (Approved Plan)
 
-- [x] Step 1: Analyze project files and identify index.html as the home page shell with <head> section
-- [x] Step 2: Edit index.html to insert the new meta tag in <head>
-- [x] Step 3: Verify the change and complete the task
+## Steps:
+- [ ] 1. Create TODO.md (done)
+- [x] 2. Edit src/sections/Work.jsx: Replace fake projects with 5 real case studies
+- [x] 3. Edit src/pages/OurWorkPage.jsx: Sync projects data, remove "Coming Soon"
+- [x] 4. Update TODO-remove-fake-portfolio.md
+- [x] 5. Test: Run `npm run dev` and check http://localhost:5173/work
+- [x] 6. Complete task
+
