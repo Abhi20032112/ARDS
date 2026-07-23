@@ -1,0 +1,92 @@
+/* Unified light hero language across the site */
+.cinematic-hero {
+  color: #111827;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eef2ff 100%);
+}
+.cinematic-hero::after {
+  background: radial-gradient(circle at 72% 45%, transparent 0, rgba(248, 250, 252, .28) 50%, #f8fafc 78%);
+}
+.cinematic-hero .cinema-grid {
+  background-image: linear-gradient(rgba(37, 99, 235, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(37, 99, 235, .07) 1px, transparent 1px);
+}
+.cinematic-hero .aurora.a1 { background: #c4b5fd; opacity: .48; }
+.cinematic-hero .aurora.a2 { background: #bfdbfe; opacity: .6; }
+.cinematic-hero .light-ray { background: linear-gradient(90deg, transparent, rgba(124, 58, 237, .08), transparent); }
+.cinematic-hero .binary-stream { color: rgba(37, 99, 235, .13); }
+.cinematic-hero .cinema-eyebrow { color: #5b21b6; }
+.cinematic-hero .cinema-copy h1 > span:not(.glow-word) { color: #111827; }
+.cinematic-hero .cinema-copy > p { color: #64748b; }
+.cinematic-hero .cinema-btn.glass {
+  color: #334155;
+  border-color: #dbe2ed;
+  background: rgba(255, 255, 255, .78);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+}
+.cinematic-hero .cinema-watch { color: #475569; }
+.cinematic-hero .cinema-watch i { border-color: #dbe2ed; background: white; box-shadow: 0 7px 20px rgba(124, 58, 237, .1); }
+.cinematic-hero .cinema-stats { border-color: #dbe2ed; }
+.cinematic-hero .cinema-stats b { color: #1e3a8a; }
+.cinematic-hero .cinema-stats span { color: #64748b; }
+.cinematic-hero .scene-halo { border-color: rgba(124, 58, 237, .18); }
+.cinematic-hero .orbit-card {
+  color: #111827;
+  border-color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 16px 40px rgba(30, 64, 175, .16);
+}
+.cinematic-hero .orbit-card small { color: #16a34a; }
+.cinematic-hero .notification-pop {
+  color: #111827;
+  border-color: #e2e8f0;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 15px 35px rgba(30,64,175,.14);
+}
+.cinematic-hero .notification-pop span { color: #64748b; }
+.cinematic-hero .cloud-node { color: #2563eb; }
+.cinematic-hero .scroll-cue { color: #94a3b8; }
+
+.case-hero.visual-first {
+  color: #111827;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #eef2ff 100%);
+}
+.case-hero.visual-first .case-grid-bg {
+  opacity: .55;
+  background-image: linear-gradient(rgba(37,99,235,.07) 1px,transparent 1px), linear-gradient(90deg,rgba(37,99,235,.07) 1px,transparent 1px);
+}
+.case-hero.visual-first .case-orb.one { background: rgba(196,181,253,.6); }
+.case-hero.visual-first .case-orb.two { background: rgba(191,219,254,.8); }
+.case-hero.visual-first .case-kicker { color: #6d28d9; }
+.case-hero.visual-first h1 { color: #111827; }
+.case-hero.visual-first > .site-shell > .case-hero-copy > p { color: #64748b; }
+.case-hero.visual-first .case-text-link { color: #1e3a8a; }
+.case-hero.visual-first .case-hero-graphic { margin-top: 18px; }
+.case-hero.visual-first .case-hero-graphic img {
+  mix-blend-mode: normal;
+  border-radius: 26px;
+  box-shadow: 0 30px 75px rgba(30,64,175,.18);
+}
+.case-hero.visual-first .proof-ribbon {
+  color: #111827;
+  border-color: #e2e8f0;
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 -10px 40px rgba(30,64,175,.06);
+}
+.case-hero.visual-first .proof-ribbon div { border-color: #e2e8f0; }
+.case-hero.visual-first .proof-ribbon b { color: #1e40af; }
+.case-hero.visual-first .proof-ribbon span { color: #64748b; }
+
+/* Scope legacy gradient changes to the first hero only, leaving lower CTAs unchanged. */
+main .page-container > section:first-child.hero-gradient,
+main > section:first-child.hero-gradient,
+main > div > section:first-child.hero-gradient {
+  color: #111827 !important;
+  background: radial-gradient(circle at 80% 20%, #e9d5ff 0, transparent 32%), linear-gradient(135deg, #ffffff, #f8fafc 55%, #eef2ff) !important;
+}
+main .page-container > section:first-child.hero-gradient p,
+main > div > section:first-child.hero-gradient p {
+  color: #64748b !important;
+}
+main .page-container > section:first-child.hero-gradient h1,
+main > div > section:first-child.hero-gradient h1 {
+  color: #111827 !important;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from '@/components/ui/toaster';
 import { MessageCircle } from 'lucide-react';
@@ -15,12 +15,17 @@ import ContactPage from '@/pages/ContactPage';
 import BlogPage from '@/pages/BlogPage';
 import BlogPostPage from '@/pages/BlogPostPage';
 import ScrollToTop from '@/components/ScrollToTop';
+import SolutionLanding from '@/pages/SolutionLanding';
+import ExperienceEffects from '@/components/ExperienceEffects';
+import IndustriesPage from '@/pages/IndustriesPage';
+import '@/components/LightHeroes.css';
 
 function App() {
   return (
     <Router>
       <AnimatePresence mode="wait">
         <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+          <ExperienceEffects />
           <ScrollToTop />
           <Navbar />
           <main className="flex-1">
@@ -34,14 +39,17 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
+              <Route path="/ai-solutions" element={<SolutionLanding type="ai" />} />
+              <Route path="/business-automation" element={<SolutionLanding type="automation" />} />
+              <Route path="/industries" element={<IndustriesPage />} />
             </Routes>
           </main>
           <Footer />
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/919308579699?text=Hi%20ARDS%2C%20I%27d%20like%20to%20book%20a%20free%20demo."
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors z-50"
+            className="whatsapp-float"
             aria-label="Contact us on WhatsApp"
           >
             <MessageCircle className="h-6 w-6" />

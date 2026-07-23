@@ -1,223 +1,29 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Target, Eye, Gem, Users, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import vikrantImage from '../assets/Vikrant.jpeg';
-import abhiImage from '../assets/Abhijeet.jpeg';
+import {Helmet} from 'react-helmet';
+import {Link} from 'react-router-dom';
+import {motion} from 'framer-motion';
+import * as I from 'lucide-react';
+import vikrant from '@/assets/Vikrant.jpeg';
+import abhijeet from '@/assets/Abhijeet.jpeg';
+import './AboutPage.css';
 
-const AboutPage = () => {
-  const fadeIn = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
-    viewport: { once: true, amount: 0.2 }
-  };
+const principles=[['Clarity before code','ScanSearch','We solve the right problem before choosing the technology.'],['Built for real work','Workflow','Every decision respects the people who will use the system daily.'],['Progress in the open','PanelsTopLeft','Clear milestones, visible work and honest communication.'],['Security by default','ShieldCheck','Trust is designed into the architecture from day one.'],['Useful over impressive','CheckCircle2','We measure quality by adoption and outcomes, not complexity.'],['Always improving','RefreshCw','Launch is the beginning of a better feedback loop.']];
+const timeline=[['01','Listen','Understand the operation and its constraints.'],['02','Frame','Define the smallest valuable change.'],['03','Build','Ship working software in clear phases.'],['04','Learn','Use evidence to improve what comes next.']];
+const SafeIcon=({name,size=22})=>{const C=I[name]||I.Sparkles;return <C size={size}/>};
+const reveal={initial:{opacity:0,y:25},whileInView:{opacity:1,y:0},viewport:{once:true,margin:'-70px'},transition:{duration:.55,ease:[.22,1,.36,1]}};
 
-  const values = [
-    { icon: Target, title: "Our Mission", description: "To empower businesses of all sizes to thrive in the digital landscape through innovative, data-driven marketing strategies that deliver measurable results and foster sustainable growth." },
-    { icon: Eye, title: "Our Vision", description: "To be the most trusted and results-oriented digital marketing partner, renowned for our creativity, strategic excellence, and unwavering commitment to client success." },
-    { icon: Gem, title: "Our Values", description: "We operate with integrity, champion innovation, foster collaboration, and are passionately dedicated to our clients' success. Excellence is not an act, but a habit." }
-  ];
+export default function AboutPage(){return <>
+ <Helmet><title>Company | Alpenrose Digital Solutions</title><meta name="description" content="Meet Alpenrose Digital Solutions, a Patna-based technology company building practical AI, ERP, cloud and custom software systems."/><link rel="canonical" href="https://ards.in/about"/></Helmet>
+ <section className="company-hero"><div className="company-grid"/><div className="company-glow cg-one"/><div className="company-glow cg-two"/><div className="site-shell company-hero-layout"><motion.div initial={{opacity:0,y:25}} animate={{opacity:1,y:0}}><span className="company-kicker"><i/> COMPANY · PATNA, INDIA</span><h1>Small enough to care.<br/><em>Built to think big.</em></h1><p>A product-minded team turning difficult operations into clear, dependable digital systems.</p><div className="company-actions"><Link to="/contact" className="btn btn-primary">Work with us <I.ArrowUpRight/></Link><a href="#company-story" className="btn btn-secondary">Our story <I.ArrowDown/></a></div></motion.div><motion.div className="company-graphic" initial={{opacity:0,scale:.92}} animate={{opacity:1,scale:1}} transition={{duration:.85}}><div className="company-core"><span>ARDS</span><b>Ideas into<br/>working systems</b><i/></div>{[['Think','Lightbulb','c1'],['Design','PenTool','c2'],['Engineer','Code2','c3'],['Support','Headphones','c4']].map(([x,icon,cls],index)=><motion.div className={'company-node '+cls} key={x} animate={{y:[0,index%2?9:-9,0]}} transition={{duration:4+index*.4,repeat:Infinity}}><span><SafeIcon name={icon}/></span><b>{x}</b></motion.div>)}<svg viewBox="0 0 600 500"><circle cx="300" cy="250" r="170"/><circle cx="300" cy="250" r="115"/><path d="M300 250L115 110M300 250L490 100M300 250L100 390M300 250L500 390"/></svg></motion.div><div className="company-hero-stats">{[['Patna','Home base'],['India','Primary market'],['24×7','Support'],['One team','End to end']].map(([v,l])=><div key={l}><b>{v}</b><span>{l}</span></div>)}</div></div></section>
 
-  const teamMembers = [
-    { name: "Vikrant Mishra", role: "Founder", image: vikrantImage },
-    { name: "Abhijeet M Mishra", role: "Head-Tech Support", image: abhiImage },
-  ];
+ <section className="section company-story" id="company-story"><div className="site-shell"><motion.div className="story-heading" {...reveal}><span>WHY WE EXIST</span><h2>Technology should remove friction,<br/>not create more of it.</h2></motion.div><div className="story-layout"><motion.div className="story-copy" {...reveal}><p className="story-lead">ARDS began with a simple observation: organizations often know exactly what slows them down, but available software rarely fits the way they actually work.</p><p>We bring product thinking, design and engineering into one conversation. That keeps decisions closer to the problem and makes delivery easier to understand.</p><p>Our home is Patna. Our standards are global. The systems we create are practical enough for today and considered enough for what comes next.</p><div className="story-signature"><span>ARDS</span><div><b>Alpenrose Digital Solutions</b><small>Empowering businesses through innovative digital transformations</small></div></div></motion.div><motion.div className="story-panel" {...reveal}><div className="story-panel-top"><span>WHAT WE BRING TO THE TABLE</span><I.Sparkles/></div>{[['Product strategy','The reason behind every feature.'],['Experience design','Interfaces people can learn quickly.'],['Software engineering','Secure foundations that stay maintainable.'],['Long-term support','A partner after the launch.']].map(([x,p],i)=><div className="story-row" key={x}><b>0{i+1}</b><span><strong>{x}</strong><small>{p}</small></span><I.ArrowUpRight/></div>)}</motion.div></div></div></section>
 
-  return (
-    <>
-      <Helmet>
-        <title>About Alpenrose Digital Solutions | Best Digital Marketing Agency Patna</title>
-        <meta name="description" content="About Alpenrose Digital Solutions - Leading digital marketing agency in Patna, Bihar. Learn about our mission, vision, values, and expert team dedicated to driving your digital success." />
-        <meta name="keywords" content="best digital marketing agency Patna, marketing agency Bihar, digital marketing services Patna, social media management Patna, brand identity design Patna, web development Patna, top SEO company Patna" />
-        <meta property="og:title" content="About Alpenrose Digital Solutions | Best Digital Marketing Agency Patna" />
-        <meta property="og:description" content="About Alpenrose Digital Solutions - Leading digital marketing agency in Patna, Bihar. Learn about our mission, vision, values, and expert team dedicated to driving your digital success." />
-        <meta property="og:image" content="/src/assets/logo.png" />
-        <meta property="og:url" content="https://ards.in/about" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "AboutPage",
-            "name": "About Alpenrose Digital Solutions",
-            "description": "Learn about Alpenrose Digital Solutions, the leading digital marketing agency in Patna, Bihar. Discover our mission, vision, values, and expert team.",
-            "mainEntity": {
-              "@type": "Organization",
-              "name": "Alpenrose Digital Solutions",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Patna",
-                "addressRegion": "Bihar",
-                "addressCountry": "India"
-              }
-            },
-            "breadcrumb": {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": "https://ards.in"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "About",
-                  "item": "https://ards.in/about"
-                }
-              ]
-            }
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Vikrant Mishra",
-            "jobTitle": "Founder",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "Alpenrose Digital Solutions"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Patna",
-              "addressRegion": "Bihar",
-              "addressCountry": "India"
-            }
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Abhijeet M Mishra",
-            "jobTitle": "Head-Tech Support",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "Alpenrose Digital Solutions"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Patna",
-              "addressRegion": "Bihar",
-              "addressCountry": "India"
-            }
-          })}
-        </script>
-      </Helmet>
+ <section className="section principle-section"><div className="site-shell"><motion.div className="company-section-heading" {...reveal}><span>OUR PRINCIPLES</span><h2>The standards behind the work.</h2><p>Simple rules that keep projects focused and relationships healthy.</p></motion.div><div className="principle-grid">{principles.map(([title,icon,copy],index)=><motion.article key={title} {...reveal} transition={{...reveal.transition,delay:index*.05}}><small>{String(index+1).padStart(2,'0')}</small><span><SafeIcon name={icon}/></span><h3>{title}</h3><p>{copy}</p></motion.article>)}</div></div></section>
 
-      <div className="page-container">
-        <section className="hero-gradient py-24 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }} className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-extrabold">About Alpenrose Digital Solutions - Best Digital Marketing Agency Patna</h1>
-              <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-                We are a passionate team of digital experts dedicated to helping your brand shine in the crowded digital world. As the top digital marketing agency in Patna, Bihar, we specialize in social media management Patna, targeted ad campaigns Patna, and comprehensive brand identity design Patna.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+ <section className="section leadership-section"><div className="site-shell"><motion.div className="company-section-heading" {...reveal}><span>LEADERSHIP</span><h2>Accountable from the first conversation.</h2></motion.div><div className="leader-grid"><motion.article {...reveal}><div className="leader-image"><img src={vikrant} alt="Vikrant Mishra, Founder of Alpenrose Digital Solutions"/><div className="leader-shape"/></div><div className="leader-info"><span>FOUNDER</span><h3>Vikrant Mishra</h3><p>Guides company direction, client partnerships and the practical application of technology.</p><a href="#" aria-label="Vikrant Mishra on LinkedIn"><I.Linkedin/> Connect</a></div></motion.article><motion.article {...reveal} transition={{...reveal.transition,delay:.1}}><div className="leader-image"><img src={abhijeet} alt="Abhijeet M Mishra, Co-Founder and Lead Software Engineer"/><div className="leader-shape"/></div><div className="leader-info"><span>CO-FOUNDER · LEAD SOFTWARE ENGINEER</span><h3>Abhijeet M Mishra</h3><p>Leads software architecture and engineering, turning complex requirements into secure, reliable products.</p><a href="#" aria-label="Abhijeet M Mishra on LinkedIn"><I.Linkedin/> Connect</a></div></motion.article></div></div></section>
 
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div {...fadeIn}>
-                <h2 className="text-3xl lg:text-4xl font-extrabold gradient-text mb-6">The Story Behind Our Startup Journey in Patna</h2>
-                <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-                  Alpenrose Digital Solutions is a top digital marketing agency in Patna, Bihar, specializing in social media management Patna, digital branding, and web development in Bihar. We help businesses of all sizes build a strong online presence with services like targeted ad campaigns Patna, content marketing Bihar, analytics & insights, political campaign management Patna, and IT infrastructure solutions Bihar.
-                </p>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  As a fast-growing startup, we combine creative collaboration with data-driven strategies to deliver measurable results. Whether you need expert social media marketing Patna, professional brand identity design Bihar, or cutting-edge custom web development Patna, Alpenrose Digital Solutions is your trusted partner for succeeding in the digital landscape of Patna and Bihar.
-                </p>
-              </motion.div>
-              <motion.div {...fadeIn} transition={{ ...fadeIn.transition, delay: 0.2 }} className="h-96">
-                <img className="w-full h-full object-cover rounded-3xl shadow-xl" alt="Alpenrose Digital Solutions team collaborating in modern Patna office" src="https://images.unsplash.com/photo-1573165231977-3f0e27806045" />
-              </motion.div>
-            </div>
-          </div>
-        </section>
+ <section className="section company-method"><div className="site-shell"><motion.div className="method-intro" {...reveal}><span>HOW WE WORK</span><h2>Direct. Visible.<br/>Always moving.</h2><p>No black boxes. Every phase produces something useful to review.</p></motion.div><div className="method-line">{timeline.map(([n,title,copy],i)=><motion.div key={title} {...reveal} transition={{...reveal.transition,delay:i*.08}}><b>{n}</b><i/><h3>{title}</h3><p>{copy}</p></motion.div>)}</div></div></section>
 
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn} className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">Our Core Philosophy</h2>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {values.map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="text-center p-8 rounded-3xl bg-gray-50 shadow-lg card-hover border border-gray-200/50"
-                >
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-5 shadow-md">
-                    <value.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn} className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">Meet Our Experts</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                We are a team of strategists, creatives, and technologists united by a single goal: to make your brand unforgettable.
-              </p>
-            </motion.div>
-
-            {/* ✅ CENTERED TEAM IMAGES */}
-            <div className="flex justify-center flex-wrap gap-8">
-              {teamMembers.map((member, index) => (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="text-center group"
-                >
-                  <div className="relative w-32 h-32 mx-auto mb-4">
-                  <img className="w-full h-full rounded-full object-cover shadow-lg" alt={`${member.name} - ${member.role} at Alpenrose Digital Solutions Patna`} src={member.image} />
-                    <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-indigo-500 transition-all duration-300 transform group-hover:scale-110"></div>
-                  </div>
-                  <h3 className="font-bold text-lg text-gray-900">{member.name}</h3>
-                  <p className="text-sm text-indigo-600 font-medium">{member.role}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-24 hero-gradient">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div {...fadeIn} className="text-white space-y-8">
-              <h2 className="text-4xl lg:text-5xl font-extrabold">Join Us On Our Journey in Patna</h2>
-              <p className="text-lg text-white/90 max-w-2xl mx-auto">
-                Let's collaborate to build something truly remarkable. Your success story starts here in Patna, Bihar.
-              </p>
-              <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <Link to="/contact">
-                  Let's Talk
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-      </div>
-    </>
-  );
-};
-
-export default AboutPage;
+ <section className="company-belief"><div className="site-shell"><motion.div {...reveal}><I.Quote/><blockquote>“The best system is the one people trust enough to use every day.”</blockquote><span>OUR PRODUCT BELIEF</span></motion.div></div></section>
+ <section className="company-cta"><div className="site-shell"><motion.div {...reveal}><span>BUILD WITH US</span><h2>Good problems deserve<br/>thoughtful teams.</h2><p>Tell us what is slowing you down—or what you want to make possible.</p><div><Link to="/contact" className="btn btn-primary">Start a conversation <I.ArrowUpRight/></Link><Link to="/contact" className="company-career"><I.Briefcase/> Explore careers</Link></div></motion.div></div></section>
+ </>}

@@ -1,195 +1,31 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Share2, Target, Palette, BarChart3, PenTool, Lightbulb, Megaphone, Code, Database, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React,{useState} from 'react';
+import {Helmet} from 'react-helmet';
+import {Link} from 'react-router-dom';
+import {AnimatePresence,motion} from 'framer-motion';
+import * as I from 'lucide-react';
+import './ServicesPage.css';
 
-const ServicesPage = () => {
-  const [expandedCard, setExpandedCard] = useState(null);
-
-  const services = [
-    {
-      icon: Share2,
-      title: 'Social Media Management',
-      description: 'Comprehensive social media strategy and management across all platforms.',
-      details: 'Our social media management service includes content creation, posting schedules, community management, engagement tracking, and performance analytics. We help you build a strong online presence across Facebook, Instagram, LinkedIn, Twitter, and other relevant platforms for your business.',
-      features: ['Content Creation', 'Daily Posting', 'Community Management', 'Analytics & Reporting'],
-    },
-    {
-      icon: Target,
-      title: 'Ad Campaigns',
-      description: 'Targeted advertising campaigns that deliver measurable results.',
-      details: 'We create and manage high-converting ad campaigns across Google Ads, Facebook Ads, Instagram Ads, and LinkedIn Ads. Our data-driven approach ensures optimal ROI through precise targeting, compelling ad copy, and continuous optimization.',
-      features: ['Google Ads', 'Facebook & Instagram Ads', 'LinkedIn Advertising', 'Campaign Optimization'],
-    },
-    {
-      icon: Palette,
-      title: 'Brand Identity',
-      description: 'Complete brand identity design and development services.',
-      details: 'From logo design to complete brand guidelines, we help you create a memorable brand identity that resonates with your target audience. Our services include logo design, color palette selection, typography, brand voice development, and brand guideline creation.',
-      features: ['Logo Design', 'Brand Guidelines', 'Visual Identity', 'Brand Strategy'],
-    },
-    {
-      icon: BarChart3,
-      title: 'Analytics & Insights',
-      description: 'Deep analytics and actionable insights for your digital presence.',
-      details: 'We provide comprehensive analytics and reporting services to track your digital marketing performance. Our detailed reports include website analytics, social media insights, campaign performance, and actionable recommendations for improvement.',
-      features: ['Performance Tracking', 'Custom Reports', 'ROI Analysis', 'Strategic Recommendations'],
-    },
-    {
-      icon: PenTool,
-      title: 'Content Marketing',
-      description: 'Engaging content that tells your brand story effectively.',
-      details: 'Our content marketing service includes blog writing, video content creation, infographic design, email marketing campaigns, and content strategy development. We create compelling content that engages your audience and drives conversions.',
-      features: ['Blog Writing', 'Video Content', 'Email Marketing', 'Content Strategy'],
-    },
-    {
-      icon: Lightbulb,
-      title: 'IT Infrastructure Solutions',
-      description: 'Reliable and scalable IT infrastructure services for seamless business operations.',
-      details: 'We provide end-to-end IT infrastructure solutions including server management, cloud setup, network security, and system monitoring to ensure your business runs smoothly and securely.',
-      features:  ['Server Setup & Management', 'Cloud Infrastructure', 'Network Security', 'System Monitoring'],
-    },
-    {
-      icon: Megaphone,
-      title: 'Political Campaign Management',
-      description: 'Strategic digital campaign management for political candidates to engage voters and amplify messages.',
-      details: 'Our political campaign services leverage digital tools to create compelling narratives, target key demographics, and drive voter engagement through social media, advertising, and content strategies.',
-      features: ['Social Media Strategy', 'Targeted Advertising', 'Content Creation', 'Voter Engagement'],
-    },
-    {
-      icon: Code,
-      title: 'Web Development',
-      description: 'Custom web development solutions to build modern, responsive, and user-friendly websites.',
-      details: 'From concept to deployment, we create scalable websites using the latest technologies, ensuring optimal performance, security, and user experience.',
-      features: ['Responsive Design', 'Custom Development', 'E-commerce Solutions', 'SEO Optimization'],
-    },
-    {
-      icon: Database,
-      title: 'ERP & Payroll Solutions',
-      description: 'Comprehensive ERP and payroll management systems to streamline business operations and employee management.',
-      details: 'We provide end-to-end ERP and payroll solutions including system implementation, customization, integration, and ongoing support to optimize your business processes and ensure accurate payroll management.',
-      features: ['ERP Implementation', 'Payroll Management', 'System Integration', 'Custom Reporting'],
-    },
-  ];
-
-  const toggleExpanded = (index) => {
-    setExpandedCard(expandedCard === index ? null : index);
-  };
-  
-  const fadeIn = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
-    viewport: { once: true, amount: 0.2 }
-  };
-
-  return (
-    <>
-      <Helmet>
-        <title>Our Services - Alpenrose Digital Solutions</title>
-        <meta name="description" content="Comprehensive digital marketing services including social media management, ad campaigns, brand identity, analytics, content marketing, ERP & payroll solutions, and digital strategy." />
-      </Helmet>
-
-      <div className="page-container">
-        <section className="hero-gradient py-24 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: "easeOut" }}
-              className="space-y-6"
-            >
-              <h1 className="text-4xl lg:text-6xl font-extrabold">Our Services</h1>
-              <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-                Comprehensive digital marketing solutions designed to grow your business and enhance your online presence.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {services.map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.03, rotateY: 5, boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}
-                  transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-3xl shadow-lg overflow-hidden card-hover flex flex-col tilt-card reveal-fade stagger-1"
-                >
-                  <div className="p-8 flex-grow">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-md icon-spin">
-                      <service.icon className="h-8 w-8 text-white" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                    <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-
-                    {expandedCard === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="overflow-hidden space-y-4"
-                      >
-                        <p className="text-gray-700 leading-relaxed">{service.details}</p>
-                        <div className="space-y-2">
-                          <h4 className="font-semibold text-gray-900">Key Features:</h4>
-                          <ul className="space-y-1">
-                            {service.features.map((feature, featureIndex) => (
-                              <li key={featureIndex} className="text-gray-600 text-sm flex items-center">
-                                <div className="w-2 h-2 bg-indigo-500 rounded-full mr-3 shrink-0"></div>
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </motion.div>
-                    )}
-                  </div>
-                  <div className="p-8 pt-0">
-                    <Button
-                      onClick={() => toggleExpanded(index)}
-                      variant="outline"
-                      className="w-full mt-4 border-indigo-200 text-indigo-600 font-semibold hover:bg-indigo-50 hover:text-indigo-700"
-                    >
-                      {expandedCard === index ? 'Show Less' : 'Read More'}
-                      {expandedCard === index ? <ChevronUp className="ml-2 h-4 w-4" /> : <ChevronDown className="ml-2 h-4 w-4" />}
-                    </Button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-24 hero-gradient">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div {...fadeIn} className="text-white space-y-8">
-              <h2 className="text-4xl lg:text-5xl font-extrabold">
-                Ready to Get Started?
-              </h2>
-              <p className="text-lg text-white/90 max-w-2xl mx-auto">
-                Let's discuss how our services can help transform your digital presence and grow your business.
-              </p>
-               <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <Link to="/contact">
-                  Contact Us Today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-      </div>
-    </>
-  );
+const solutions={
+ 'AI & Automation':{icon:'BrainCircuit',eyebrow:'INTELLIGENCE LAYER',title:'Turn repetitive work into intelligent flow.',copy:'AI that reads, recognizes, responds and acts across daily operations.',color:'violet',items:[['AI Automation','Workflow'],['Face Recognition','ScanFace'],['Chatbots','Bot'],['OCR Processing','ScanText'],['Predictive Analytics','BarChart3'],['Smart Reporting','FileBarChart']]},
+ 'ERP Platforms':{icon:'Blocks',eyebrow:'ONE OPERATING SYSTEM',title:'Connect every department and decision.',copy:'Modular platforms shaped around real institutional and enterprise workflows.',color:'blue',items:[['Education ERP','GraduationCap'],['Hospital ERP','HeartPulse'],['Manufacturing ERP','Factory'],['HRMS & Payroll','Users'],['Inventory','Boxes'],['Finance & CRM','WalletCards']]},
+ 'Web & Apps':{icon:'PanelsTopLeft',eyebrow:'DIGITAL EXPERIENCES',title:'Products people understand instantly.',copy:'Fast, accessible experiences for customers, employees and partners.',color:'pink',items:[['Corporate Websites','Globe2'],['Web Applications','AppWindow'],['Android & iOS','Smartphone'],['Flutter Apps','Layers3'],['E-Commerce','ShoppingBag'],['Customer Portals','Contact']]},
+ 'Cloud & Security':{icon:'CloudCog',eyebrow:'RESILIENT FOUNDATIONS',title:'Infrastructure ready for the next stage.',copy:'Secure cloud environments engineered for performance, continuity and scale.',color:'cyan',items:[['Cloud Migration','CloudUpload'],['AWS & Azure','Cloud'],['DevOps','GitBranch'],['Managed Hosting','Server'],['Cyber Security','ShieldCheck'],['Backup & Recovery','DatabaseBackup']]},
+ 'Growth Systems':{icon:'TrendingUp',eyebrow:'COMPOUNDING GROWTH',title:'Make every digital interaction measurable.',copy:'Strategy, creative and analytics connected to qualified demand.',color:'orange',items:[['Search Optimization','Search'],['Performance Marketing','Megaphone'],['Brand Systems','Gem'],['Content Marketing','FileText'],['Conversion UX','MousePointerClick'],['Growth Analytics','ChartNoAxesCombined']]}
 };
+const categories=Object.keys(solutions);
+const SafeIcon=({name,size=22})=>{const C=I[name]||I.Sparkles;return <C size={size}/>};
+const reveal={initial:{opacity:0,y:24},whileInView:{opacity:1,y:0},viewport:{once:true,margin:'-70px'},transition:{duration:.55,ease:[.22,1,.36,1]}};
 
-export default ServicesPage;
+export default function ServicesPage(){const [active,setActive]=useState(categories[0]);const current=solutions[active];return <>
+ <Helmet><title>AI, ERP, Cloud & Software Solutions | ARDS</title><meta name="description" content="Explore AI automation, ERP platforms, web and mobile applications, cloud infrastructure, cyber security and growth solutions from ARDS."/><link rel="canonical" href="https://ards.in/services"/></Helmet>
+ <section className="solutions-hero"><div className="solutions-grid-bg"/><div className="solution-aura sa-one"/><div className="solution-aura sa-two"/><div className="site-shell solutions-hero-layout"><motion.div initial={{opacity:0,y:24}} animate={{opacity:1,y:0}}><span className="solutions-kicker"><i/> SOLUTIONS BUILT AROUND OUTCOMES</span><h1>One partner.<br/><em>Every digital layer.</em></h1><p>From the first workflow to the full operating platform.</p><div className="solutions-actions"><Link to="/contact" className="btn btn-primary">Discuss your project <I.ArrowUpRight/></Link><a href="#solution-explorer" className="btn btn-secondary">Explore capabilities <I.ArrowDown/></a></div><div className="solutions-proof"><span><I.CheckCircle2/> Modular by design</span><span><I.ShieldCheck/> Enterprise security</span><span><I.Expand/> Built to scale</span></div></motion.div><motion.div className="solution-orbit" initial={{opacity:0,scale:.9}} animate={{opacity:1,scale:1}} transition={{duration:.8}}><div className="orbit-track outer"/><div className="orbit-track inner"/><div className="orbit-center"><span>ARDS</span><b>Digital<br/>Core</b><i/></div>{categories.map((x,index)=>{const s=solutions[x];return <motion.button key={x} className={'orbit-solution os-'+index} onClick={()=>setActive(x)} animate={{y:[0,index%2?8:-8,0]}} transition={{duration:4+index*.35,repeat:Infinity}}><span><SafeIcon name={s.icon}/></span><div><b>{x}</b><small>{s.eyebrow}</small></div></motion.button>})}<div className="orbit-pulse p1"/><div className="orbit-pulse p2"/></motion.div></div></section>
+
+ <section className="section solution-explorer" id="solution-explorer"><div className="site-shell"><motion.div className="solution-heading" {...reveal}><span>CAPABILITY EXPLORER</span><h2>Start with the challenge,<br/>not the technology.</h2></motion.div><div className="solution-tabs" role="tablist">{categories.map(x=><button key={x} className={active===x?'active':''} onClick={()=>setActive(x)} role="tab" aria-selected={active===x}><SafeIcon name={solutions[x].icon}/><span>{x}</span></button>)}</div><AnimatePresence mode="wait"><motion.div className={'solution-feature '+current.color} key={active} initial={{opacity:0,y:15}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-15}} transition={{duration:.35}}><div className="feature-copy"><span>{current.eyebrow}</span><h2>{current.title}</h2><p>{current.copy}</p><Link to={active==='AI & Automation'?'/ai-solutions':active==='ERP Platforms'?'/business-automation':'/contact'}>Explore {active} <I.ArrowRight/></Link></div><div className="feature-modules">{current.items.map(([name,icon],index)=><motion.div key={name} initial={{opacity:0,scale:.94}} animate={{opacity:1,scale:1}} transition={{delay:index*.05}}><span><SafeIcon name={icon}/></span><b>{name}</b><small>Learn more</small><I.ArrowUpRight/></motion.div>)}</div></motion.div></AnimatePresence></div></section>
+
+ <section className="section architecture-section"><div className="site-shell"><motion.div className="architecture-copy" {...reveal}><span>CONNECTED BY DESIGN</span><h2>Not a collection of tools.<br/>One coherent system.</h2><p>Information moves cleanly between customer experiences, operations, intelligence and infrastructure.</p></motion.div><motion.div className="architecture-map" {...reveal}><div className="arch-core"><SafeIcon name="Sparkles" size={30}/><b>Intelligence</b></div>{[['Experience','PanelsTopLeft','a1'],['Operations','Workflow','a2'],['Data','Database','a3'],['Cloud','Cloud','a4'],['Security','ShieldCheck','a5'],['Growth','TrendingUp','a6']].map(([name,icon,cls])=><div className={'arch-node '+cls} key={name}><span><SafeIcon name={icon}/></span><b>{name}</b></div>)}<svg viewBox="0 0 700 420"><g>{[[350,210,105,80],[350,210,350,35],[350,210,595,80],[350,210,105,340],[350,210,350,385],[350,210,595,340]].map((p,i)=><path key={i} d={`M${p[0]} ${p[1]} C${(p[0]+p[2])/2} ${p[1]}, ${(p[0]+p[2])/2} ${p[3]}, ${p[2]} ${p[3]}`}/>)}</g></svg></motion.div></div></section>
+
+ <section className="section engagement-section"><div className="site-shell"><motion.div className="solution-heading" {...reveal}><span>WAYS TO WORK TOGETHER</span><h2>Choose the right starting point.</h2></motion.div><div className="engagement-grid">{[['01','Focused Build','A defined product, portal, website or automation delivered end to end.','Rocket'],['02','Platform Program','A phased ERP or digital platform with clear releases and adoption support.','Layers3'],['03','Embedded Team','Product, design and engineering capacity integrated with your team.','Users'],['04','Modernization','Upgrade a legacy system without interrupting critical operations.','RefreshCw']].map(([n,title,copy,icon],i)=><motion.article key={title} {...reveal} transition={{...reveal.transition,delay:i*.07}}><small>{n}</small><span><SafeIcon name={icon}/></span><h3>{title}</h3><p>{copy}</p><Link to="/contact">Talk to us <I.ArrowRight/></Link></motion.article>)}</div></div></section>
+
+ <section className="solution-stack"><div className="site-shell"><span>ENGINEERED WITH</span><div>{['React','Next.js','Python','FastAPI','Node.js','Flutter','PostgreSQL','Docker','AWS','Azure','TensorFlow','OpenCV'].map(x=><b key={x}>{x}</b>)}</div></div></section>
+ <section className="solutions-cta"><div className="site-shell"><motion.div {...reveal}><span>YOUR NEXT SYSTEM</span><h2>What should work<br/>better tomorrow?</h2><p>Bring the workflow, bottleneck or idea. We’ll help define the clearest next move.</p><div><Link to="/contact" className="btn btn-primary">Book a free consultation <I.ArrowUpRight/></Link><a href="tel:+919308579699"><I.Phone/> +91 93085 79699</a></div></motion.div></div></section>
+ </>}

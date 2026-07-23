@@ -40,7 +40,7 @@ const BlogPage = () => {
   return (
     <>
       <Helmet>
-        <title>Digital Marketing Blog Patna | Alpenrose Digital Solutions</title>
+        <title>AI, ERP, Automation &amp; Technology Insights | ARDS</title>
         <meta name="description" content="Digital marketing blog Patna - Stay updated with latest SEO, social media, and digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Bihar." />
         <meta name="keywords" content="content marketing Patna, SEO content marketing Patna, digital marketing services Patna, best digital marketing agency Patna, marketing agency Bihar" />
         <meta property="og:title" content="Digital Marketing Blog Patna | Alpenrose Digital Solutions" />

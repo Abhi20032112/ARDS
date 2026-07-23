@@ -18,13 +18,13 @@ const TeamPage = () => {
 
   const teamMembers = [
     { name: "Vikrant Mishra", role: "Founder", image: vikrantImage, bio: "Visionary leader with expertise in digital strategy and brand development." },
-    { name: "Abhijeet M Mishra", role: "Head-Tech Support", image: abhiImage, bio: "Technical expert ensuring seamless digital operations and support." },
+    { name: "Abhijeet M Mishra", role: "Co-Founder & Lead Software Engineer", image: abhiImage, bio: "Leads software architecture and engineering across ARDS products and client platforms." },
   ];
 
   return (
     <>
       <Helmet>
-        <title>Digital Marketing Team Patna | Alpenrose Digital Solutions</title>
+        <title>Technology Leadership Team | Alpenrose Digital Solutions</title>
         <meta name="description" content="Meet the expert digital marketing team in Patna, Bihar. Learn about our founders Vikrant Mishra and Abhijeet M Mishra, dedicated to your digital success." />
         <meta name="keywords" content="top SEO company Patna, digital marketing agency Patna, best digital marketing agency Patna, marketing agency Bihar, digital marketing services Patna" />
         <meta property="og:title" content="Digital Marketing Team Patna | Alpenrose Digital Solutions" />
@@ -56,7 +56,7 @@ const TeamPage = () => {
                 {
                   "@type": "Person",
                   "name": "Abhijeet M Mishra",
-                  "jobTitle": "Head-Tech Support"
+                  "jobTitle": "Co-Founder & Lead Software Engineer"
                 }
               ]
             }

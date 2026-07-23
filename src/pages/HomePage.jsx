@@ -1,355 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, TrendingUp, Clock, Star, Zap, Target, Briefcase, BookOpen } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import AnimatedNumber from '@/components/AnimatedNumber';
-import AnimatedTypewriter from '@/components/AnimatedTypewriter';
-import { useRef, useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react'; // Keep this import if needed for other parts of the code
-import slide1 from '/src/assets/slide1.jpg';
-import slide2 from '/src/assets/slide2.jpg';
-import slide3 from '/src/assets/slide3.jpg';
+import * as Icons from 'lucide-react';
+import heroVisual from '@/assets/ards-enterprise-hero.png';
+import CinematicHero from '@/components/CinematicHero';
 
-// Lazy load images
-const lazyLoadImage = (src) => {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(src);
-    img.src = src;
-  });
-};
+const services = [
+  ['Website Development','Globe2','Fast, accessible websites engineered to convert.'],['Application Development','PanelsTopLeft','Secure software built around your operations.'],['Mobile App Development','Smartphone','Native-quality experiences for every screen.'],['AI Automation','Bot','Intelligent workflows that remove repetitive work.'],['ERP Solutions','Blocks','One connected operating system for your business.'],['Cloud Solutions','CloudCog','Reliable cloud infrastructure that scales on demand.'],['Digital Marketing','Megaphone','Full-funnel campaigns focused on measurable growth.'],['SEO','Search','Build visibility and win high-intent organic traffic.'],['Cyber Security','ShieldCheck','Proactive protection for systems, people and data.'],['Web Hosting','Server','High-performance managed hosting with 99.9% uptime.'],['E-Commerce','ShoppingBag','Conversion-first storefronts and commerce operations.'],['Custom Software','Code2','Purpose-built platforms for complex business needs.'],['Attendance Management','ScanFace','Accurate, real-time attendance with smart insights.'],['Inventory','Boxes','Track stock, purchases and movement in real time.'],['HRMS','UsersRound','Simplify employee journeys from hire to payroll.'],['Hospital ERP','HeartPulse','Connected care, billing, pharmacy and administration.'],['School ERP','School','A complete digital campus for schools and parents.'],['College ERP','GraduationCap','Admissions to alumni, unified in one platform.'],['Manufacturing ERP','Factory','Plan production, materials, quality and dispatch.'],['Government Solutions','Landmark','Citizen-first digital systems built for scale.']
+];
+const industries = [['Education','GraduationCap'],['Healthcare','HeartPulse'],['Manufacturing','Factory'],['Government','Landmark'],['Retail','ShoppingCart'],['Hospitality','Hotel'],['NGO','HandHeart'],['Real Estate','Building2'],['Transportation','Truck'],['Sports Club','Trophy'],['Infrastructure','HardHat'],['Finance','ChartNoAxesCombined']];
+const aiFeatures = [['Face Recognition','ScanFace'],['Workflow Automation','Workflow'],['AI Analytics','ChartSpline'],['Chatbots','MessagesSquare'],['OCR','ScanText'],['Document Automation','Files'],['Auto Reports','FileChartColumn'],['Smart Notifications','BellRing']];
+const erpModules = ['Admissions','Attendance','Fees','Examination','HR','Payroll','Inventory','Finance','Library','Hostel','Transport','Canteen','ID Cards','Analytics','Reports','Download Center','Parent Portal','Teacher Portal','Student Portal'];
+const why = [['Customized Solutions','SlidersHorizontal'],['Affordable Pricing','BadgeIndianRupee'],['Experienced Team','Users'],['Fast Delivery','Rocket'],['24×7 Support','Headphones'],['Secure Architecture','ShieldCheck'],['Cloud Ready','Cloud'],['AI Powered','Sparkles'],['Scalable','Expand'],['Modern Technology','Cpu']];
+const stack = ['React','Next.js','FastAPI','Python','Node.js','Flutter','Android','iOS','MySQL','PostgreSQL','MongoDB','Docker','AWS','Azure','Cloud','GitHub','TensorFlow','OpenCV'];
+const Reveal = ({children, className=''}) => <motion.div className={className} initial={{opacity:0,y:28}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:'-80px'}} transition={{duration:.55}}>{children}</motion.div>;
+const Icon = ({name,size=22}) => { const C=Icons[name] || Icons.Sparkles; return <C size={size}/> };
+const Heading = ({eyebrow,title,copy}) => <div className="section-heading"><span>{eyebrow}</span><h2>{title}</h2>{copy&&<p>{copy}</p>}</div>;
 
-const HomePage = () => {
-  const metrics = [
-    { icon: Users, value: '50+', label: 'Happy Clients' },
-    { icon: TrendingUp, value: '100%', label: 'Success Rate' },
-    { icon: Star, value: '5+', label: 'Years Experience' },
-  ];
+export default function HomePage(){
+ const [erp,setErp]=useState('Admissions'); const [openFaq,setOpenFaq]=useState(0); const [employees,setEmployees]=useState(30); const [hours,setHours]=useState(8); const [demo,setDemo]=useState('Attendance'); const monthly=Math.round(employees*hours*250/60);
+ return <>
+  <Helmet><title>ARDS | AI, ERP & Digital Transformation Company in India</title><meta name="description" content="Alpenrose Digital Solutions builds AI automation, ERP, cloud, web and mobile solutions that help organizations work smarter and scale faster."/><meta property="og:title" content="Automate Your Business. Accelerate Your Growth."/><meta property="og:description" content="Enterprise AI, ERP and digital solutions by ARDS."/><meta property="og:image" content="https://ards.in/logo.png"/><link rel="canonical" href="https://ards.in/"/><script type="application/ld+json">{JSON.stringify({'@context':'https://schema.org','@type':'ProfessionalService',name:'Alpenrose Digital Solutions',url:'https://ards.in',areaServed:'India',address:{'@type':'PostalAddress',addressLocality:'Patna',addressRegion:'Bihar',addressCountry:'IN'},telephone:'+91-9308579699'})}</script></Helmet>
+  <CinematicHero />
+  {/* Legacy hero retained below is hidden to preserve existing markup during rollout. */}<section className="hero legacy-hero" id="home"><div className="hero-glow one"/><div className="hero-glow two"/><div className="site-shell hero-grid">
+   <motion.div className="hero-copy" initial={{opacity:0,x:-30}} animate={{opacity:1,x:0}} transition={{duration:.7}}><div className="eyebrow-pill"><Icons.Sparkles size={16}/> AI-first digital transformation partner</div><h1>Transform Your Business With <span>Intelligent Digital Solutions.</span></h1><p>We help educational institutions, hospitals, enterprises, manufacturers, government organizations and businesses automate operations using AI, ERP, mobile apps, cloud solutions and custom software.</p><div className="hero-actions"><Link className="btn btn-primary magnetic" to="/contact">Book Free Demo <Icons.ArrowUpRight/></Link><a className="btn btn-secondary" href="#solutions">Explore Solutions <Icons.ArrowDown/></a><a className="watch-link" href="#live-demo"><span><Icons.Play/></span> Watch Demo</a></div><div className="trust-row"><span><Icons.ShieldCheck/> Secure by design</span><span><Icon name="CheckCircle2"/> Built for India</span><span><Icons.Headphones/> Human support</span></div></motion.div>
+   <motion.div className="hero-art" initial={{opacity:0,scale:.92}} animate={{opacity:1,scale:1}} transition={{duration:.9,delay:.15}}><img src={heroVisual} alt="ARDS enterprise analytics, ERP, AI and cloud solutions dashboard" fetchPriority="high"/><div className="float-chip ai"><Icons.Bot/> AI Automation</div><div className="float-chip up"><Icons.TrendingUp/> +38% efficiency</div></motion.div>
+  </div><div className="site-shell hero-stats">{[['500+','Projects delivered'],['20+','Solutions'],['99.9%','Uptime'],['24×7','Support']].map(x=><div key={x[1]}><strong>{x[0]}</strong><span>{x[1]}</span></div>)}</div></section>
 
-  const features = [
-    {
-      icon: Zap,
-      title: 'Lightning Fast Results',
-      description: 'Our streamlined processes get your campaigns up and running in record time, delivering swift impact.',
-    },
-    {
-      icon: Target,
-      title: 'Precision Targeting',
-      description: 'We use data-driven strategies to reach your ideal audience with unparalleled accuracy and effectiveness.',
-    },
-    {
-      icon: Star,
-      title: 'Premium Quality Content',
-      description: 'Our award-winning creative team produces compelling content that elevates your brand and engages your audience.',
-    },
-  ];
+  <section className="logo-strip"><span>Trusted technology for ambitious organizations</span><div>{['EDUCATION','HEALTHCARE','GOVERNMENT','MANUFACTURING','RETAIL'].map(x=><b key={x}>{x}</b>)}</div></section>
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
-    viewport: { once: true, amount: 0.2 }
-  };
+  <section className="section" id="solutions"><div className="site-shell"><Heading eyebrow="Capabilities" title="One partner. Every digital capability." copy="Strategy, design and engineering come together to solve your toughest operational challenges."/><div className="service-grid">{services.map(([t,i,d],n)=><Reveal key={t}><article className="service-card"><div className="icon-box"><Icon name={i}/></div><small>{String(n+1).padStart(2,'0')}</small><h3>{t}</h3><p>{d}</p><Link to="/services">Learn more <Icons.ArrowRight/></Link></article></Reveal>)}</div></div></section>
 
-  // Manual slider component (lightweight fallback to avoid Swiper module issues)
-  function ManualSlider() {
-    const slides = [
-      slide1,
-      slide2,
-      slide3,
-    ];
-    const [index, setIndex] = useState(0);
-    const timeoutRef = useRef(null);
+  <section className="section soft-section"><div className="site-shell"><Heading eyebrow="Industries" title="Deep context. Better outcomes." copy="Purpose-built digital experiences for organizations that keep the world moving."/><div className="industry-grid">{industries.map(([t,i])=><div className="industry-card" key={t}><span><Icon name={i} size={25}/></span><h3>{t}</h3><Icons.ArrowUpRight/></div>)}</div></div></section>
 
-    useEffect(() => {
-      const next = () => setIndex((i) => (i + 1) % slides.length);
-      timeoutRef.current = setInterval(next, 3500);
-      return () => clearInterval(timeoutRef.current);
-    }, []);
+  <section className="section dark-section"><div className="site-shell split"><Reveal className="ai-visual"><div className="ai-orbit"><div className="brain"><Icon name="BrainCircuit" size={70}/></div>{['ScanFace','Workflow','BarChart3','Bot'].map((name,i)=><span style={{'--i':i}} key={name}><Icon name={name}/></span>)}</div></Reveal><div><Heading eyebrow="ARDS Intelligence" title="Work smarter with AI" copy="Give your team intelligent tools that see patterns, automate decisions and turn documents into action."/><div className="feature-list">{aiFeatures.map(([t,i])=><div key={t}><Icon name={i}/><span>{t}</span></div>)}</div><Link className="btn btn-light" to="/ai-solutions">Explore AI solutions <Icons.ArrowRight/></Link></div></div></section>
 
-    return (
-      <div className="relative">
-        <img src={slides[index]} alt={`Slide ${index + 1}`} className="w-full h-auto rounded-3xl object-cover" />
-        <button
-          aria-label="Previous"
-          onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-gray-800 p-2 rounded-full shadow hover:scale-105 transition"
-        >
-          ‹
-        </button>
-        <button
-          aria-label="Next"
-          onClick={() => setIndex((i) => (i + 1) % slides.length)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-gray-800 p-2 rounded-full shadow hover:scale-105 transition"
-        >
-          ›
-        </button>
-      </div>
-    );
-  }
+  <section className="section"><div className="site-shell"><Heading eyebrow="Enterprise ERP" title="Every operation. One intelligent platform." copy="Role-based modules give every stakeholder the right information at the right moment."/><div className="erp-layout"><div className="erp-menu">{erpModules.map(x=><button className={erp===x?'active':''} onClick={()=>setErp(x)} key={x}>{x}</button>)}</div><div className="erp-screen"><div className="screen-top"><span/><span/><span/><b>ARDS Enterprise</b></div><div className="screen-body"><aside><Icons.LayoutDashboard/><Icons.Users/><Icons.WalletCards/><Icons.BarChart3/><Icons.Settings/></aside><main><div className="screen-title"><div><small>ERP MODULE</small><h3>{erp}</h3></div><button><Icons.Download/> Export</button></div><div className="mini-stats"><div><span>Active records</span><b>12,480</b><em>+12.5%</em></div><div><span>Completed</span><b>8,294</b><em>+8.2%</em></div><div><span>Pending</span><b>186</b><em>Live</em></div></div><div className="chart"><div className="chart-bars">{[36,55,42,72,61,84,69,92,77,96].map((h,i)=><i style={{height:h+'%'}} key={i}/>)}</div></div></main></div></div></div></div></section>
 
-  return (
-    <>
-      <Helmet>
-        <title>Best Digital Marketing Agency in Patna | Alpenrose Digital Solutions</title>
-        <meta name="description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar. We specialize in SEO, social media management, web development, and online ad campaigns to grow your business online." />
-        <meta name="keywords" content="best digital marketing agency Patna, social media management Patna, digital marketing agency Patna, ad campaigns Patna, brand identity design Patna, web development Patna, marketing agency Bihar, digital marketing services Patna" />
-        <meta property="og:title" content="Best Digital Marketing Agency in Patna | Alpenrose Digital Solutions" />
-        <meta property="og:description" content="Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar. We specialize in SEO, social media management, web development, and online ad campaigns to grow your business online." />
-        <meta property="og:image" content="/src/assets/logo.png" />
-        <meta property="og:url" content="https://ards.in" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Alpenrose Digital Solutions",
-            "url": "https://ards.in",
-            "logo": "/src/assets/logo.png",
-            "description": "Leading digital marketing agency in Patna specializing in SEO, social media management, branding, and ad campaigns.",
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+91 9308579699",
-              "contactType": "customer service"
-            },
-            "sameAs": [
-              "https://www.facebook.com/profile.php?id=61578637610542",
-              "https://www.instagram.com/alpenrosedigitalsolutions",
-              "https://www.linkedin.com/company/alpenrose-digital-solutions",
-              "https://www.youtube.com/@AlpenroseDigitalSolutions"
-            ]
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Alpenrose Digital Solutions",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Patna",
-              "addressRegion": "Bihar",
-              "addressCountry": "India"
-            },
-            "telephone": "+91 9308579699",
-            "url": "https://ards.in"
-          })}
-        </script>
-      </Helmet>
+  <section className="section soft-section"><div className="site-shell"><Heading eyebrow="Why ARDS" title="Enterprise discipline. Startup speed."/><div className="why-grid">{why.map(([t,i])=><div key={t}><span><Icon name={i}/></span><h3>{t}</h3><p>Practical expertise, transparent delivery and outcomes you can measure.</p></div>)}</div></div></section>
 
-      <div className="page-container">
-        <section className="relative hero-gradient text-white overflow-hidden parallax-bg">
-          {/* Enhanced Particles with Floating Shapes */}
-          <div className="particles">
-            {[...Array(30)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="particle"
-                initial={{ y: 0, opacity: 0 }}
-                animate={{
-                  y: [0, -20, 0],
-                  opacity: [0, 1, 0],
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 5 + Math.random() * 5,
-                  repeat: Infinity,
-                  delay: Math.random() * 5,
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
-          {/* Floating Icons */}
-          <motion.div
-            className="absolute top-20 left-10 opacity-20"
-            animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            <Zap className="h-12 w-12 text-white" />
-          </motion.div>
-          <motion.div
-            className="absolute bottom-20 right-10 opacity-20"
-            animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 2 }}
-          >
-            <Target className="h-12 w-12 text-white" />
-          </motion.div>
-          <div className="absolute inset-0 bg-black/40"></div>
+  <section className="section"><div className="site-shell"><Heading eyebrow="Our process" title="From idea to impact, without the guesswork."/><div className="process">{['Discovery','Planning','Design','Development','Testing','Deployment','Support'].map((x,i)=><div key={x}><b>{String(i+1).padStart(2,'0')}</b><span/><h3>{x}</h3></div>)}</div></div></section>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9, ease: "easeOut" }}
-                className="space-y-8 z-10 text-center lg:text-left reveal-fade"
-              >
-                <motion.h1
-                  className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight whitespace-nowrap"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                >
-                  <AnimatedTypewriter
-                    texts={["Alpenrose Digital Solutions"]}
-                    speed={100}
-                    pause={1200}
-                  />
-                </motion.h1>
-                <motion.p
-                  className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                >
-                  Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, web development, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
-                </motion.p>
-                <motion.div
-                  className="flex justify-center lg:justify-start"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
-                      <Link to="/contact">
-                        Get Started
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
+  <section className="section automation-story"><div className="site-shell"><Heading eyebrow="Business automation" title="From operational chaos to one clear view." copy="We connect scattered work into a system that runs, measures and improves itself."/><div className="transform-board"><motion.div className="before-panel" whileHover={{y:-5}}><span className="panel-label bad">BEFORE AUTOMATION</span><h3>Busy teams. Invisible progress.</h3><div className="chaos-list">{[['Paper files','Files'],['Disconnected Excel sheets','Table2'],['Manual attendance','ClipboardCheck'],['Endless phone follow-ups','PhoneCall'],['Daily operational stress','CircleAlert']].map(([x,i])=><div key={x}><Icon name={i}/><span>{x}</span><Icons.X/></div>)}</div></motion.div><div className="flow-arrow"><span><Icons.ArrowRight/></span><small>ARDS FLOW</small></div><motion.div className="after-panel" whileHover={{y:-5}}><span className="panel-label good">AFTER AUTOMATION</span><div className="smart-head"><div><small>Good morning</small><h3>Everything is on track.</h3></div><span><Icons.Bell/></span></div><div className="smart-stats"><div><Icon name="Workflow"/><b>84%</b><small>Automated</small></div><div><Icon name="Clock3"/><b>42h</b><small>Saved</small></div><div><Icon name="CheckCircle2"/><b>98%</b><small>On time</small></div></div><div className="smart-graph">{[42,60,48,75,67,88,82,96].map((h,i)=><i style={{height:h+'%'}} key={i}/>)}</div><div className="success-line"><Icons.CheckCircle2/> Weekly reports generated automatically</div></motion.div></div></div></section>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotateY: 45 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-                className="relative hidden lg:block reveal-zoom"
-              >
-                <motion.div
-                  className="floating-animation"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <div className="rounded-3xl shadow-2xl relative overflow-hidden hover-lift">
-                    <ManualSlider className="w-full" />
-                  </div>
-                </motion.div>
-                {/* Parallax Effect on Slider */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-3xl"
-                  animate={{ x: [0, 10, 0] }}
-                  transition={{ duration: 5, repeat: Infinity }}
-                />
-              </motion.div>
-            </div>
-          </div>
-          <div className="section-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
-            </svg>
-          </div>
-        </section>
+  <section className="section live-demo" id="live-demo"><div className="site-shell"><Heading eyebrow="Live product experience" title="Don’t take our word for it. Try the workflow." copy="Explore a lightweight simulation of the connected experiences we build."/><div className="demo-tabs">{['Attendance','Analytics','AI Assistant'].map(x=><button className={demo===x?'active':''} onClick={()=>setDemo(x)} key={x}>{x}</button>)}</div><div className="demo-stage">{demo==='Attendance'&&<motion.div key="attendance" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} className="attendance-demo"><div className="face-scan"><Icons.ScanFace/><span/><small>Identity verified</small></div><div className="employee-card"><span>AK</span><div><h3>Ananya Kumari</h3><p>Product Design · Patna Office</p></div><b><Icons.Check/> Checked in · 09:12</b></div></motion.div>}{demo==='Analytics'&&<motion.div key="analytics" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} className="analytics-demo"><div className="analytic-kpis"><div><span>Revenue</span><b>₹24.8L</b><em>↑ 18.4%</em></div><div><span>Efficiency</span><b>91.2%</b><em>↑ 7.1%</em></div><div><span>Open tasks</span><b>128</b><em>↓ 12.2%</em></div></div><div className="line-chart"><svg viewBox="0 0 700 180" preserveAspectRatio="none"><path d="M0,145 C80,120 110,150 180,110 S280,80 350,92 S460,35 520,58 S630,24 700,18"/><path className="fill" d="M0,145 C80,120 110,150 180,110 S280,80 350,92 S460,35 520,58 S630,24 700,18 L700,180 L0,180Z"/></svg></div></motion.div>}{demo==='AI Assistant'&&<motion.div key="ai" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} className="chat-demo"><div className="chat-title"><span><Icons.Bot/></span><div><h3>ARDS Intelligence</h3><small>Online · Your business copilot</small></div></div><div className="chat-bubble user">Summarize pending approvals and flag anything urgent.</div><div className="chat-bubble bot"><Icons.Sparkles/><p>You have <b>12 pending approvals</b>. Three purchase requests exceed their department budgets and need attention today. I’ve prepared a detailed report.</p></div><div className="chat-input">Ask about your business data… <Icons.Send/></div></motion.div>}</div></div></section>
 
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {metrics.map((metric, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className={`text-center p-8 rounded-3xl bg-white shadow-lg card-hover reveal-fade stagger-${index + 1}`}
-                >
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mb-5 shadow-md icon-spin">
-                    <metric.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-5xl font-extrabold gradient-text mb-2">
-                    <AnimatedNumber value={metric.value.replace(/[+%]/g, '')} formatter={(n) => `${n}${metric.value.includes('+') ? '+' : metric.value.includes('%') ? '%' : ''}`} />
-                  </h3>
-                  <p className="text-gray-600 font-semibold text-lg">{metric.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+  <section className="section case-section"><div className="site-shell"><Heading eyebrow="Selected transformations" title="Proof lives in the outcome."/><div className="case-grid">{[['Education ERP','80%','faster fee reconciliation','Building a connected campus'],['AI Attendance','95%','less manual processing','Making every check-in accurate'],['Workflow Automation','42 hrs','saved every month','Turning approval delays into flow']].map((c,i)=><article key={c[0]}><div className={'case-art c'+i}><Icon name={i===0?'GraduationCap':i===1?'ScanFace':'Workflow'} size={44}/></div><span>CASE STUDY · {c[0]}</span><h3>{c[3]}</h3><div><strong>{c[1]}</strong><p>{c[2]}</p></div><Link to="/work">View case study <Icons.ArrowUpRight/></Link></article>)}</div></div></section>
 
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeIn} className="text-center mb-16">
-              <h1 className="text-4xl lg:text-5xl font-extrabold gradient-text mb-6">
-                Why Choose Us
-              </h1>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Alpenrose Digital Solutions is the best digital marketing agency in Patna, Bihar, specializing in SEO, social media management, web development, and ad campaigns. We help businesses grow their online presence, increase traffic, and achieve measurable results. Partner with us to boost your brand and get top rankings in Patna and beyond.
-              </p>
-              <div className="mt-8">
-                <Button asChild size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                  <Link to="/contact">
-                    Grow your business with Alpenrose today.
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
+  <section className="section roi-section" id="roi"><div className="site-shell roi"><div><Heading eyebrow="ROI calculator" title="What could automation give back to your team?" copy="Move the sliders for an instant directional estimate based on your current manual effort."/><div className="slider-row"><label><span>Employees doing repetitive work</span><b>{employees}</b></label><input type="range" min="5" max="250" value={employees} onChange={e=>setEmployees(+e.target.value)}/></div><div className="slider-row"><label><span>Hours spent per person / month</span><b>{hours}h</b></label><input type="range" min="1" max="40" value={hours} onChange={e=>setHours(+e.target.value)}/></div></div><div className="roi-result"><span>Estimated monthly savings</span><strong>₹{monthly.toLocaleString('en-IN')}</strong><p>≈ {(employees*hours*.65).toFixed(0)} productive hours recovered</p><Link className="btn btn-primary" to="/contact">Get a tailored ROI report <Icons.ArrowRight/></Link><small>*Illustrative estimate using ₹250/hour and 65% automation potential.</small></div></div></section>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.03, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
-                  transition={{ duration: 0.35, delay: index * 0.2, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className={`bg-gray-50 p-8 rounded-3xl shadow-lg card-hover border border-gray-200/50 tilt-card reveal-fade stagger-${index + 1}`}
-                >
-                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl mb-6 shadow-md icon-spin">
-                    <feature.icon className="h-7 w-7 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+  <section className="section"><div className="site-shell"><Heading eyebrow="Technology" title="Modern foundations. No lock-in."/><div className="stack">{stack.map(x=><span key={x}>{x}</span>)}</div><div className="big-stats">{[['500+','Projects'],['50+','Happy clients'],['20+','Solutions'],['10+','Industries'],['99%','Client satisfaction']].map(x=><div key={x[1]}><b>{x[0]}</b><span>{x[1]}</span></div>)}</div></div></section>
 
+  <section className="section testimonials"><div className="site-shell"><Heading eyebrow="Client stories" title="Trusted where execution matters."/><div className="quote-grid">{[['“ARDS understood our operations before writing a single line of code. The result feels built for us.”','Operations Director','Education Group'],['“We replaced scattered spreadsheets with one reliable view. Decisions are faster and the team is happier.”','Chief Administrator','Healthcare Network'],['“The automation paid for itself far sooner than expected. Support continues to be excellent.”','Managing Director','Manufacturing Company']].map(q=><blockquote key={q[1]}><div>★★★★★</div><p>{q[0]}</p><footer><span>{q[1]}</span><small>{q[2]}</small></footer></blockquote>)}</div></div></section>
 
+  <section className="section"><div className="site-shell faq"><Heading eyebrow="FAQ" title="Questions, answered."/><div>{[['What kinds of organizations does ARDS work with?','We partner with startups, growing businesses, institutions and government organizations across India.'],['Can ARDS customize an ERP for our workflow?','Yes. We map your process first, configure the right modules and build custom integrations where they create value.'],['How quickly can a project launch?','A focused website can launch in weeks; larger ERP and automation programs are delivered in clear, usable phases.'],['Do you provide post-launch support?','Yes. Monitoring, updates, training and 24×7 support plans keep your solution healthy after launch.'],['Is our business data secure?','We apply role-based access, encryption, secure cloud architecture, backups and audit-ready engineering practices.']].map((x,i)=><div className="faq-item" key={x[0]}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}><span>{x[0]}</span>{openFaq===i?<Icons.Minus/>:<Icons.Plus/>}</button>{openFaq===i&&<motion.p initial={{opacity:0}} animate={{opacity:1}}>{x[1]}</motion.p>}</div>)}</div></div></section>
 
-        <section className="py-24 hero-gradient">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div {...fadeIn} className="text-white space-y-8 reveal-fade">
-              <h2 className="text-4xl lg:text-5xl font-extrabold">
-                Ready to Transform Your Brand?
-              </h2>
-              <p className="text-lg text-white/90 max-w-2xl mx-auto">
-                Join hundreds of successful businesses who trust Alpenrose Digital Solutions to drive their growth.
-              </p>
-              <Button asChild size="lg" className="bg-white text-indigo-600 hover:bg-gray-100 text-md px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-slow">
-                <Link to="/contact">
-                  Start Your Journey
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-      </div>
-    </>
-  );
-};
+  <section className="section soft-section"><div className="site-shell"><Heading eyebrow="Insights" title="Ideas for the next way of working."/><div className="blog-grid">{[['AI','AI automation: where should your business begin?','A practical roadmap for finding fast, low-risk wins.'],['ERP','The hidden cost of disconnected business software','Why one source of truth changes more than reporting.'],['Growth','How better digital experiences compound growth','Turn every customer interaction into useful momentum.']].map((x,i)=><article key={x[1]}><div className={'blog-cover b'+i}><span>{x[0]}</span></div><small>6 MIN READ</small><h3>{x[1]}</h3><p>{x[2]}</p><Link to="/blog">Read article <Icons.ArrowRight/></Link></article>)}</div></div></section>
 
-export default HomePage;
+  <section className="final-cta"><div className="site-shell"><span>YOUR NEXT ADVANTAGE STARTS HERE</span><h2>Ready to make work<br/>work better?</h2><p>Let’s find the simplest path from manual effort to measurable growth.</p><div><Link className="btn btn-light" to="/contact">Book your free demo <Icons.ArrowUpRight/></Link><a href="tel:+919308579699" className="phone-link"><Icons.Phone/> +91 93085 79699</a></div></div></section>
+ </>;
+}

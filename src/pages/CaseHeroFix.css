@@ -1,0 +1,86 @@
+/* Viewport-fit correction for the selected-work hero */
+@media (min-width: 1001px) {
+  .case-hero.visual-first {
+    height: 100svh;
+    min-height: 680px;
+    max-height: 940px;
+    padding-top: 82px;
+  }
+  .case-hero.visual-first > .site-shell {
+    height: calc(100svh - 82px);
+    min-height: 598px;
+    max-height: 858px;
+    grid-template-columns: minmax(390px, .72fr) minmax(0, 1.45fr);
+    grid-template-rows: 1fr auto;
+    column-gap: 48px;
+  }
+  .case-hero.visual-first .case-hero-copy {
+    width: 100%;
+    max-width: 470px;
+    align-self: center;
+  }
+  .case-hero.visual-first .case-hero-copy h1 {
+    max-width: 470px;
+    margin: 30px 0 34px;
+    font-size: clamp(62px, 5.6vw, 88px);
+    line-height: 1.02;
+    white-space: normal;
+  }
+  .case-hero.visual-first .case-hero-graphic {
+    width: 100%;
+    height: min(635px, calc(100svh - 185px));
+    margin: 0;
+    align-self: center;
+    overflow: hidden;
+    border-radius: 28px;
+  }
+  .case-hero.visual-first .case-hero-graphic img {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+  .case-hero.visual-first .proof-ribbon {
+    align-self: end;
+  }
+}
+
+@media (min-width: 1001px) and (max-height: 760px) {
+  .case-hero.visual-first .case-hero-copy h1 {
+    margin: 18px 0 22px;
+    font-size: clamp(54px, 5vw, 72px);
+  }
+  .case-hero.visual-first .case-hero-copy > p { margin: 0; }
+  .case-hero.visual-first .case-hero-actions { margin: 24px 0; }
+  .case-hero.visual-first .case-hero-graphic { height: calc(100svh - 175px); }
+  .case-hero.visual-first .proof-ribbon div { padding: 16px 25px; }
+}
+
+@media (min-width: 701px) and (max-width: 1000px) {
+  .case-hero.visual-first { padding-top: 110px; }
+  .case-hero.visual-first > .site-shell { grid-template-columns: 1fr; }
+  .case-hero.visual-first .case-hero-copy { max-width: 680px; }
+  .case-hero.visual-first .case-hero-graphic {
+    height: 480px;
+    margin: 30px 0 0;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+  .case-hero.visual-first .case-hero-graphic img { width: 100%; height: 100%; min-width: 0; object-fit: cover; }
+}
+
+@media (max-width: 700px) {
+  .case-hero.visual-first { min-height: 100svh; padding-top: 105px; }
+  .case-hero.visual-first > .site-shell { display: block; }
+  .case-hero.visual-first .case-hero-copy h1 { margin: 18px 0; font-size: 47px; }
+  .case-hero.visual-first .case-hero-actions { margin: 22px 0 28px; }
+  .case-hero.visual-first .case-hero-graphic {
+    height: 310px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+  .case-hero.visual-first .case-hero-graphic img { width: 100%; height: 100%; min-width: 0; object-fit: cover; }
+  .case-hero.visual-first .proof-ribbon { margin-top: 22px; }
+}

@@ -18,7 +18,7 @@ const Team = () => {
     {
       id: 2,
       name: 'Abhijeet M Mishra',
-      role: 'Head of Technical Support',
+      role: 'Co-Founder & Lead Software Engineer',
       image: abhijeet,
       description: 'Technical expert ensuring seamless digital infrastructure and exceptional client support.',
       icon: Code

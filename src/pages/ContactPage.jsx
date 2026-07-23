@@ -60,7 +60,7 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Alpenrose Digital Solutions | Digital Marketing Agency Patna</title>
+        <title>Contact ARDS | Software Company in Patna, Bihar</title>
         <meta name="description" content="Contact Alpenrose Digital Solutions - Best digital marketing agency in Patna, Bihar. Get in touch for social media management, ad campaigns, web development, and business consultations." />
         <meta name="keywords" content="digital marketing services Patna, best digital marketing agency Patna, social media management Patna, web development Patna, ad campaigns Patna" />
         <meta property="og:title" content="Contact Alpenrose Digital Solutions | Digital Marketing Agency Patna" />
