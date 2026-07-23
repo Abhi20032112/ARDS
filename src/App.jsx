@@ -14,7 +14,6 @@ import FeedbackPage from '@/pages/FeedbackPage';
 import ContactPage from '@/pages/ContactPage';
 import BlogPage from '@/pages/BlogPage';
 import BlogPostPage from '@/pages/BlogPostPage';
-import ScrollToTop from '@/components/ScrollToTop';
 import SolutionLanding from '@/pages/SolutionLanding';
 import ExperienceEffects from '@/components/ExperienceEffects';
 import IndustriesPage from '@/pages/IndustriesPage';
@@ -27,7 +26,6 @@ function App() {
       <AnimatePresence mode="wait">
         <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
           <ExperienceEffects />
-          <ScrollToTop />
           <Navbar />
           <main className="flex-1">
             <Routes>
