@@ -53,6 +53,9 @@
 }
 .company-belief blockquote { color: #111827; }
 
+/* Keep the original compact profile layout with a cleaner portrait crop. */
+.leader-grid article:nth-child(2) .leader-image img { object-position:50% 24%; }
+
 /* Exact one-screen Company hero */
 @media (min-width:951px){
   .company-hero{

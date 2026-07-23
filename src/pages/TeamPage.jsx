@@ -18,7 +18,7 @@ const TeamPage = () => {
 
   const teamMembers = [
     { name: "Vikrant Mishra", role: "Founder", image: vikrantImage, bio: "Visionary leader with expertise in digital strategy and brand development." },
-    { name: "Abhijeet M Mishra", role: "Co-Founder & Lead Software Engineer", image: abhiImage, bio: "Leads software architecture and engineering across ARDS products and client platforms." },
+    { name: "Abhijeet M Mishra", role: "Lead Software Engineer", image: abhiImage, bio: "Leads software architecture and engineering across ARDS products and client platforms." },
   ];
 
   return (
@@ -56,7 +56,7 @@ const TeamPage = () => {
                 {
                   "@type": "Person",
                   "name": "Abhijeet M Mishra",
-                  "jobTitle": "Co-Founder & Lead Software Engineer"
+                  "jobTitle": "Lead Software Engineer"
                 }
               ]
             }
