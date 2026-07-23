@@ -100,3 +100,9 @@
   .company-graphic{height:260px;transform:scale(.52)}
   .company-actions .btn{padding:10px 14px}
 }
+
+/* Prevent the Company headline from clipping on narrow phones. */
+@media (max-width:650px){
+  .company-hero-layout>div:first-child{width:100%;min-width:0;overflow:visible}
+  .company-hero h1{width:100%;max-width:100%;font-size:clamp(30px,8.7vw,38px)!important;line-height:1.1;letter-spacing:-.05em;white-space:normal;overflow:visible}
+}
