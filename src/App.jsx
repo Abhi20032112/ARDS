@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from '@/components/ui/toaster';
 import { MessageCircle } from 'lucide-react';
@@ -46,15 +46,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
-          <a
-            href="https://wa.me/919308579699?text=Hi%20ARDS%2C%20I%27d%20like%20to%20book%20a%20free%20demo."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatsapp-float"
-            aria-label="Contact us on WhatsApp"
-          >
-            <MessageCircle className="h-6 w-6" />
-          </a>
+          <a href="https://wa.me/919308579699" target="_blank" rel="noopener noreferrer" className="whatsapp-only-float" aria-label="Chat with ARDS on WhatsApp"><MessageCircle /></a>
           <Toaster />
         </div>
       </AnimatePresence>

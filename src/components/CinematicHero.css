@@ -50,7 +50,8 @@
   .cinema-layout{display:flex!important;flex-direction:column;height:auto!important;min-height:calc(100svh - 116px)!important}
   .cinema-copy{width:100%;padding:18px 0 16px!important}
   .cinema-eyebrow{letter-spacing:.1em}
-  .cinema-copy h1{font-size:clamp(38px,10.8vw,48px)!important;line-height:1.01!important;letter-spacing:-.055em;margin:16px 0!important}
+  .cinema-copy h1{font-size:clamp(36px,10.2vw,46px)!important;line-height:1.1!important;letter-spacing:-.05em;margin:16px 0 20px!important;padding-bottom:.12em;overflow:visible}
+  .cinema-copy h1>span{padding:0 .04em .08em 0;overflow:visible}
   .cinema-copy>p{max-width:95%;font-size:12px!important;line-height:1.58!important}
   .cinema-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:9px!important;margin-top:18px!important}
   .cinema-actions .cinema-btn{min-height:43px;padding:10px 9px;font-size:9px}
@@ -82,4 +83,16 @@
   .cinema-copy h1{font-size:36px!important}
   .cinema-copy>p{font-size:11px!important}
   .mobile-command-card{padding:13px}
+}
+
+/* Keep the complete headline visible on short mobile/landscape viewports. */
+@media (max-width:650px) and (max-height:600px){
+  .cinematic-hero{padding-top:68px!important}
+  .cinema-layout{min-height:0!important}
+  .cinema-copy{padding:10px 0 14px!important;transform:none!important}
+  .cinema-eyebrow{font-size:6px!important}
+  .cinema-copy h1{font-size:clamp(29px,8.2vw,37px)!important;line-height:1.08!important;margin:10px 0 12px!important;padding-bottom:.18em}
+  .cinema-copy h1>span{padding-bottom:.1em}
+  .cinema-copy>p{font-size:10px!important;line-height:1.45!important}
+  .cinema-actions,.cinema-stats,.mobile-command-card{display:none!important}
 }

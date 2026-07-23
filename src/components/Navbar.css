@@ -6,7 +6,11 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* Removed legacy floating demo pill globally. */
-.demo-float {
+/* Prevent stale builds from displaying the retired floating demo CTA. */
+.demo-float,
+a.demo-float,
+button.demo-float {
   display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

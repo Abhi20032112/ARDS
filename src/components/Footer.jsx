@@ -1,14 +1,14 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import {motion} from 'framer-motion';
-import {Facebook,Instagram,Linkedin,Youtube,Twitter,Github,MessageCircle,ArrowRight,MapPin,Mail,Phone,Globe2,Clock3,Heart,Send,Check} from 'lucide-react';
+import {Facebook,Instagram,Linkedin,MessageCircle,ArrowRight,MapPin,Mail,Phone,Globe2,Clock3,Heart,Send,Check} from 'lucide-react';
 import logo from '@/assets/logo.png';
 import './Footer.css';
 
 const services=['Website Development','Mobile App Development','AI Automation','ERP Solutions','Business Automation','Cloud Solutions','Custom Software','Digital Marketing','Cyber Security','Web Hosting'];
 const erp=['School ERP','College ERP','University ERP','Hospital ERP','Manufacturing ERP','HRMS','CRM','Inventory Management','Attendance Management','Hostel Management'];
 const quick=[['Home','/'],['About Us','/about'],['Services','/services'],['Portfolio','/work'],['Industries','/industries'],['Case Studies','/work'],['Blog','/blog'],['Careers','/contact'],['Contact Us','/contact'],['Book Demo','/contact'],['Privacy Policy','#'],['Terms & Conditions','#']];
-const socials=[['Facebook',Facebook,'#'],['Instagram',Instagram,'#'],['LinkedIn',Linkedin,'#'],['YouTube',Youtube,'#'],['X',Twitter,'#'],['GitHub',Github,'#'],['WhatsApp',MessageCircle,'https://wa.me/919308579699']];
+const socials=[['Facebook',Facebook,'#'],['Instagram',Instagram,'#'],['WhatsApp',MessageCircle,'https://wa.me/919308579699'],['LinkedIn',Linkedin,'#']];
 const reveal={initial:{opacity:0,y:24},whileInView:{opacity:1,y:0},viewport:{once:true,margin:'-60px'},transition:{duration:.55,ease:[.22,1,.36,1]}};
 
 export default function Footer(){
