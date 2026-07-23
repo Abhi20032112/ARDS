@@ -5,3 +5,8 @@
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
+
+/* Removed legacy floating demo pill globally. */
+.demo-float {
+  display: none !important;
+}

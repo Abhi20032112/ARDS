@@ -19,6 +19,7 @@ import SolutionLanding from '@/pages/SolutionLanding';
 import ExperienceEffects from '@/components/ExperienceEffects';
 import IndustriesPage from '@/pages/IndustriesPage';
 import '@/components/LightHeroes.css';
+import '@/components/ResponsiveHardening.css';
 
 function App() {
   return (
