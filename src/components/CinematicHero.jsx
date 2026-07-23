@@ -23,7 +23,7 @@ export default function CinematicHero(){
     <motion.div className="cinema-actions" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.78}}><Link className="cinema-btn primary" to="/contact"><span>Book Free Demo</span><I.ArrowUpRight/></Link><a className="cinema-btn glass" href="#solutions">Explore Solutions <I.ArrowRight/></a><a className="cinema-watch" href="#live-demo"><i><I.Play/></i> Watch live demo</a></motion.div>
     <motion.div className="cinema-stats" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.95}}>{[['600+','Projects'],['100+','Clients'],['20+','Solutions'],['99.9%','Uptime'],['24×7','Support']].map(([v,l])=><div key={l}><b>{v}</b><span>{l}</span></div>)}</motion.div>
    </motion.div>
-   <motion.div className="cinema-scene" style={{rotateX,rotateY}}>
+   <motion.div className="cinema-scene desktop-cinema-scene" style={{rotateX,rotateY}}>
     <div className="scene-halo h1"/><div className="scene-halo h2"/>
     <div className="ai-core"><div className="core-rings"><i/><i/><i/></div><I.BrainCircuit/><span>AI CORE</span></div>
     <div className="live-board">
@@ -32,6 +32,14 @@ export default function CinematicHero(){
     </div>
     {modules.map(([name,icon,cls],i)=><motion.div className={'orbit-card '+cls} key={name} animate={{y:[0,i%2?10:-10,0],rotate:[0,i%2?-2:2,0]}} transition={{duration:4+i*.3,repeat:Infinity,ease:'easeInOut'}}><span><SafeIcon name={icon}/></span><div><b>{name}</b><small>{i%2?'Connected':'Active'}</small></div></motion.div>)}
     <div className="cloud-node"><I.Cloud/><span>SYNCED</span></div><div className="notification-pop"><I.Bell/><div><b>Workflow complete</b><span>Monthly report generated</span></div><I.CheckCircle2/></div>
+   </motion.div>
+   <motion.div className="mobile-command-card" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:.85}}>
+    <div className="mobile-command-top"><span><i/> ARDS COMMAND</span><small><I.ShieldCheck/> Secure</small></div>
+    <div className="mobile-command-head"><div><small>OPERATIONS</small><h3>Everything is on track.</h3></div><span><I.Bell/></span></div>
+    <div className="mobile-command-kpis"><div><span>Efficiency</span><b>94.8%</b><em>↑ 12%</em></div><div><span>AI Actions</span><b>12.8K</b><em>Live</em></div></div>
+    <div className="mobile-command-chart"><div><span>Business growth</span><b>+38%</b></div><svg viewBox="0 0 340 90" preserveAspectRatio="none"><path d="M0 75 C40 68 55 80 90 55 S145 63 175 38 S235 50 265 23 S310 30 340 8"/></svg></div>
+    <div className="mobile-command-flow">{[['Lead','Check'],['ERP','Blocks'],['AI','Sparkles'],['Growth','TrendingUp']].map(([x,icon],i)=><React.Fragment key={x}><span><SafeIcon name={icon} size={11}/>{x}</span>{i<3&&<i/>}</React.Fragment>)}</div>
+    <motion.div className="mobile-ai-chip" animate={{y:[0,-6,0]}} transition={{duration:3,repeat:Infinity}}><I.BrainCircuit/><span><b>AI Core</b><small>Active</small></span></motion.div>
    </motion.div>
   </div>
   <div className="scroll-cue"><span>SCROLL TO EXPLORE</span><i/></div>
