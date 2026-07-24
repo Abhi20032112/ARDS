@@ -1,143 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Calendar, User, ArrowRight } from 'lucide-react';
-import { supabase } from '@/lib/supabaseClient';
+import React,{useEffect,useMemo,useState} from 'react';
+import {Helmet} from 'react-helmet';
+import {motion} from 'framer-motion';
+import {Link} from 'react-router-dom';
+import * as I from 'lucide-react';
+import {supabase} from '@/lib/supabaseClient';
+import {localBlogPosts} from '@/data/blogPosts';
+import './BlogPage.css';
 
-const BlogPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .order('date', { ascending: false });
-      if (error) console.error('Error fetching posts:', error);
-      else setPosts(data || []);
-      setLoading(false);
-    };
-    fetchPosts();
-  }, []);
-
-  const fadeIn = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
-    viewport: { once: true, amount: 0.2 }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-600"></div>
-      </div>
-    );
-  }
-
-  return (
-    <>
-      <Helmet>
-        <title>AI, ERP, Automation &amp; Technology Insights | ARDS</title>
-        <meta name="description" content="Digital marketing blog Patna - Stay updated with latest SEO, social media, and digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Bihar." />
-        <meta name="keywords" content="content marketing Patna, SEO content marketing Patna, digital marketing services Patna, best digital marketing agency Patna, marketing agency Bihar" />
-        <meta property="og:title" content="Digital Marketing Blog Patna | Alpenrose Digital Solutions" />
-        <meta property="og:description" content="Digital marketing blog Patna - Stay updated with latest SEO, social media, and digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Bihar." />
-        <meta property="og:image" content="/src/assets/logo.png" />
-        <meta property="og:url" content="https://ards.in/blog" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            "name": "Digital Marketing Blog Patna",
-            "description": "Stay updated with the latest digital marketing trends, tips, and insights from Alpenrose Digital Solutions in Patna, Bihar.",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Alpenrose Digital Solutions",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Patna",
-                "addressRegion": "Bihar",
-                "addressCountry": "India"
-              }
-            }
-          })}
-        </script>
-      </Helmet>
-
-      <div className="page-container">
-        <section className="hero-gradient py-24 text-white text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            className="space-y-6"
-          >
-            <h1 className="text-4xl lg:text-6xl font-extrabold">Our Blog</h1>
-            <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-              Insights, trends, and expert advice on digital marketing and business growth.
-            </p>
-          </motion.div>
-        </section>
-
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {posts.length === 0 ? (
-              <motion.div {...fadeIn} className="text-center">
-                <p className="text-lg text-gray-600">No blog posts available yet. Check back soon!</p>
-              </motion.div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post, index) => (
-                  <motion.article
-                    key={post.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-                    viewport={{ once: true }}
-                    className="bg-white rounded-3xl shadow-lg overflow-hidden hover-lift group"
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={post.image || '/src/assets/logo.png'}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center text-sm text-gray-500 mb-3">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        {new Date(post.date).toLocaleDateString()}
-                        <User className="h-4 w-4 ml-4 mr-1" />
-                        {post.author || 'Alpenrose Team'}
-                      </div>
-                      <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
-                        {post.title}
-                      </h2>
-                      <p className="text-gray-600 mb-4 line-clamp-3">
-                        {post.excerpt || post.content.substring(0, 150) + '...'}
-                      </p>
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-semibold"
-                      >
-                        Read More
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      </div>
-    </>
-  );
-};
-
-export default BlogPage;
+const categories=['All','AI Automation','Enterprise ERP','Cloud','Cyber Security','SEO & Growth'];
+const SafeIcon=({name})=>{const C=I[name]||I.Sparkles;return <C/>};
+export default function BlogPage(){const [posts,setPosts]=useState(localBlogPosts),[filter,setFilter]=useState('All');useEffect(()=>{supabase.from('blog_posts').select('*').order('date',{ascending:false}).then(({data})=>{if(data?.length){const known=new Set(data.map(x=>x.slug));setPosts([...data,...localBlogPosts.filter(x=>!known.has(x.slug))])}})},[]);const visible=useMemo(()=>filter==='All'?posts:posts.filter(x=>x.category===filter),[filter,posts]);const featured=posts[0];return <>
+ <Helmet><title>AI, ERP & Digital Transformation Insights | ARDS</title><meta name="description" content="Practical guides on AI automation, enterprise ERP, cloud, cybersecurity, SEO and digital transformation from Alpenrose Digital Solutions."/><link rel="canonical" href="https://ards.in/blog"/></Helmet>
+ <section className="insights-hero"><div className="insights-grid-bg"/><div className="insights-glow one"/><div className="insights-glow two"/><div className="site-shell insights-hero-layout"><motion.div initial={{opacity:0,y:24}} animate={{opacity:1,y:0}}><span className="insights-kicker"><I.BookOpen/> ARDS INSIGHTS</span><h1>Useful thinking for<br/><em>better digital decisions.</em></h1><p>Practical field notes for leaders improving operations with AI, ERP, cloud platforms and modern software.</p><div className="insights-topics">{['AI','ERP','Automation','Cloud','Security','Growth'].map(x=><span key={x}>{x}</span>)}</div></motion.div><motion.div className="insight-orbit" initial={{opacity:0,scale:.9}} animate={{opacity:1,scale:1}} transition={{duration:.8}}><div className="orbit-book"><I.BrainCircuit/><b>Ideas into<br/>action</b><i/></div>{[['Bot','AI'],['Blocks','ERP'],['CloudCog','Cloud'],['ShieldCheck','Secure']].map(([icon,label],n)=><motion.div className={'insight-node n'+n} key={label} animate={{y:[0,n%2?8:-8,0]}} transition={{duration:4+n*.4,repeat:Infinity}}><SafeIcon name={icon}/><span>{label}</span></motion.div>)}</motion.div></div></section>
+ <section className="section insight-featured"><div className="site-shell"><div className="insights-label"><span>EDITOR'S PICK</span><b>FIELD GUIDE · {featured.readTime||'8 min'}</b></div><motion.article initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}><div className="featured-insight-art"><SafeIcon name={featured.icon}/><div className="art-rings"><i/><i/><i/></div><span>{featured.category}</span></div><div className="featured-insight-copy"><span>{featured.category}</span><h2>{featured.title}</h2><p>{featured.excerpt}</p><div><small><I.CalendarDays/> {new Date(featured.date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</small><small><I.Clock3/> {featured.readTime||'8 min'} read</small></div><Link to={`/blog/${featured.slug}`}>Read the field guide <I.ArrowUpRight/></Link></div></motion.article></div></section>
+ <section className="section insights-library"><div className="site-shell"><div className="library-heading"><div><span>RESOURCE LIBRARY</span><h2>Explore by challenge.</h2></div><div className="insight-filters">{categories.map(x=><button className={filter===x?'active':''} onClick={()=>setFilter(x)} key={x}>{x}</button>)}</div></div><motion.div layout className="insight-card-grid">{visible.map((post,index)=><motion.article layout key={post.slug} initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:index*.04}}><div className={'insight-card-art art-'+index%4}><span><SafeIcon name={post.icon}/></span><i/><i/><small>{post.category}</small></div><div className="insight-card-copy"><div><span>{post.category}</span><small>{post.readTime||'7 min'} read</small></div><h3>{post.title}</h3><p>{post.excerpt}</p><footer><span>{post.author||'ARDS Team'}</span><Link to={`/blog/${post.slug}`}>Read article <I.ArrowRight/></Link></footer></div></motion.article>)}</motion.div></div></section>
+ <section className="insights-cta"><div className="site-shell"><motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}><span>HAVE A SPECIFIC CHALLENGE?</span><h2>Turn the next useful idea<br/>into a working system.</h2><p>Talk directly with the team that designs and builds ARDS solutions.</p><Link to="/contact" className="btn btn-light">Discuss your project <I.ArrowUpRight/></Link></motion.div></div></section>
+ </>}

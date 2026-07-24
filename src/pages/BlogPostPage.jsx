@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, ArrowLeft, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabaseClient';
+import { localBlogPosts } from '@/data/blogPosts';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
@@ -19,8 +20,9 @@ const BlogPostPage = () => {
         .select('*')
         .eq('slug', slug)
         .single();
-      if (error) console.error('Error fetching post:', error);
-      else setPost(data);
+      const localPost = localBlogPosts.find(item => item.slug === slug);
+      if (data) setPost(data);
+      else setPost(localPost || null);
       setLoading(false);
     };
 
@@ -30,8 +32,8 @@ const BlogPostPage = () => {
         .select('*')
         .neq('slug', slug)
         .limit(3);
-      if (error) console.error('Error fetching related posts:', error);
-      else setRelatedPosts(data || []);
+      const localRelated = localBlogPosts.filter(item => item.slug !== slug).slice(0, 3);
+      setRelatedPosts(data?.length ? data : localRelated);
     };
 
     fetchPost();

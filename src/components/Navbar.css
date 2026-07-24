@@ -5,6 +5,9 @@
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
+.main-nav .brand span{display:block}.main-nav .brand b{font-size:15px;letter-spacing:-.015em;color:#1e3a8a;white-space:nowrap}.main-nav nav>div{position:relative}.main-nav nav>div:after{content:'';position:absolute;left:50%;right:50%;bottom:-9px;height:2px;border-radius:2px;background:linear-gradient(90deg,#2563eb,#7c3aed,#ec4899);transition:.3s}.main-nav nav>div:hover:after,.main-nav nav>div:has(a.active):after{left:0;right:0}.main-nav nav a.active{color:#6d28d9}.main-nav .brand img{transition:transform .5s cubic-bezier(.22,1,.36,1),filter .3s}.main-nav .brand:hover img{transform:rotate(-7deg) scale(1.08);filter:drop-shadow(0 7px 10px rgba(124,58,237,.2))}.menu-btn{transition:.25s}.menu-btn:hover{color:#7c3aed;background:#f5f3ff;transform:rotate(3deg)}
+@media(max-width:420px){.main-nav .brand b{font-size:12px}.main-nav .brand{gap:7px}}
+@media(max-width:1024px){.mobile-menu>div a{display:flex;align-items:center;min-height:44px;padding:10px;color:#334155}.mobile-menu>div a:hover{color:#6d28d9;background:#f5f3ff;border-radius:10px;transform:translateX(4px)}}
 
 /* Prevent stale builds from displaying the retired floating demo CTA. */
 .demo-float,
