@@ -19,4 +19,100 @@ section,header,footer,main{width:100%;max-width:100%}.site-shell,.site-shell>*{m
 @media(max-width:640px){body{overflow-x:hidden}.site-shell{max-width:calc(100% - 28px)}.section-heading,.section-heading h2,.section-heading p{max-width:100%}.hero-actions,.company-actions,.solutions-actions{width:100%}.transform-board{display:grid}.before-panel,.after-panel{min-height:0;padding:23px}.demo-stage{min-height:0;padding:18px}.attendance-demo{gap:25px}.face-scan{width:min(210px,72vw);height:min(210px,72vw)}.analytic-kpis{grid-template-columns:1fr}.line-chart{height:180px;padding:15px}.erp-screen,.screen-body,.screen-body main{width:100%;min-width:0}.screen-title{gap:10px}.roi-result{width:100%}.roi-result strong{font-size:clamp(30px,11vw,42px)}.newsletter-card{padding:26px 18px}.newsletter-form{width:100%}.lf-contact a,.business-hours{min-width:0}.lf-contact b{overflow-wrap:anywhere}.company-belief blockquote{font-size:clamp(26px,9vw,38px)}.solutions-hero,.company-hero,.case-hero,.sub-hero{overflow:hidden}.architecture-map{width:100%;max-width:100%;margin-left:0!important;margin-right:0!important;transform:scale(.72);transform-origin:center}.whatsapp-only-float{z-index:90}}
 @media(max-width:380px){.site-shell{max-width:calc(100% - 22px)}.btn{font-size:11px}.newsletter-form button{min-width:96px}.leader-grid article{grid-template-columns:88px minmax(0,1fr)}.leader-info{padding:12px}.leader-info p{font-size:9px}.mobile-menu{left:10px;right:10px}}
 
+/* Responsive audit fixes: preserve the design while removing intrinsic overflow. */
+.main-nav .brand,.main-nav nav a,.menu-btn,.btn,
+.solution-tabs button,.case-filters button,.insight-filters button,
+.detail-nav button,.faq-item button,.newsletter-form button,
+.contact-form button,.study-content button{min-height:48px}
+.menu-btn{width:48px;min-width:48px}
+.service-card a,.solution-page-grid a,.engagement-grid a,
+.featured-copy>a,.featured-insight-copy>a,.insight-card-copy footer a,
+.leader-info a{min-height:48px;align-items:center}
+.socials a,.lf-socials a{min-width:48px;min-height:48px}
+.solutions-hero-layout,.company-hero-layout,.insights-hero-layout,
+.featured-layout,.case-library-head,.story-layout,.leader-grid,
+.solution-feature,.architecture-section>.site-shell{min-width:0}
+.solutions-hero-layout>*,.company-hero-layout>*,.insights-hero-layout>*,
+.featured-layout>*,.case-library-head>*,.story-layout>*,.leader-grid>*,
+.solution-feature>*,.architecture-section>.site-shell>*{min-width:0}
+.featured-copy,.study-tag{max-width:100%}
+.contact-form input,.contact-form textarea,.contact-form select,
+.newsletter-form input{width:100%;min-width:0;min-height:48px}
+.contact-fields input,.contact-fields select,.contact-fields textarea{width:100%;min-width:0;min-height:48px}
+.contact-fields label,.contact-form-card,.contact-layout,.contact-side{min-width:0}
+.detail-nav button{min-width:48px}
+.case-whatsapp,.company-career,.phone-link,.industry-page-grid a,
+.case-grid a,.blog-grid a{min-height:48px;align-items:center}
+.study-card,.insight-card-grid article,.engagement-grid article,
+.principle-grid article,.leader-grid article{height:100%}
+
+@media(max-width:1024px){
+  .mobile-menu>div,.mobile-menu>div a{width:100%}
+  .mobile-menu>div a{min-height:48px}
+}
+
+@media(max-width:900px){
+  .solutions-hero-layout,.company-hero-layout,.insights-hero-layout,
+  .featured-layout,.solution-feature,.architecture-section>.site-shell{
+    grid-template-columns:minmax(0,1fr)
+  }
+  .solution-orbit,.company-graphic{max-width:none}
+  .featured-copy{transform:none}
+}
+
+@media(max-width:640px){
+  .solutions-hero h1,.company-hero h1,.case-hero h1,.insights-hero h1,
+  .sub-hero h1{max-width:100%;overflow-wrap:anywhere}
+  .solutions-hero-layout,.company-hero-layout{width:100%}
+  .solution-orbit,.company-graphic{justify-self:start;min-width:0}
+  .solution-orbit{scale:.62}
+  .case-filters,.insight-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;overflow:visible}
+  .case-filters button,.insight-filters button{width:100%;white-space:normal}
+  .case-library-head,.library-heading{width:100%;min-width:0}
+  .case-hero-actions,.final-cta>div>div,.case-cta>div>div>div,
+  .company-cta>div>div>div,.solutions-cta>div>div>div{
+    width:100%;align-items:stretch
+  }
+  .featured-layout{gap:32px}
+  .featured-copy{width:100%;padding-inline:0}
+  .campus-dashboard{width:100%;margin-inline:0}
+  .dash-welcome{gap:10px}
+  .dash-welcome h3{font-size:clamp(14px,4.8vw,18px)}
+  .dash-welcome button{min-width:48px;min-height:48px;justify-content:center}
+  .proof-ribbon,.company-hero-stats{width:100%}
+  .newsletter-form{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;overflow:visible}
+  .newsletter-form button{width:100%;min-width:0}
+  .lf-bottom{grid-template-columns:1fr;text-align:center;gap:14px}
+  .lf-bottom p,.lf-bottom>div{justify-content:center}
+  .light-footer-grid>*{text-align:center}
+  .lf-socials{justify-content:center}
+  .lf-contact a,.business-hours{justify-content:center;text-align:left}
+}
+
+@media(max-width:360px){
+  .site-shell{width:calc(100% - 20px);max-width:calc(100% - 20px)}
+  .main-nav .brand b{font-size:11px}
+  .main-nav .brand img{width:32px;height:32px}
+  .case-filters,.insight-filters{grid-template-columns:1fr}
+  .featured-outcome{align-items:flex-start;flex-direction:column}
+  .solution-orbit{scale:.48}
+  .company-graphic{scale:.82}
+}
+
+@media(hover:none),(pointer:coarse){
+  .main-nav .brand:hover img,.main-nav nav>div:hover:after,
+  .insight-card-grid article:hover,.study-card:hover,.service-card:hover,
+  .engagement-grid article:hover,.principle-grid article:hover,
+  .leader-grid article:hover img{transform:none}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+
 .capabilities-toggle{display:flex;justify-content:center;margin-top:30px}.capabilities-toggle .btn{cursor:pointer}.capabilities-toggle svg{width:17px;height:17px}.whatsapp-only-float{position:fixed;z-index:120;right:max(22px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));display:grid;place-items:center;width:56px;height:56px;border:3px solid #fff;border-radius:50%;color:#fff;background:#22c55e;box-shadow:0 14px 34px rgba(22,163,74,.34);transition:transform .2s ease,box-shadow .2s ease}.whatsapp-only-float:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 38px rgba(22,163,74,.42)}.whatsapp-only-float svg{width:25px;height:25px}@media(max-width:640px){.capabilities-toggle .btn{width:auto;min-width:210px}.whatsapp-only-float{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:50px;height:50px}}@media print{.whatsapp-only-float{display:none!important}}
