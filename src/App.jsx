@@ -7,6 +7,11 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HomePage from '@/pages/HomePage';
 import ExperienceEffects from '@/components/ExperienceEffects';
+import '@/pages/ServicesPage.css';
+import '@/pages/AboutPage.css';
+import '@/pages/CaseHeroFix.css';
+import '@/pages/BlogPage.css';
+import '@/pages/ContactPage.css';
 import '@/components/LightHeroes.css';
 import '@/components/ResponsiveHardening.css';
 

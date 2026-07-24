@@ -61,9 +61,28 @@ section,header,footer,main{width:100%;max-width:100%}.site-shell,.site-shell>*{m
 }
 
 @media(max-width:640px){
+  .nav-actions>div{display:none}
+  .nav-actions{flex:0 0 48px;width:48px}
+  .nav-inner{gap:10px}
+  .main-nav .brand{flex:1 1 auto;min-width:0;overflow:hidden}
+  .main-nav .brand span{min-width:0;overflow:hidden}
+  .main-nav .brand b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .solutions-hero h1,.company-hero h1,.case-hero h1,.insights-hero h1,
   .sub-hero h1{max-width:100%;overflow-wrap:anywhere}
-  .solutions-hero-layout,.company-hero-layout{width:100%}
+  .solutions-hero-layout,.company-hero-layout{width:100%;max-width:100%}
+  .solutions-hero-layout>div:first-child,.company-hero-layout>div:first-child,
+  .insights-hero-layout>div:first-child,.contact-hero-layout>div:first-child{
+    width:100%;max-width:100%;min-width:0
+  }
+  .solutions-hero-layout>div:first-child>p,.company-hero-layout>div:first-child>p,
+  .insights-hero-layout>div:first-child>p,.contact-hero-layout>div:first-child>p{
+    width:100%;max-width:100%;white-space:normal;overflow-wrap:anywhere
+  }
+  .solutions-actions,.company-actions,.contact-hero-actions,.case-hero-actions{
+    display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%
+  }
+  .solutions-actions .btn,.company-actions .btn,.contact-hero-actions .btn,
+  .case-hero-actions .btn{width:100%;max-width:100%;min-width:0}
   .solution-orbit,.company-graphic{justify-self:start;min-width:0}
   .solution-orbit{scale:.62}
   .case-filters,.insight-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;overflow:visible}
@@ -74,7 +93,7 @@ section,header,footer,main{width:100%;max-width:100%}.site-shell,.site-shell>*{m
     width:100%;align-items:stretch
   }
   .featured-layout{gap:32px}
-  .featured-copy{width:100%;padding-inline:0}
+  .featured-copy{width:100%;padding-inline:0;transform:none!important}
   .campus-dashboard{width:100%;margin-inline:0}
   .dash-welcome{gap:10px}
   .dash-welcome h3{font-size:clamp(14px,4.8vw,18px)}
