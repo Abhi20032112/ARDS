@@ -21,7 +21,7 @@ export default function CinematicHero(){
     <h1>{words.map((word,i)=><motion.span className={i===0||i===2?'glow-word':''} key={word} initial={{opacity:0,y:45,filter:'blur(10px)'}} animate={{opacity:1,y:0,filter:'blur(0px)'}} transition={{duration:.7,delay:.12+i*.1,ease:[.22,1,.36,1]}}>{word}</motion.span>)}</h1>
     <motion.p initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.65}}>We build AI-powered software, ERP systems, cloud platforms and intelligent automation that make complex operations feel simple.</motion.p>
     <motion.div className="cinema-actions" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.78}}><Link className="cinema-btn primary" to="/contact"><span>Book Free Demo</span><I.ArrowUpRight/></Link><a className="cinema-btn glass" href="#solutions">Explore Solutions <I.ArrowRight/></a><a className="cinema-watch" href="#live-demo"><i><I.Play/></i> Watch live demo</a></motion.div>
-    <motion.div className="cinema-stats" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.95}}>{[['600+','Projects'],['100+','Clients'],['20+','Solutions'],['99.9%','Uptime'],['24×7','Support']].map(([v,l])=><div key={l}><b>{v}</b><span>{l}</span></div>)}</motion.div>
+    <motion.div className="cinema-stats" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.95}}>{[['50+','Projects'],['50+','Clients'],['20+','Solutions'],['100%','Uptime'],['24×7','Support']].map(([v,l])=><div key={l}><b>{v}</b><span>{l}</span></div>)}</motion.div>
    </motion.div>
    <motion.div className="cinema-scene desktop-cinema-scene" style={{rotateX,rotateY}}>
     <div className="scene-halo h1"/><div className="scene-halo h2"/>
