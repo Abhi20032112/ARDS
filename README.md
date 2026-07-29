@@ -33,6 +33,7 @@ A modern, animated React website for Alpenrose Digital Solutions, featuring Bran
 ```bash
 git clone https://github.com/your-username/alpenrose-digital-solutions.git
 cd alpenrose-digital-solutions
+cd frontend
 ```
 
 2. Install dependencies:
@@ -50,6 +51,25 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 4. Start the development server:
 ```bash
 npm run dev
+```
+
+### Alpenrose AI Backend
+
+The floating Alpenrose consultant can run fully in-browser, but it will use the FastAPI backend when available:
+
+```bash
+cd ..\backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
+uvicorn app.main:app --reload --port 8000
+```
+
+Optional frontend variable:
+
+```env
+VITE_ARDS_AI_API_URL=http://localhost:8000
 ```
 
 ## CMS Setup

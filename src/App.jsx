@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HomePage from '@/pages/HomePage';
 import ExperienceEffects from '@/components/ExperienceEffects';
+import AIBusinessConsultant from '@/components/AIBusinessConsultant';
 import '@/pages/ServicesPage.css';
 import '@/pages/AboutPage.css';
 import '@/pages/CaseHeroFix.css';
@@ -17,6 +18,7 @@ import '@/components/ResponsiveHardening.css';
 
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
+const ServiceDetailPage = lazy(() => import('@/pages/ServiceDetailPage'));
 const OurWorkPage = lazy(() => import('@/pages/OurWorkPage'));
 const TestimonialsPage = lazy(() => import('@/pages/TestimonialsPage'));
 const FeedbackPage = lazy(() => import('@/pages/FeedbackPage'));
@@ -25,6 +27,9 @@ const BlogPage = lazy(() => import('@/pages/BlogPage'));
 const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
 const SolutionLanding = lazy(() => import('@/pages/SolutionLanding'));
 const IndustriesPage = lazy(() => import('@/pages/IndustriesPage'));
+const IndustryDetailPage = lazy(() => import('@/pages/IndustryDetailPage'));
+const PrivacyPolicyPage = lazy(() => import('@/pages/PrivacyPolicyPage'));
+const TermsConditionsPage = lazy(() => import('@/pages/TermsConditionsPage'));
 
 function App() {
   return (
@@ -38,6 +43,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/:slug" element={<ServiceDetailPage />} />
               <Route path="/work" element={<OurWorkPage />} />
               <Route path="/clients" element={<TestimonialsPage />} />
               <Route path="/feedback" element={<FeedbackPage />} />
@@ -47,10 +53,14 @@ function App() {
               <Route path="/ai-solutions" element={<SolutionLanding type="ai" />} />
               <Route path="/business-automation" element={<SolutionLanding type="automation" />} />
               <Route path="/industries" element={<IndustriesPage />} />
+              <Route path="/industries/:slug" element={<IndustryDetailPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms-conditions" element={<TermsConditionsPage />} />
             </Routes></Suspense>
           </main>
           <Footer />
           <a href="https://wa.me/919308579699" target="_blank" rel="noopener noreferrer" className="whatsapp-only-float" aria-label="Chat with ARDS on WhatsApp"><MessageCircle /></a>
+          <AIBusinessConsultant />
           <Toaster />
         </div>
       </AnimatePresence>

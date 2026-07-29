@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Star, Quote, MessageCircle } from 'lucide-react';
+import { Star, Quote, MessageCircle, ExternalLink } from 'lucide-react';
 import ManualTestimonials from './ManualTestimonials'; // Ensure to import the ManualTestimonials component
 
 const TestimonialsPage = () => {
@@ -63,6 +63,9 @@ const TestimonialsPage = () => {
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Don't just take our word for it. Here's what our clients have to say about working with Alpenrose Digital Solutions.
               </p>
+              <a className="google-review-button" href="https://share.google/Nqbo2IjNtnMrnU4ZI" target="_blank" rel="noopener noreferrer">
+                Review ARDS on Google <ExternalLink />
+              </a>
             </motion.div>
 
             {testimonials.length > 0 ? (
@@ -74,6 +77,9 @@ const TestimonialsPage = () => {
                 <p className="text-gray-600 max-w-md mx-auto">
                   Be the first to share your experience! Your feedback helps us and other clients.
                 </p>
+                <a className="google-review-button" href="https://share.google/Nqbo2IjNtnMrnU4ZI" target="_blank" rel="noopener noreferrer">
+                  Write a Google review <ExternalLink />
+                </a>
               </motion.div>
             )}
           </div>

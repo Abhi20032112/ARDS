@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { serviceDetails } from '../src/data/serviceDetails.js';
+import { industryDetails } from '../src/data/industryDetails.js';
 
 const root=process.cwd(),dist=path.join(root,'dist'),templatePath=path.join(dist,'index.html');
 const pages=[
@@ -12,8 +14,20 @@ const pages=[
  {path:'about',title:'About Alpenrose Digital Solutions | Patna, Bihar',description:'Meet Alpenrose Digital Solutions, a Patna-based team building practical AI, ERP, cloud, web, mobile and custom software systems.'},
  {path:'blog',title:'AI, ERP, Automation & Technology Insights | ARDS',description:'Practical articles about artificial intelligence, ERP, business automation, cyber security, SEO, software and digital growth.'},
  {path:'contact',title:'Contact ARDS | Software Company in Patna, Bihar',description:'Contact Alpenrose Digital Solutions in Patna for AI automation, ERP, custom software, website, mobile app and cloud solution enquiries.'},
- {path:'clients',title:'Client Experiences | Alpenrose Digital Solutions',description:'Read client experiences and learn how ARDS supports organizations with dependable digital products, automation and software services.'}
+ {path:'clients',title:'Client Experiences | Alpenrose Digital Solutions',description:'Read client experiences and learn how ARDS supports organizations with dependable digital products, automation and software services.'},
+ {path:'privacy-policy',title:'Privacy Policy | Alpenrose Digital Solutions',description:'Privacy policy for Alpenrose Digital Solutions, including how enquiry, consultation and project information is collected and used.'},
+ {path:'terms-conditions',title:'Terms & Conditions | Alpenrose Digital Solutions',description:'Terms and conditions for using the Alpenrose Digital Solutions website and requesting digital transformation services.'}
 ];
+pages.push(...serviceDetails.map(service=>({
+ path:`services/${service.slug}`,
+ title:`${service.title} | Alpenrose Digital Solutions`,
+ description:service.summary
+})));
+pages.push(...industryDetails.map(industry=>({
+ path:`industries/${industry.slug}`,
+ title:`${industry.name} Digital Solutions | Alpenrose Digital Solutions`,
+ description:industry.summary
+})));
 if(!fs.existsSync(templatePath))process.exit(0);
 const base=fs.readFileSync(templatePath,'utf8');
 const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');

@@ -96,3 +96,18 @@
   .cinema-copy>p{font-size:10px!important;line-height:1.45!important}
   .cinema-actions,.cinema-stats,.mobile-command-card{display:none!important}
 }
+
+/* Keep the stacked hero headline readable on desktop and tablet. */
+.cinema-copy h1{
+  line-height:1.13!important;
+  letter-spacing:-.045em!important;
+}
+.cinema-copy h1>span{
+  display:block;
+  padding-bottom:.04em;
+}
+@media (min-width:1051px) and (max-height:790px){
+  .cinema-copy h1{
+    line-height:1.12!important;
+  }
+}

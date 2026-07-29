@@ -1,24 +1,194 @@
-import React,{useState} from 'react';
-import {Helmet} from 'react-helmet';
-import {motion} from 'framer-motion';
-import {ArrowUpRight,CalendarDays,Check,Clock3,Headphones,Mail,MapPin,MessageCircle,Phone,Send,ShieldCheck,Sparkles} from 'lucide-react';
-import {useToast} from '@/components/ui/use-toast';
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, CalendarDays, Check, Clock3, Headphones, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Sparkles } from 'lucide-react';
+import ContactForm from '@/components/ContactForm';
 import './ContactPage.css';
 
-const services=['AI Automation','Enterprise ERP','Custom Software','Website Development','Mobile App','Cloud Solutions','Digital Marketing','Other'];
-const reveal={initial:{opacity:0,y:24},whileInView:{opacity:1,y:0},viewport:{once:true,margin:'-50px'},transition:{duration:.55,ease:[.22,1,.36,1]}};
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-50px' },
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+};
 
-export default function ContactPage(){
- const [form,setForm]=useState({name:'',email:'',phone:'',company:'',service:'Enterprise ERP',message:''}),[sending,setSending]=useState(false);const {toast}=useToast();
- const change=e=>setForm({...form,[e.target.name]:e.target.value});
- const submit=async e=>{e.preventDefault();setSending(true);try{const leads=JSON.parse(localStorage.getItem('contacts')||'[]');localStorage.setItem('contacts',JSON.stringify([{...form,id:Date.now(),submittedAt:new Date().toISOString()},...leads]));setForm({name:'',email:'',phone:'',company:'',service:'Enterprise ERP',message:''});toast({title:'Message received',description:'Our team will contact you within one business day.'})}catch{toast({title:'Unable to save message',description:'Please call or WhatsApp us directly.',variant:'destructive'})}finally{setSending(false)}};
- return <>
-  <Helmet><title>Contact ARDS | Start Your Digital Transformation</title><meta name="description" content="Talk to Alpenrose Digital Solutions in Patna about AI automation, ERP, custom software, websites, mobile apps and cloud solutions."/><link rel="canonical" href="https://ards.in/contact"/></Helmet>
-  <section className="contact-hero"><div className="contact-grid"/><div className="contact-orb co-one"/><div className="contact-orb co-two"/><div className="site-shell contact-hero-layout"><motion.div initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{duration:.65}}><span className="contact-kicker"><i/> LET'S BUILD SOMETHING USEFUL</span><h1>Bring us the problem.<br/><em>We’ll map the next move.</em></h1><p>Tell us what is slowing your team down. You’ll get a practical conversation with people who design and build the solution.</p><div className="contact-hero-actions"><a href="#contact-form" className="btn btn-primary">Start a conversation <ArrowUpRight/></a><a href="https://wa.me/919308579699" target="_blank" rel="noreferrer" className="btn btn-secondary"><MessageCircle/> WhatsApp us</a></div><div className="contact-trust"><span><ShieldCheck/> Your details stay private</span><span><Clock3/> Reply within one business day</span></div></motion.div><motion.div className="contact-signal" initial={{opacity:0,scale:.9}} animate={{opacity:1,scale:1}} transition={{duration:.8,delay:.12}}><div className="signal-rings"><i/><i/><i/></div><div className="signal-core"><Sparkles/><b>ARDS</b><small>DISCOVERY DESK</small></div><div className="signal-card sc-one"><span><MessageCircle/></span><div><b>New conversation</b><small>Tell us the challenge</small></div></div><div className="signal-card sc-two"><span><CalendarDays/></span><div><b>Plan the solution</b><small>Clear scope and next steps</small></div></div><div className="signal-card sc-three"><span><Check/></span><div><b>Build with confidence</b><small>One accountable team</small></div></div></motion.div></div></section>
+export default function ContactPage() {
+  return (
+    <>
+      <Helmet>
+        <title>Contact ARDS | Start Your Digital Transformation</title>
+        <meta name="description" content="Talk to Alpenrose Digital Solutions in Patna about AI automation, ERP, custom software, websites, mobile apps and cloud solutions." />
+        <link rel="canonical" href="https://ards.in/contact" />
+      </Helmet>
 
-  <section className="contact-main section" id="contact-form"><div className="site-shell contact-layout"><motion.div className="contact-form-card" {...reveal}><div className="contact-form-head"><span>PROJECT ENQUIRY</span><h2>What would you like to improve?</h2><p>A few useful details help us bring the right people into the first call.</p></div><form onSubmit={submit}><div className="contact-fields"><label><span>Your name *</span><input required name="name" value={form.name} onChange={change} placeholder="Full name"/></label><label><span>Work email *</span><input required type="email" name="email" value={form.email} onChange={change} placeholder="you@company.com"/></label><label><span>Phone number *</span><input required name="phone" value={form.phone} onChange={change} placeholder="+91 98765 43210"/></label><label><span>Organization</span><input name="company" value={form.company} onChange={change} placeholder="Company or institution"/></label><label className="wide"><span>What do you need?</span><select name="service" value={form.service} onChange={change}>{services.map(x=><option key={x}>{x}</option>)}</select></label><label className="wide"><span>Tell us about the challenge *</span><textarea required rows="5" name="message" value={form.message} onChange={change} placeholder="Current process, users involved and the outcome you want…"/></label></div><button className="contact-submit" disabled={sending}>{sending?<><i/> Sending securely…</>:<>Send project brief <Send/></>}</button><small className="form-note"><ShieldCheck/> No spam. No sales pressure. Just a useful first conversation.</small></form></motion.div>
-  <div className="contact-side"><motion.div className="direct-card" {...reveal}><span>DIRECT CONTACT</span><h3>Prefer to speak now?</h3><a href="tel:+919308579699"><i><Phone/></i><div><small>Call our team</small><b>+91 9308579699</b></div><ArrowUpRight/></a><a href="mailto:business@ards.in"><i><Mail/></i><div><small>Email us</small><b>business@ards.in</b></div><ArrowUpRight/></a><a href="https://wa.me/919308579699" target="_blank" rel="noreferrer"><i><MessageCircle/></i><div><small>WhatsApp</small><b>Start a chat</b></div><ArrowUpRight/></a><div className="availability"><i/><div><b>Team available</b><span>Monday–Saturday · 9:00 AM–6:00 PM</span></div></div></motion.div><motion.div className="contact-location" {...reveal} transition={{...reveal.transition,delay:.1}}><div className="location-map"><div className="map-lines"/><span><MapPin/></span><i className="map-pulse"/></div><div><small>OUR HOME BASE</small><h3>Patna, Bihar, India</h3><p>Working with ambitious organizations across India.</p></div></motion.div></div></div></section>
+      <section className="contact-hero">
+        <div className="contact-grid" />
+        <div className="contact-orb co-one" />
+        <div className="contact-orb co-two" />
+        <div className="site-shell contact-hero-layout">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
+            <span className="contact-kicker">
+              <i /> LET'S BUILD SOMETHING USEFUL
+            </span>
+            <h1>
+              Bring us the problem.
+              <br />
+              <em>We'll map the next move.</em>
+            </h1>
+            <p>Tell us what is slowing your team down. You'll get a practical conversation with people who design and build the solution.</p>
+            <div className="contact-hero-actions">
+              <a href="#contact-form" className="btn btn-primary">
+                Start a conversation <ArrowUpRight />
+              </a>
+              <a href="https://wa.me/919308579699" target="_blank" rel="noreferrer" className="btn btn-secondary">
+                <MessageCircle /> WhatsApp us
+              </a>
+            </div>
+            <div className="contact-trust">
+              <span>
+                <ShieldCheck /> Your details stay private
+              </span>
+              <span>
+                <Clock3 /> Reply within one business day
+              </span>
+            </div>
+          </motion.div>
 
-  <section className="contact-expect"><div className="site-shell"><motion.div {...reveal}><span>WHAT HAPPENS NEXT</span><h2>A clear first step.<br/>No complicated process.</h2></motion.div><div className="expect-grid">{[['01','We listen','A focused call about the operation, users and desired outcome.'],['02','We frame','A practical recommendation, scope direction and delivery path.'],['03','You decide','Move forward when the approach, timing and investment make sense.']].map((x,i)=><motion.article key={x[0]} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*.08}}><b>{x[0]}</b><span>{i===0?<Headphones/>:i===1?<Sparkles/>:<Check/>}</span><h3>{x[1]}</h3><p>{x[2]}</p></motion.article>)}</div></div></section>
- </>
+          <motion.div className="contact-signal" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.12 }}>
+            <div className="signal-rings">
+              <i />
+              <i />
+              <i />
+            </div>
+            <div className="signal-core">
+              <Sparkles />
+              <b>ARDS</b>
+              <small>DISCOVERY DESK</small>
+            </div>
+            <div className="signal-card sc-one">
+              <span>
+                <MessageCircle />
+              </span>
+              <div>
+                <b>New conversation</b>
+                <small>Tell us the challenge</small>
+              </div>
+            </div>
+            <div className="signal-card sc-two">
+              <span>
+                <CalendarDays />
+              </span>
+              <div>
+                <b>Plan the solution</b>
+                <small>Clear scope and next steps</small>
+              </div>
+            </div>
+            <div className="signal-card sc-three">
+              <span>
+                <Check />
+              </span>
+              <div>
+                <b>Build with confidence</b>
+                <small>One accountable team</small>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="contact-main section" id="contact-form">
+        <div className="site-shell contact-layout">
+          <motion.div className="contact-form-card premium-form-card" {...reveal}>
+            <ContactForm />
+          </motion.div>
+
+          <div className="contact-side">
+            <motion.div className="direct-card" {...reveal}>
+              <span>DIRECT CONTACT</span>
+              <h3>Prefer to speak now?</h3>
+              <a href="tel:+919308579699">
+                <i>
+                  <Phone />
+                </i>
+                <div>
+                  <small>Call our team</small>
+                  <b>+91 9308579699</b>
+                </div>
+                <ArrowUpRight />
+              </a>
+              <a href="mailto:business@ards.in">
+                <i>
+                  <Mail />
+                </i>
+                <div>
+                  <small>Email us</small>
+                  <b>business@ards.in</b>
+                </div>
+                <ArrowUpRight />
+              </a>
+              <a href="https://wa.me/919308579699" target="_blank" rel="noreferrer">
+                <i>
+                  <MessageCircle />
+                </i>
+                <div>
+                  <small>WhatsApp</small>
+                  <b>Start a chat</b>
+                </div>
+                <ArrowUpRight />
+              </a>
+              <div className="availability">
+                <i />
+                <div>
+                  <b>Team available</b>
+                  <span>Monday-Saturday | 9:00 AM-6:00 PM</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div className="contact-location" {...reveal} transition={{ ...reveal.transition, delay: 0.1 }}>
+              <div className="location-map">
+                <div className="map-lines" />
+                <span>
+                  <MapPin />
+                </span>
+                <i className="map-pulse" />
+              </div>
+              <div>
+                <small>OUR HOME BASE</small>
+                <h3>Patna, Bihar, India</h3>
+                <p>Working with ambitious organizations across India.</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="contact-expect">
+        <div className="site-shell">
+          <motion.div {...reveal}>
+            <span>WHAT HAPPENS NEXT</span>
+            <h2>
+              A clear first step.
+              <br />
+              No complicated process.
+            </h2>
+          </motion.div>
+          <div className="expect-grid">
+            {[
+              ['01', 'We listen', 'A focused call about the operation, users and desired outcome.'],
+              ['02', 'We frame', 'A practical recommendation, scope direction and delivery path.'],
+              ['03', 'You decide', 'Move forward when the approach, timing and investment make sense.'],
+            ].map((item, index) => (
+              <motion.article key={item[0]} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }}>
+                <b>{item[0]}</b>
+                <span>{index === 0 ? <Headphones /> : index === 1 ? <Sparkles /> : <Check />}</span>
+                <h3>{item[1]}</h3>
+                <p>{item[2]}</p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

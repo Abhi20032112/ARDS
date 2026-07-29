@@ -132,6 +132,29 @@ section,header,footer,main{width:100%;max-width:100%}.site-shell,.site-shell>*{m
   .company-graphic{scale:.49}
 }
 
+.google-review-row{
+  display:flex;align-items:center;justify-content:space-between;gap:22px;
+  margin-top:22px;padding:18px 20px;border:1px solid #ffffff20;
+  border-radius:18px;background:#ffffff0b;backdrop-filter:blur(12px)
+}
+.google-review-row>div{display:flex;align-items:center;gap:12px;min-width:0}
+.google-review-row>div>svg{width:25px;height:25px;flex:0 0 auto;color:#fbbf24;fill:#fbbf24}
+.google-review-row span{display:flex;flex-direction:column;gap:3px}
+.google-review-row b{font-size:13px;color:#fff}
+.google-review-row small{font-size:10px;color:#a9b6d3}
+.google-review-row>a,.google-review-button{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 17px;border-radius:12px;color:#1e3a8a;
+  background:#fff;font:700 11px Poppins;box-shadow:0 10px 25px #02061724
+}
+.google-review-row>a{flex:0 0 auto}
+.google-review-row>a svg,.google-review-button svg{width:15px;height:15px}
+.google-review-button{margin-top:22px;color:#fff;background:linear-gradient(135deg,#2563eb,#7c3aed)}
+@media(max-width:640px){
+  .google-review-row{align-items:stretch;flex-direction:column;padding:16px}
+  .google-review-row>a{width:100%}
+}
+
 @media(hover:none),(pointer:coarse){
   .main-nav .brand:hover img,.main-nav nav>div:hover:after,
   .insight-card-grid article:hover,.study-card:hover,.service-card:hover,

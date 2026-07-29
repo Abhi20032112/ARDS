@@ -7,7 +7,7 @@ import './Footer.css';
 
 const services=['Website Development','Mobile App Development','AI Automation','ERP Solutions','Business Automation','Cloud Solutions','Custom Software','Digital Marketing','Cyber Security','Web Hosting'];
 const erp=['School ERP','College ERP','University ERP','Hospital ERP','Manufacturing ERP','HRMS','CRM','Inventory Management','Attendance Management','Hostel Management'];
-const quick=[['Home','/'],['About Us','/about'],['Services','/services'],['Portfolio','/work'],['Industries','/industries'],['Case Studies','/work'],['Blog','/blog'],['Careers','/contact'],['Contact Us','/contact'],['Book Demo','/contact'],['Privacy Policy','#'],['Terms & Conditions','#']];
+const quick=[['Home','/'],['About Us','/about'],['Services','/services'],['Portfolio','/work'],['Industries','/industries'],['Case Studies','/work'],['Blog','/blog'],['Careers','/contact'],['Contact Us','/contact'],['Book Demo','/contact'],['Privacy Policy','/privacy-policy'],['Terms & Conditions','/terms-conditions']];
 const socials=[
  ['Facebook',Facebook,'https://www.facebook.com/people/Alpenrose-Digital-Solutions/61578637610542/'],
  ['Instagram',Instagram,'https://www.instagram.com/alpenrosedigitalsolutions/'],
@@ -42,7 +42,7 @@ export default function Footer(){
     <motion.div className="lf-contact" {...reveal} transition={{...reveal.transition,delay:.24}}><h3>Contact</h3><a href="https://maps.google.com/?q=Patna+Bihar" target="_blank" rel="noreferrer"><span><MapPin/></span><div><small>Office</small><b>Patna, Bihar, India</b></div></a><a href="tel:+919308579699"><span><Phone/></span><div><small>Call</small><b>+91 9308579699</b></div></a><a href="mailto:business@ards.in"><span><Mail/></span><div><small>Email</small><b>business@ards.in</b></div></a><a href="https://ards.in"><span><Globe2/></span><div><small>Website</small><b>www.ards.in</b></div></a><div className="business-hours"><Clock3/><div><small>Business Hours</small><b>Monday–Saturday</b><span>9:00 AM – 6:00 PM</span></div></div><Link className="consult-btn" to="/contact"><i/>Book Free Consultation <ArrowRight/></Link></motion.div>
    </div>
    <div className="lf-divider"/>
-   <div className="lf-bottom"><span>© 2026 Alpenrose Digital Solutions. All Rights Reserved.</span><div><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="/sitemap.xml">Sitemap</a></div></div>
+   <div className="lf-bottom"><span>© 2026 Alpenrose Digital Solutions. All Rights Reserved.</span><div><Link to="/privacy-policy">Privacy Policy</Link><Link to="/terms-conditions">Terms</Link><a href="/sitemap.xml">Sitemap</a></div></div>
   </div>
  </footer>
 }
