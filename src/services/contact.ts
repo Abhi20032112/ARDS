@@ -67,7 +67,7 @@ export const submitContactLead = async (values: ContactLeadInput): Promise<Conta
   }
 
   if (!isSupabaseConfigured) {
-    return { error: 'Contact form is not configured yet. Please add Supabase environment variables in Vercel.' };
+    return { error: 'Contact form is not configured yet. Please add Supabase environment variables in Netlify and redeploy.' };
   }
 
   const payload = {
