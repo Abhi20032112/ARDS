@@ -241,3 +241,41 @@ section,header,footer,main{width:100%;max-width:100%}.site-shell,.site-shell>*{m
 }
 
 .capabilities-toggle{display:flex;justify-content:center;margin-top:30px}.capabilities-toggle .btn{cursor:pointer}.capabilities-toggle svg{width:17px;height:17px}.whatsapp-only-float{position:fixed;z-index:120;right:max(22px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));display:grid;place-items:center;width:56px;height:56px;border:3px solid #fff;border-radius:50%;color:#fff;background:#22c55e;box-shadow:0 14px 34px rgba(22,163,74,.34);transition:transform .2s ease,box-shadow .2s ease}.whatsapp-only-float:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 38px rgba(22,163,74,.42)}.whatsapp-only-float svg{width:25px;height:25px}@media(max-width:640px){.capabilities-toggle .btn{width:auto;min-width:210px}.whatsapp-only-float{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:50px;height:50px}}@media print{.whatsapp-only-float{display:none!important}}
+
+/* Premium UX polish layer: clearer focus, richer service cards, safer motion. */
+:focus-visible{outline:3px solid rgba(37,99,235,.75)!important;outline-offset:4px!important}
+.premium-service-card{display:flex;flex-direction:column;gap:14px;min-height:330px;border-color:#dbe4f0!important;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,rgba(37,99,235,.35),rgba(124,58,237,.28),rgba(236,72,153,.22)) border-box!important;box-shadow:0 16px 45px rgba(15,23,42,.06)}
+.premium-service-card:after{content:"";position:absolute;inset:auto -30% -45% 30%;height:140px;border-radius:999px;background:radial-gradient(circle,rgba(124,58,237,.18),transparent 68%);transition:transform .35s ease,opacity .35s ease;opacity:.65}
+.premium-service-card:hover,.premium-service-card:focus-visible{transform:translateY(-8px);border-color:transparent!important;box-shadow:0 28px 70px rgba(30,58,138,.16)}
+.premium-service-card:hover:after,.premium-service-card:focus-visible:after{transform:translateY(-18px) scale(1.08);opacity:1}
+.service-card-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}.premium-service-card small{position:static!important;color:#94a3b8!important}.premium-service-card h3,.premium-service-card p,.premium-service-card .service-card-more,.service-benefits,.service-stack-line{position:relative;z-index:1}.premium-service-card h3{margin:6px 0 0!important;font-size:18px!important}.premium-service-card p{margin:0}.service-benefits{display:grid;gap:8px;margin-top:auto}.service-benefits span{display:flex;align-items:center;gap:7px;color:#334155;font-size:11px;font-weight:700}.service-benefits svg{width:14px;height:14px;color:#16a34a;flex:none}.service-stack-line{display:inline-flex;width:max-content;max-width:100%;padding:8px 10px;border:1px solid #e2e8f0;border-radius:999px;color:#5b21b6;background:#f8f7ff;font-size:10px;font-weight:800;overflow-wrap:anywhere}.service-card-more{display:flex;align-items:center;gap:7px;color:#6d28d9;font-size:12px;font-weight:800}
+@media(max-width:640px){.premium-service-card{min-height:0}.service-stack-line{width:100%;justify-content:center;text-align:center}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Performance layer: keep the same visuals while reducing off-screen work. */
+.section,.soft-section,.dark-section,.case-section,.roi-section,.testimonials,
+.solutions-cta,.company-cta,.insights-cta,.case-cta,.final-cta,
+.contact-expect,.company-belief,.light-footer{
+  content-visibility:auto;
+  contain-intrinsic-size:1px 760px;
+}
+
+.service-card,.premium-service-card,.industry-card,.study-card,.quote-grid blockquote,
+.insight-card-grid article,.engagement-grid article,.principle-grid article,
+.leader-grid article,.contact-form-card,.direct-card,.contact-location,
+.solution-feature,.newsletter-card{
+  contain:layout paint style;
+}
+
+.network-canvas,.cursor-ring,.cursor-dot{will-change:transform}
+
+@media(max-width:900px),(hover:none),(pointer:coarse){
+  .network-canvas,.cursor-ring,.cursor-dot{display:none!important}
+  .orbit-track,.orbit-pulse,.map-pulse,.footer-wave path,
+  .contact-submit,.premium-contact-bg i,.float-chip,
+  .ards-ai-launcher:before,.ards-ai-launcher-orb:after,
+  .ards-ai-panel:before,.ards-ai-panel:after,.ards-ai-orb,
+  .ards-ai-orb i,.ards-ai-wave i,.ards-ai-demo-bars i{
+    animation:none!important;
+  }
+}

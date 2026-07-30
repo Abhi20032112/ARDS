@@ -7,7 +7,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HomePage from '@/pages/HomePage';
 import ExperienceEffects from '@/components/ExperienceEffects';
-import AIBusinessConsultant from '@/components/AIBusinessConsultant';
 import '@/pages/ServicesPage.css';
 import '@/pages/AboutPage.css';
 import '@/pages/CaseHeroFix.css';
@@ -30,6 +29,7 @@ const IndustriesPage = lazy(() => import('@/pages/IndustriesPage'));
 const IndustryDetailPage = lazy(() => import('@/pages/IndustryDetailPage'));
 const PrivacyPolicyPage = lazy(() => import('@/pages/PrivacyPolicyPage'));
 const TermsConditionsPage = lazy(() => import('@/pages/TermsConditionsPage'));
+const AIBusinessConsultant = lazy(() => import('@/components/AIBusinessConsultant'));
 
 function App() {
   return (
@@ -60,7 +60,9 @@ function App() {
           </main>
           <Footer />
           <a href="https://wa.me/919308579699" target="_blank" rel="noopener noreferrer" className="whatsapp-only-float" aria-label="Chat with ARDS on WhatsApp"><MessageCircle /></a>
-          <AIBusinessConsultant />
+          <Suspense fallback={null}>
+            <AIBusinessConsultant />
+          </Suspense>
           <Toaster />
         </div>
       </AnimatePresence>
