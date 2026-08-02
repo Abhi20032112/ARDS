@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   Bot,
   BrainCircuit,
@@ -20,6 +20,7 @@ import {
   MicOff,
   Minimize2,
   Paperclip,
+  RefreshCcw,
   Send,
   ShieldCheck,
   Smartphone,
@@ -104,42 +105,42 @@ const solutionMap = {
   hospital: {
     name: 'Hospital ERP + Patient Experience Suite',
     modules: ['OPD/IPD', 'Billing', 'Lab', 'Pharmacy', 'Inventory', 'Doctor scheduling', 'Patient mobile app'],
-    range: 'Rs. 3.5L - Rs. 18L',
+    range: '₹3.5L - ₹18L',
     timeline: '8 - 18 weeks',
     roi: 'Lower billing leakage, faster patient flow, cleaner inventory control'
   },
   school: {
     name: 'School ERP + Parent App',
     modules: ['Admissions', 'Fees', 'Attendance', 'Exams', 'Transport', 'Parent communication', 'Staff payroll'],
-    range: 'Rs. 2.5L - Rs. 12L',
+    range: '₹2.5L - ₹12L',
     timeline: '6 - 14 weeks',
     roi: 'Reduced admin workload and better parent communication'
   },
   college: {
     name: 'College ERP + LMS + Accreditation Dashboard',
     modules: ['Admissions', 'Fees', 'Departments', 'Exams', 'Library', 'NAAC/IQAC', 'Student portal'],
-    range: 'Rs. 5L - Rs. 28L',
+    range: '₹5L - ₹28L',
     timeline: '10 - 24 weeks',
     roi: 'Digitized academic workflows and stronger compliance reporting'
   },
   manufacturing: {
     name: 'Manufacturing ERP + Inventory Automation',
     modules: ['Production planning', 'Purchase', 'Inventory', 'QC', 'Dispatch', 'Vendor management', 'Analytics'],
-    range: 'Rs. 6L - Rs. 35L',
+    range: '₹6L - ₹35L',
     timeline: '12 - 28 weeks',
     roi: 'Less stock mismatch, better production visibility, tighter cost control'
   },
   website: {
     name: 'Conversion-Focused Website + SEO Foundation',
     modules: ['Premium UI', 'CMS', 'Landing pages', 'SEO setup', 'Analytics', 'Lead forms', 'WhatsApp integration'],
-    range: 'Rs. 75K - Rs. 6L',
+    range: '₹75K - ₹6L',
     timeline: '2 - 8 weeks',
     roi: 'More trust, stronger enquiries, measurable digital presence'
   },
   default: {
     name: 'AI-led Digital Transformation Roadmap',
     modules: ['Discovery', 'Workflow mapping', 'Automation plan', 'Cloud architecture', 'Dashboards', 'Training'],
-    range: 'Rs. 1.5L - Rs. 20L',
+    range: '₹1.5L - ₹20L',
     timeline: '4 - 20 weeks',
     roi: 'Lower manual effort and faster decision-making'
   }
@@ -149,7 +150,8 @@ const starterMessages = [
   {
     role: 'ai',
     text:
-      "Welcome to Alpenrose.\n\nI'm your AI Digital Transformation Consultant.\n\nI'll analyse your business, identify operational challenges, and recommend the best technology solutions for your organisation.\n\nThis usually takes less than 3 minutes.\n\nStart by selecting your business type below, then tell me about your operations."
+      "Welcome to Alpenrose.\n\nI'm your AI Digital Transformation Consultant.\n\nI'll analyse your business, identify operational challenges, and recommend the best technology solutions for your organisation.\n\nThis usually takes less than 3 minutes.\n\nStart by selecting your business type below, then tell me about your operations.",
+    timestamp: Date.now()
   }
 ];
 
@@ -228,7 +230,7 @@ function createBusinessReport(messages) {
   const businessScore = Math.round((digitalMaturity + automationReadiness + completed * 16) / 3);
   const manualDependency = state.text.includes('manual') || state.text.includes('excel') || state.text.includes('register') ? 'High' : completed >= 4 ? 'Medium' : 'Unknown';
   const timeLoss = manualDependency === 'High' ? 210 : manualDependency === 'Medium' ? 96 : 40;
-  const revenueLoss = manualDependency === 'High' ? 'Rs. 3.5L - Rs. 9L/year' : manualDependency === 'Medium' ? 'Rs. 1.2L - Rs. 4L/year' : 'Needs discovery';
+  const revenueLoss = manualDependency === 'High' ? '₹3.5L - ₹9L/year' : manualDependency === 'Medium' ? '₹1.2L - ₹4L/year' : 'Needs discovery';
 
   return {
     solution,
@@ -341,8 +343,6 @@ function estimateCost(form) {
   const high = roundToNearest(Math.max(low + spread * 0.16, market.low + spread * Math.min(1, complexityFactor + 0.28)), 5000);
   const recommended = Math.round((low + high) / 2);
   const premium = Math.min(market.high, roundToNearest(high * 1.18, 5000));
-  const gstLow = Math.round(low * 0.18);
-  const gstHigh = Math.round(high * 0.18);
   const complexityScore = Math.min(100, 24 + featureCount * 7 + integrations * 8 + Math.max(0, users - 20) / 8 + (form.timeline === 'Urgent' ? 14 : 0) + (form.security === 'High' ? 10 : 0) + (form.scalability === 'Enterprise' ? 12 : 0));
   const risk = complexityScore > 74 ? 'High' : complexityScore > 48 ? 'Medium' : 'Low';
   const maintenance = Math.round(recommended * 0.08);
@@ -367,9 +367,6 @@ function estimateCost(form) {
     stack: profile.stack,
     maintenance,
     hosting,
-    gstLow,
-    gstHigh,
-    gstRate: 18,
     support: '30 Days Free Support Included',
     amc: 'Available on Request',
     roi: profile.roi,
@@ -530,10 +527,10 @@ a{color:inherit;text-decoration:none}
 <section class="page" id="project-timeline"><div class="section-title"><span>08 / Project Timeline</span><h2>Milestone Roadmap</h2></div><p class="lead">Estimated timeline: ${timeline}</p><div class="timeline">${milestones.map((item, index) => `<div class="milestone"><b>${item}</b><div class="track"><i style="width:${Math.min(100, 22 + index * 12)}%"></i></div></div>`).join('')}</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 10 | Generated by ARDS AI Consultant</span></div></section>
 <section class="page" id="team-structure"><div class="section-title"><span>09 / Team Structure</span><h2>Delivery Team</h2></div><div class="team-grid">${team.map((person) => `<div class="team-card"><b>${person}</b><p>Responsible for quality, execution, coordination, and successful delivery.</p></div>`).join('')}</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 11 | Generated by ARDS AI Consultant</span></div></section>
 <section class="page" id="estimated-investment"><div class="section-title"><span>10 / Estimated Investment</span><h2>Commercial Overview</h2></div><div class="pricing-grid"><div class="price-card"><span>Estimated Range</span><strong>${escapeHtml(solution.range)}</strong><p>Depends on confirmed users, integrations, hosting, and modules.</p></div><div class="price-card recommended"><span>Recommended Budget</span><strong>${budget}</strong><p>Best validated after discovery and scope alignment.</p></div><div class="price-card"><span>Maintenance</span><strong>8% - 15% yearly</strong><p>Support, updates, monitoring, and enhancement planning.</p></div></div><div class="note">This is an estimated quotation generated by AI. Final pricing may vary after detailed project discussion.</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 12 | Generated by ARDS AI Consultant</span></div></section>
-<section class="page" id="roi-analysis"><div class="section-title"><span>11 / ROI Analysis</span><h2>Expected Business Return</h2></div><div class="roi-grid"><div class="roi-card"><span>Time Saved</span><strong>30-45%</strong><p>Less manual entry.</p></div><div class="roi-card"><span>Cost Savings</span><strong>15-28%</strong><p>Reduced leakage.</p></div><div class="roi-card"><span>Efficiency</span><strong>35%</strong><p>Faster approvals.</p></div><div class="roi-card"><span>Automation</span><strong>High</strong><p>${escapeHtml(solution.roi)}</p></div></div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 13 | Generated by ARDS AI Consultant</span></div></section>
+<section class="page" id="roi-analysis"><div class="section-title"><span>11 / Value Analysis</span><h2>Outcomes to Validate</h2></div><div class="roi-grid"><div class="roi-card"><span>Time Saved</span><strong>Baseline needed</strong><p>Measure current task time before implementation.</p></div><div class="roi-card"><span>Cost Control</span><strong>Baseline needed</strong><p>Confirm current leakage and operating cost.</p></div><div class="roi-card"><span>Efficiency</span><strong>Target required</strong><p>Agree measurable workflow KPIs.</p></div><div class="roi-card"><span>Value Direction</span><strong>Potential</strong><p>${escapeHtml(solution.roi)}</p></div></div><div class="note">ROI will be calculated after ARDS validates baseline volumes, process time, error rates, adoption assumptions, and operating costs.</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 13 | Generated by ARDS AI Consultant</span></div></section>
 <section class="page" id="why-choose-ards"><div class="section-title"><span>12 / Why Choose ARDS</span><h2>Enterprise Delivery Strengths</h2></div><div class="why-grid">${['Industry Expertise','AI Automation','Custom Development','24x7 Support','Scalable Solutions','Secure Architecture','Dedicated Team','Transparent Delivery'].map((item, index) => `<div class="why-card"><i>${index + 1}</i><b>${item}</b><p>Professional consulting, engineering, and implementation practices aligned with business outcomes.</p></div>`).join('')}</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 14 | Generated by ARDS AI Consultant</span></div></section>
-<section class="page" id="portfolio"><div class="section-title"><span>13 / Portfolio</span><h2>Selected Work Signals</h2></div><div class="portfolio-grid">${['Education ERP','Healthcare ERP','Manufacturing Automation','Web & Mobile Platform'].map((item) => `<div class="portfolio-card"><b>${item}</b><p><strong>Industry:</strong> ${industry}<br><strong>Technology:</strong> React, Cloud, Database, Automation<br><strong>Result:</strong> Faster operations, stronger reporting, and improved stakeholder experience.</p></div>`).join('')}</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 15 | Generated by ARDS AI Consultant</span></div></section>
-<section class="page" id="testimonials"><div class="section-title"><span>14 / Testimonials</span><h2>Client Confidence</h2></div><div class="quote-grid"><div class="quote-card"><p>"ARDS brought structure, speed, and clarity to our digital transformation plan."</p><b>Operations Leader</b></div><div class="quote-card"><p>"The team understood our workflows and converted them into a practical platform roadmap."</p><b>Business Owner</b></div><div class="quote-card"><p>"Professional communication, strong UI thinking, and reliable delivery planning."</p><b>Project Stakeholder</b></div></div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 16 | Generated by ARDS AI Consultant</span></div></section>
+<section class="page" id="portfolio"><div class="section-title"><span>13 / Capability Alignment</span><h2>Relevant Solution Areas</h2></div><div class="portfolio-grid">${['Education ERP','Healthcare ERP','Manufacturing Automation','Web & Mobile Platform'].map((item) => `<div class="portfolio-card"><b>${item}</b><p><strong>Relevance:</strong> Capability area for ${industry}.<br><strong>Possible technology:</strong> React, cloud services, databases, and workflow automation.<br><strong>Proof:</strong> ARDS will provide verified case studies and references separately where available.</p></div>`).join('')}</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 15 | Generated by ARDS AI Consultant</span></div></section>
+<section class="page" id="testimonials"><div class="section-title"><span>14 / Validation</span><h2>Evidence Before Approval</h2></div><div class="quote-grid"><div class="quote-card"><b>Reference Check</b><p>Request named, permissioned client references relevant to the proposed scope.</p></div><div class="quote-card"><b>Case Study Review</b><p>Validate the original challenge, delivered scope, timeframe, and measurable result.</p></div><div class="quote-card"><b>Technical Validation</b><p>Review architecture, security controls, delivery plan, support model, and acceptance criteria.</p></div></div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 16 | Generated by ARDS AI Consultant</span></div></section>
 <section class="page" id="next-steps"><div class="section-title"><span>15 / Next Steps</span><h2>Recommended Process</h2></div><div class="timeline">${['Free Consultation','Requirement Gathering','Proposal Approval','Development','Go Live'].map((item, index) => `<div class="milestone"><b>${index + 1}. ${item}</b><div class="track"><i style="width:${(index + 1) * 20}%"></i></div></div>`).join('')}</div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Confidential</span><span>Page 17 | Generated by ARDS AI Consultant</span></div></section>
 <section class="page" id="contact"><div class="section-title"><span>16 / Contact</span><h2>Alpenrose Digital Solutions</h2></div><div class="contact-grid"><div class="card"><b>Contact Details</b><p>Justice Madal Path,<br>Rajbanshi Nagar,<br>Patna - 800023<br><br><strong>Phone:</strong> +91 9308579699<br><strong>Email:</strong> business@ards.in<br><strong>Website:</strong> www.ards.in</p></div><div class="card"><b>Quick Access</b><div class="qr-row"><span><img src="${qrSite}" alt="Website QR"><p>Website</p></span><span><img src="${qrWhatsApp}" alt="WhatsApp QR"><p>WhatsApp</p></span></div></div></div><div class="footer-row"><span><img src="${ardsLogo}" alt="">Copyright ARDS</span><span>Generated by ARDS AI Consultant</span></div></section>
 </main>
@@ -668,6 +665,56 @@ const estimatorQuestions = {
   'Custom Software': ['Admin Dashboard', 'CRM', 'Portal', 'Workflow App', 'Reporting System']
 };
 
+const featureCatalog = {
+  Website: [
+    ['Lead Forms', 1], ['SEO Required', 1], ['Analytics', 1], ['WhatsApp', 1],
+    ['Custom Design', 2], ['Blog', 2], ['CMS', 2], ['Admin Panel', 3],
+    ['Payment Gateway', 3], ['Booking System', 3], ['Multi-language', 4], ['AI Assistant', 4]
+  ],
+  'Mobile App': [
+    ['Authentication', 1], ['User Profiles', 1], ['Push Notifications', 1], ['Admin Panel', 2],
+    ['API Integration', 2], ['Analytics', 2], ['Payment Gateway', 3], ['Real-time Chat', 3],
+    ['Location Tracking', 3], ['Offline Mode', 4], ['Multi-language', 4], ['AI Assistant', 5]
+  ],
+  ERP: [
+    ['User Roles', 1], ['Core Workflow', 1], ['Reports', 1], ['Audit Trail', 2],
+    ['Admin Dashboard', 2], ['Notifications', 2], ['Data Migration', 3], ['Payment Integration', 3],
+    ['Mobile Access', 3], ['Advanced Analytics', 4], ['Multi-branch', 4], ['AI Assistant', 5]
+  ],
+  'AI Automation': [
+    ['Workflow Mapping', 1], ['One Core Automation', 1], ['Human Approval', 1], ['Activity Logs', 2],
+    ['Email Integration', 2], ['WhatsApp Integration', 2], ['Document OCR', 3], ['Custom Dashboard', 3],
+    ['CRM Integration', 3], ['Knowledge Base', 4], ['Advanced Analytics', 4], ['Multi-agent System', 5]
+  ],
+  'Digital Marketing': [
+    ['SEO Audit', 1], ['Analytics Setup', 1], ['Content Plan', 1], ['Local SEO', 2],
+    ['Landing Pages', 2], ['Lead Tracking', 2], ['Social Campaigns', 3], ['Paid Ads Setup', 3],
+    ['CRM Integration', 3], ['Marketing Automation', 4], ['Conversion Testing', 4], ['AI Content Workflow', 5]
+  ],
+  Cloud: [
+    ['Cloud Assessment', 1], ['Backups', 1], ['SSL & DNS', 1], ['Monitoring', 2],
+    ['Managed Deployment', 2], ['Access Controls', 2], ['Database Migration', 3], ['CI/CD', 3],
+    ['Disaster Recovery', 3], ['High Availability', 4], ['Auto Scaling', 4], ['Multi-region Setup', 5]
+  ],
+  'Custom Software': [
+    ['User Roles', 1], ['Core Workflow', 1], ['Basic Reports', 1], ['Admin Dashboard', 2],
+    ['Notifications', 2], ['Audit Trail', 2], ['Data Migration', 3], ['Third-party APIs', 3],
+    ['Payment Gateway', 3], ['Advanced Analytics', 4], ['Mobile App', 4], ['AI Automation', 5]
+  ]
+};
+
+function getBudgetFeatureTier(budget) {
+  if (budget === 'Below ₹50,000') return 1;
+  if (budget === '₹50,000-₹1,00,000') return 2;
+  if (budget === '₹1,00,000-₹5,00,000') return 3;
+  if (budget === '₹5,00,000-₹10,00,000') return 4;
+  return 5;
+}
+
+function getBudgetFeatureLimit(budget) {
+  return [0, 3, 5, 7, 9, 12][getBudgetFeatureTier(budget)];
+}
+
 function calculateLeadScore(messages, lead) {
   const combined = `${messages.map((message) => message.text).join(' ')} ${Object.values(lead).join(' ')}`.toLowerCase();
   let score = 18;
@@ -771,6 +818,44 @@ function createSessionId() {
   }
 }
 
+function ConsultantMessage({ text }) {
+  const sections = String(text || '').split(/\n\s*\n/).filter(Boolean);
+
+  return (
+    <div className="ards-ai-response">
+      {sections.map((section, sectionIndex) => {
+        const lines = section.split('\n').filter(Boolean);
+        const first = lines[0]?.trim() || '';
+        const hasHeading = lines.length > 1 && first.length < 48 && !/[.!?]$/.test(first) && !first.startsWith('-');
+        const content = hasHeading ? lines.slice(1) : lines;
+        const bulletLines = content.filter((line) => /^[-*]\s+/.test(line));
+
+        return (
+          <section key={`${first}-${sectionIndex}`}>
+            {hasHeading && <strong>{first}</strong>}
+            {bulletLines.length === content.length && bulletLines.length > 0 ? (
+              <ul>{bulletLines.map((line, index) => <li key={`${line}-${index}`}>{line.replace(/^[-*]\s+/, '')}</li>)}</ul>
+            ) : (
+              content.map((line, index) => <p key={`${line}-${index}`}>{line.replace(/^[-*]\s+/, '')}</p>)
+            )}
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+const TAB_ITEMS = [
+  ['chat', 'Consult'],
+  ['estimate', 'Estimator'],
+  ['proposal', 'Proposal'],
+  ['audit', 'Website'],
+  ['intel', 'Intel'],
+  ['architect', 'Architect'],
+  ['demo', 'Demo'],
+  ['meeting', 'Meeting']
+];
+
 export default function AIBusinessConsultant() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState('chat');
@@ -810,9 +895,17 @@ export default function AIBusinessConsultant() {
   const [activeDemo, setActiveDemo] = useState('ERP');
   const fileRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const panelRef = useRef(null);
+  const launcherRef = useRef(null);
+  const tabRefs = useRef({});
+  const liveRegionRef = useRef(null);
   const aiSessionId = useMemo(() => createSessionId(), []);
+  const prefersReducedMotion = useReducedMotion();
 
   const estimate = useMemo(() => estimateCost(estimator), [estimator]);
+  const availableFeatures = featureCatalog[estimator.type] || featureCatalog['Custom Software'];
+  const budgetFeatureTier = getBudgetFeatureTier(estimator.budget);
+  const budgetFeatureLimit = getBudgetFeatureLimit(estimator.budget);
   const leadScore = useMemo(() => calculateLeadScore(messages, lead), [messages, lead]);
   const latestSolution = useMemo(() => detectSolution(messages.map((message) => message.text).join(' ')), [messages]);
   const currentAgent = useMemo(() => activeAgent(messages), [messages]);
@@ -829,6 +922,7 @@ export default function AIBusinessConsultant() {
       return /budget|timeline|deadline|urgent|month|week|price|cost/i.test(text);
     });
   }, [messages]);
+  const discoveryPercent = Math.round((completedDiscovery.filter(Boolean).length / completedDiscovery.length) * 100);
 
   const saveAiData = (payload) => {
     logAiAgentInteraction({
@@ -856,9 +950,32 @@ export default function AIBusinessConsultant() {
 
   useEffect(() => {
     if (open && mode === 'chat') {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      messagesEndRef.current?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'end' });
     }
-  }, [messages, typing, open, mode]);
+  }, [messages, typing, open, mode, prefersReducedMotion]);
+
+  // Focus management: move focus into the panel when it opens, return it to the
+  // launcher button when it closes, and let Escape close the panel from anywhere inside it.
+  useEffect(() => {
+    if (open) {
+      const focusTarget = panelRef.current?.querySelector('h2') || panelRef.current;
+      focusTarget?.focus();
+    } else {
+      launcherRef.current?.focus();
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open]);
 
   const speakReply = (reply, sourceText) => {
     if (voiceReply && 'speechSynthesis' in window) {
@@ -871,9 +988,9 @@ export default function AIBusinessConsultant() {
 
   const sendMessage = async (text = input, interactionType = 'chat') => {
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed || typing) return;
     const history = messages;
-    setMessages((prev) => [...prev, { role: 'user', text: trimmed }]);
+    setMessages((prev) => [...prev, { role: 'user', text: trimmed, timestamp: Date.now() }]);
     setInput('');
     setTyping(true);
     setThinkingStep(thinkingSteps[0]);
@@ -885,7 +1002,13 @@ export default function AIBusinessConsultant() {
     const reply = apiReply?.reply || createConsultantReply(trimmed, history);
 
     window.setTimeout(() => {
-      setMessages((prev) => [...prev, { role: 'ai', text: reply }]);
+      setMessages((prev) => [...prev, {
+        role: 'ai',
+        text: reply,
+        timestamp: Date.now(),
+        source: apiReply?.source || 'fallback',
+        confidence: apiReply?.confidence || 'Directional recommendation'
+      }]);
       setSuggestions(apiReply?.suggestions || responseSuggestions);
       speakReply(reply, trimmed);
       saveAiData({
@@ -896,6 +1019,8 @@ export default function AIBusinessConsultant() {
         metadata: {
           agent: currentAgent,
           suggested_solution: latestSolution.name,
+          response_source: apiReply?.source || 'fallback',
+          confidence: apiReply?.confidence || 'Directional recommendation',
           suggestions: apiReply?.suggestions || responseSuggestions
         }
       });
@@ -952,14 +1077,14 @@ export default function AIBusinessConsultant() {
     setMode('chat');
     setMessages((prev) => [
       ...prev,
-      { role: 'user', text: `Uploaded file: ${file.name} (${Math.round(file.size / 1024)} KB)` }
+      { role: 'user', text: `Uploaded file: ${file.name} (${Math.round(file.size / 1024)} KB)`, timestamp: Date.now() }
     ]);
     setTyping(true);
     const analysis = await analyzeDocumentFile(file);
     const reply = analysis
       ? `Document AI Intake\n\nFile: ${analysis.filename} (${analysis.size_kb} KB)\nCategory: ${analysis.category}\n\nSignals:\n${analysis.extracted_signals.map((item) => `- ${item}`).join('\n')}\n\nRecommended next steps:\n${analysis.recommendations.map((item) => `- ${item}`).join('\n')}`
       : 'I captured the file details and will treat it as a requirement/RFP/tender input.\n\nStart with the project type, deadline, must-have modules, users, and integrations mentioned in the document.';
-    setMessages((prev) => [...prev, { role: 'ai', text: reply }]);
+    setMessages((prev) => [...prev, { role: 'ai', text: reply, timestamp: Date.now() }]);
     saveAiData({
       interaction_type: 'file_upload',
       mode: 'chat',
@@ -980,8 +1105,18 @@ export default function AIBusinessConsultant() {
       ...prev,
       features: prev.features.includes(feature)
         ? prev.features.filter((item) => item !== feature)
-        : [...prev.features, feature]
+        : prev.features.length < getBudgetFeatureLimit(prev.budget)
+          ? [...prev.features, feature]
+          : prev.features
     }));
+  };
+
+  const selectRecommendedFeatures = () => {
+    const recommended = availableFeatures
+      .filter(([, tier]) => tier <= budgetFeatureTier)
+      .slice(0, budgetFeatureLimit)
+      .map(([feature]) => feature);
+    setEstimator((prev) => ({ ...prev, features: recommended }));
   };
 
   const generateProposal = async () => {
@@ -1092,7 +1227,7 @@ export default function AIBusinessConsultant() {
   const startVoice = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      setMessages((prev) => [...prev, { role: 'ai', text: 'Voice input is not supported in this browser. You can still type naturally.' }]);
+      setMessages((prev) => [...prev, { role: 'ai', text: 'Voice input is not supported in this browser. You can still type naturally.', timestamp: Date.now() }]);
       return;
     }
     const recognition = new SpeechRecognition();
@@ -1119,35 +1254,61 @@ export default function AIBusinessConsultant() {
     });
   };
 
+  const handleTabKeyDown = (event, index) => {
+    const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+    if (!keys.includes(event.key)) return;
+    event.preventDefault();
+    let nextIndex = index;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % TAB_ITEMS.length;
+    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + TAB_ITEMS.length) % TAB_ITEMS.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = TAB_ITEMS.length - 1;
+    const [nextKey] = TAB_ITEMS[nextIndex];
+    setMode(nextKey);
+    tabRefs.current[nextKey]?.focus();
+  };
+
   const leadText = `Hello ARDS, I want a consultation.
 Name: ${lead.name || 'Not provided'}
 Company: ${lead.company || 'Not provided'}
 Phone: ${lead.phone || 'Not provided'}
 Interest: ${lead.interest}`;
 
+  const motionProps = prefersReducedMotion
+    ? { initial: false, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.12 } }
+    : {
+        initial: { opacity: 0, y: 34, scale: 0.96 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        exit: { opacity: 0, y: 22, scale: 0.98 },
+        transition: { type: 'spring', stiffness: 260, damping: 24 }
+      };
+
   return (
     <>
       <motion.button
         type="button"
+        ref={launcherRef}
         className={`ards-ai-launcher ${typing ? 'thinking' : ''}`}
-        aria-label="Open Alpenrose consultant"
+        aria-label="Open Alpenrose consultant chat"
+        aria-haspopup="dialog"
+        aria-expanded={open}
         onClick={() => setOpen(true)}
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.96 }}
+        whileHover={prefersReducedMotion ? undefined : { scale: 1.04 }}
+        whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
       >
-        <span className="ards-ai-launcher-orb"><Bot /></span>
+        <span className="ards-ai-launcher-orb" aria-hidden="true"><Bot /></span>
         <b>Alpenrose</b>
       </motion.button>
 
       <AnimatePresence>
         {open && (
           <motion.aside
+            ref={panelRef}
             className={`ards-ai-panel ${dark ? 'is-dark' : 'is-light'}`}
-            initial={{ opacity: 0, y: 34, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 22, scale: 0.98 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-            aria-label="Alpenrose Business Consultant"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ards-ai-panel-title"
+            {...motionProps}
           >
             <header className="ards-ai-head">
               <div className={`ards-ai-orb ${typing ? 'thinking' : ''}`} aria-hidden="true">
@@ -1155,35 +1316,44 @@ Interest: ${lead.interest}`;
                 <BrainCircuit />
               </div>
               <div>
-                <span><Sparkles /> Alpenrose AI Consultant</span>
-                <h2>Welcome to Alpenrose</h2>
+                <span><Sparkles aria-hidden="true" /> Alpenrose AI Consultant</span>
+                <h2 id="ards-ai-panel-title" tabIndex={-1}>Welcome to Alpenrose</h2>
                 <p>Your Intelligent Digital Transformation Consultant</p>
               </div>
-              <button type="button" onClick={() => setOpen(false)} aria-label="Minimize Alpenrose">
-                <Minimize2 />
+              <button type="button" onClick={() => setOpen(false)} aria-label="Close Alpenrose consultant">
+                <Minimize2 aria-hidden="true" />
               </button>
             </header>
 
-            <nav className="ards-ai-tabs" aria-label="AI consultant modes">
-              {[
-                ['chat', 'Consult'],
-                ['estimate', 'Estimator'],
-                ['proposal', 'Proposal'],
-                ['audit', 'Website'],
-                ['intel', 'Intel'],
-                ['architect', 'Architect'],
-                ['demo', 'Demo'],
-                ['meeting', 'Meeting']
-              ].map(([key, label]) => (
-                <button key={key} type="button" className={mode === key ? 'active' : ''} onClick={() => setMode(key)}>
+            <nav className="ards-ai-tabs" aria-label="AI consultant modes" role="tablist">
+              {TAB_ITEMS.map(([key, label], index) => (
+                <button
+                  key={key}
+                  type="button"
+                  ref={(node) => { tabRefs.current[key] = node; }}
+                  role="tab"
+                  id={`ards-ai-tab-${key}`}
+                  aria-selected={mode === key}
+                  aria-controls={`ards-ai-tabpanel-${key}`}
+                  tabIndex={mode === key ? 0 : -1}
+                  className={mode === key ? 'active' : ''}
+                  onClick={() => setMode(key)}
+                  onKeyDown={(event) => handleTabKeyDown(event, index)}
+                >
                   {label}
                 </button>
               ))}
-              <button type="button" onClick={() => setDark((value) => !value)}>{dark ? 'Light' : 'Dark'}</button>
+              <button
+                type="button"
+                onClick={() => setDark((value) => !value)}
+                aria-pressed={dark}
+              >
+                {dark ? 'Light' : 'Dark'}
+              </button>
             </nav>
 
             {mode === 'chat' && (
-              <section className="ards-ai-chat">
+              <section className="ards-ai-chat" id="ards-ai-tabpanel-chat" role="tabpanel" aria-labelledby="ards-ai-tab-chat">
                 {messages.length <= 1 && (
                   <div className="ards-ai-chat-start">
                     <div className="ards-ai-welcome-screen">
@@ -1194,7 +1364,7 @@ Interest: ${lead.interest}`;
                     <div className="ards-ai-quick-grid" aria-label="Quick AI actions">
                       {quickActions.map(({ label, icon: Icon }) => (
                         <button key={label} type="button" onClick={() => handleQuickAction(label)}>
-                          <Icon />
+                          <Icon aria-hidden="true" />
                           <span>{label}</span>
                         </button>
                       ))}
@@ -1202,22 +1372,42 @@ Interest: ${lead.interest}`;
                   </div>
                 )}
 
-                <div className="ards-ai-messages">
+                {messages.length > 1 && (
+                  <div className="ards-ai-discovery" aria-label={`Discovery ${discoveryPercent}% complete`}>
+                    <div>
+                      <span>Discovery brief</span>
+                      <b>{discoveryPercent}%</b>
+                    </div>
+                    <div className="ards-ai-discovery-track" aria-hidden="true">
+                      <i style={{ width: `${discoveryPercent}%` }} />
+                    </div>
+                    <small>{discoveryPercent < 60 ? 'Answer a few focused questions for a reliable recommendation.' : 'Enough context for a directional solution. Final scope still needs human review.'}</small>
+                  </div>
+                )}
+
+                <div className="ards-ai-messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation with Alpenrose">
                   {messages.map((message, index) => (
                     <motion.div
                       key={`${message.role}-${index}`}
                       className={`ards-ai-message ${message.role}`}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                     >
-                      {message.role === 'ai' && <Bot />}
-                      <p>{message.text}</p>
-                      <time>{new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}</time>
+                      {message.role === 'ai' && <Bot aria-hidden="true" />}
+                      {message.role === 'ai' ? <ConsultantMessage text={message.text} /> : <p>{message.text}</p>}
+                      {message.role === 'ai' && message.confidence && (
+                        <span className={`ards-ai-evidence ${message.source === 'genai' ? 'is-genai' : ''}`}>
+                          {message.source === 'genai' ? 'GenAI analysis' : 'Consultant fallback'} · {message.confidence}
+                        </span>
+                      )}
+                      <time dateTime={new Date(message.timestamp || Date.now()).toISOString()}>
+                        {new Date(message.timestamp || Date.now()).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                      </time>
                     </motion.div>
                   ))}
                   {typing && (
-                    <div className="ards-ai-thinking-card">
-                      <div className="ards-ai-mini-brain"><BrainCircuit /><i /><i /><i /></div>
+                    <div className="ards-ai-thinking-card" role="status">
+                      <div className="ards-ai-mini-brain" aria-hidden="true"><BrainCircuit /><i /><i /><i /></div>
                       <div>
                         <b>{thinkingStep || 'Thinking...'}</b>
                         <div className="ards-ai-progress"><span /></div>
@@ -1228,54 +1418,73 @@ Interest: ${lead.interest}`;
                 </div>
 
                 {messages.length > 1 && !typing && (
-                  <div className="ards-ai-suggestions">
-                    {suggestions.map((item) => <button key={item} type="button" onClick={() => handleSuggestion(item)}>{item}</button>)}
+                  <div className="ards-ai-suggestion-row">
+                    <div className="ards-ai-suggestions" aria-label="Suggested replies">
+                      {suggestions.map((item) => <button key={item} type="button" onClick={() => handleSuggestion(item)}>{item}</button>)}
+                    </div>
+                    <button
+                      type="button"
+                      className="ards-ai-reset"
+                      onClick={() => {
+                        setMessages(starterMessages);
+                        setSuggestions(responseSuggestions);
+                        setInput('');
+                      }}
+                      aria-label="Start a new consultation"
+                      title="New consultation"
+                    >
+                      <RefreshCcw aria-hidden="true" />
+                    </button>
                   </div>
                 )}
 
                 <div className="ards-ai-composer">
+                  <label htmlFor="ards-ai-input" className="sr-only">Message Alpenrose</label>
                   <input
+                    id="ards-ai-input"
                     value={input}
                     onChange={(event) => setInput(event.target.value)}
                     onKeyDown={(event) => {
                       if (event.key === 'Enter') sendMessage();
                     }}
-                    placeholder="Describe your business problem..."
+                    placeholder="Tell me what you need or what is not working..."
+                    aria-describedby="ards-ai-composer-hint"
                   />
-                  <input ref={fileRef} type="file" className="sr-only" onChange={handleFile} accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" />
-                  <button type="button" onClick={() => fileRef.current?.click()} aria-label="Upload file">
-                    <Paperclip />
+                  <span id="ards-ai-composer-hint" className="sr-only">Press Enter to send</span>
+                  <input ref={fileRef} type="file" className="sr-only" onChange={handleFile} accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" aria-label="Choose a file to upload" />
+                  <button type="button" onClick={() => fileRef.current?.click()} aria-label="Upload a file">
+                    <Paperclip aria-hidden="true" />
                   </button>
-                  <button type="button" onClick={startVoice} aria-label="Use voice input" className={listening ? 'recording' : ''}>
-                    {listening ? <MicOff /> : <Mic />}
+                  <button type="button" onClick={startVoice} aria-label={listening ? 'Stop voice input' : 'Start voice input'} aria-pressed={listening} className={listening ? 'recording' : ''}>
+                    {listening ? <MicOff aria-hidden="true" /> : <Mic aria-hidden="true" />}
                   </button>
                   {listening && <div className="ards-ai-wave" aria-hidden="true"><i /><i /><i /><i /></div>}
-                  <button type="button" onClick={() => setVoiceReply((value) => !value)} aria-label="Toggle voice replies" className={voiceReply ? 'recording' : ''}>
-                    <Volume2 />
+                  <button type="button" onClick={() => setVoiceReply((value) => !value)} aria-label="Read replies aloud" aria-pressed={voiceReply} className={voiceReply ? 'recording' : ''}>
+                    <Volume2 aria-hidden="true" />
                   </button>
                   <button type="button" onClick={() => sendMessage()} aria-label="Send message" disabled={typing || !input.trim()}>
-                    <Send />
+                    <Send aria-hidden="true" />
                   </button>
                 </div>
               </section>
             )}
 
             {mode === 'estimate' && (
-              <section className="ards-ai-tool ards-estimator">
+              <section className="ards-ai-tool ards-estimator" id="ards-ai-tabpanel-estimate" role="tabpanel" aria-labelledby="ards-ai-tab-estimate">
                 <div className="estimator-hero">
-                  <span><BrainCircuit /> AI Project Estimator</span>
+                  <span><BrainCircuit aria-hidden="true" /> AI Project Estimator</span>
                   <h3>Let's scope this like a pre-sales consultant.</h3>
                   <p>This is an AI-generated estimate. A final quotation will be prepared by ARDS solution experts after detailed discovery.</p>
                 </div>
 
-                <div className="estimator-stepper">
+                <ol className="estimator-stepper" aria-label="Estimation steps">
                   {['Understand', 'Analyse', 'Estimate', 'Negotiate', 'Recommend'].map((step, index) => (
-                    <div key={step} className={index <= 4 ? 'active' : ''}>
-                      <b>{index + 1}</b>
+                    <li key={step} className="active">
+                      <b aria-hidden="true">{index + 1}</b>
                       <span>{step}</span>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ol>
 
                 <div className="estimator-section">
                   <div className="estimator-section-head">
@@ -1285,16 +1494,16 @@ Interest: ${lead.interest}`;
                   <label>What type of business do you have?
                     <input value={estimator.business} onChange={(event) => setEstimator((prev) => ({ ...prev, business: event.target.value }))} placeholder="School, hospital, manufacturer, startup..." />
                   </label>
-                  <div className="ards-ai-grid estimator-service-grid">
+                  <div className="ards-ai-grid estimator-service-grid" role="group" aria-label="Service type">
                     {['Website', 'Mobile App', 'ERP', 'AI Automation', 'Digital Marketing', 'Cloud', 'Custom Software'].map((type) => (
-                      <button key={type} type="button" className={estimator.type === type ? 'active' : ''} onClick={() => setEstimator((prev) => ({ ...prev, type, subtype: estimatorQuestions[type]?.[0] || type, features: [] }))}>
+                      <button key={type} type="button" aria-pressed={estimator.type === type} className={estimator.type === type ? 'active' : ''} onClick={() => setEstimator((prev) => ({ ...prev, type, subtype: estimatorQuestions[type]?.[0] || type, features: [] }))}>
                         {type}
                       </button>
                     ))}
                   </div>
-                  <div className="ards-ai-chips">
+                  <div className="ards-ai-chips" role="group" aria-label="Project subtype">
                     {(estimatorQuestions[estimator.type] || []).map((subtype) => (
-                      <button key={subtype} type="button" className={estimator.subtype === subtype ? 'active' : ''} onClick={() => setEstimator((prev) => ({ ...prev, subtype }))}>
+                      <button key={subtype} type="button" aria-pressed={estimator.subtype === subtype} className={estimator.subtype === subtype ? 'active' : ''} onClick={() => setEstimator((prev) => ({ ...prev, subtype }))}>
                         {subtype}
                       </button>
                     ))}
@@ -1307,9 +1516,9 @@ Interest: ${lead.interest}`;
                     <h4>Features that change the estimate</h4>
                   </div>
                   <div className="estimator-input-grid">
-                    <label>Pages / Screens <input type="number" min="1" value={estimator.pages} onChange={(event) => setEstimator((prev) => ({ ...prev, pages: event.target.value }))} /></label>
-                    <label>Users / Seats <input type="number" min="1" value={estimator.users} onChange={(event) => setEstimator((prev) => ({ ...prev, users: event.target.value }))} /></label>
-                    <label>Integrations <input type="number" min="0" value={estimator.integrations} onChange={(event) => setEstimator((prev) => ({ ...prev, integrations: event.target.value }))} /></label>
+                    <label>Pages / Screens <input type="number" min="1" inputMode="numeric" value={estimator.pages} onChange={(event) => setEstimator((prev) => ({ ...prev, pages: event.target.value }))} /></label>
+                    <label>Users / Seats <input type="number" min="1" inputMode="numeric" value={estimator.users} onChange={(event) => setEstimator((prev) => ({ ...prev, users: event.target.value }))} /></label>
+                    <label>Integrations <input type="number" min="0" inputMode="numeric" value={estimator.integrations} onChange={(event) => setEstimator((prev) => ({ ...prev, integrations: event.target.value }))} /></label>
                     <label>Expected Timeline
                       <select value={estimator.timeline} onChange={(event) => setEstimator((prev) => ({ ...prev, timeline: event.target.value }))}>
                         <option>Flexible</option>
@@ -1338,17 +1547,55 @@ Interest: ${lead.interest}`;
                       </select>
                     </label>
                     <label>Approximate Budget
-                      <select value={estimator.budget} onChange={(event) => setEstimator((prev) => ({ ...prev, budget: event.target.value }))}>
+                      <select value={estimator.budget} onChange={(event) => {
+                        const budget = event.target.value;
+                        const tier = getBudgetFeatureTier(budget);
+                        const limit = getBudgetFeatureLimit(budget);
+                        const eligible = new Set(availableFeatures.filter(([, featureTier]) => featureTier <= tier).map(([feature]) => feature));
+                        setEstimator((prev) => ({
+                          ...prev,
+                          budget,
+                          features: prev.features.filter((feature) => eligible.has(feature)).slice(0, limit)
+                        }));
+                      }}>
                         {Object.keys(budgetRanges).map((budget) => <option key={budget}>{budget}</option>)}
                       </select>
                     </label>
                   </div>
-                  <div className="ards-ai-chips estimator-feature-chips">
-                    {['Custom Design', 'Admin Panel', 'Payment Gateway', 'Blog', 'Booking System', 'Multi-language', 'SEO Required', 'WhatsApp', 'AI Assistant', 'Data Migration', 'Reports', 'Role Access'].map((feature) => (
-                      <button key={feature} type="button" className={estimator.features.includes(feature) ? 'active' : ''} onClick={() => toggleFeature(feature)}>
-                        {feature}
-                      </button>
-                    ))}
+                  <div className="estimator-feature-head">
+                    <div>
+                      <b>Choose features for your budget</b>
+                      <span>{estimator.features.length} of {budgetFeatureLimit} selected</span>
+                    </div>
+                    <div>
+                      <button type="button" onClick={selectRecommendedFeatures}>Select recommended</button>
+                      <button type="button" onClick={() => setEstimator((prev) => ({ ...prev, features: [] }))}>Clear</button>
+                    </div>
+                  </div>
+                  <div className="estimator-budget-guide" role="status">
+                    <span>{estimator.budget}</span>
+                    <p>Features marked “Fits budget” can be selected now. Higher-scope features are shown as future-phase options.</p>
+                  </div>
+                  <div className="estimator-feature-grid" role="group" aria-label={`Features available for ${estimator.budget}`}>
+                    {availableFeatures.map(([feature, tier]) => {
+                      const eligible = tier <= budgetFeatureTier;
+                      const selected = estimator.features.includes(feature);
+                      const limitReached = !selected && estimator.features.length >= budgetFeatureLimit;
+                      return (
+                        <button
+                          key={feature}
+                          type="button"
+                          aria-pressed={selected}
+                          aria-disabled={!eligible || limitReached}
+                          disabled={!eligible || limitReached}
+                          className={`${selected ? 'active' : ''} ${!eligible ? 'future' : ''}`}
+                          onClick={() => toggleFeature(feature)}
+                        >
+                          <CheckCircle2 aria-hidden="true" />
+                          <span>{feature}<small>{eligible ? (selected ? 'Selected' : 'Fits budget') : 'Future phase'}</small></span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -1358,9 +1605,9 @@ Interest: ${lead.interest}`;
                     <h4>Project analysis dashboard</h4>
                   </div>
                   <div className="estimator-dashboard">
-                    <div className="estimator-ring" style={{ '--score': estimate.complexityScore }}>
-                      <strong>{estimate.complexityScore}</strong>
-                      <span>Complexity</span>
+                    <div className="estimator-ring" style={{ '--score': estimate.complexityScore }} role="img" aria-label={`Complexity score ${estimate.complexityScore} out of 100`}>
+                      <strong aria-hidden="true">{estimate.complexityScore}</strong>
+                      <span aria-hidden="true">Complexity</span>
                     </div>
                     <div className="estimator-analysis-grid">
                       <span>Complexity <b>{estimate.complexity}</b></span>
@@ -1393,7 +1640,6 @@ Interest: ${lead.interest}`;
                       <p>Based on Indian software development market pricing for {estimate.marketLabel}, adjusted for features, users, integrations, timeline, security, scalability and hosting.</p>
                     </div>
                     <div className="estimator-market-grid">
-                      <span>GST (18%) <b>{formatCurrency(estimate.gstLow)} - {formatCurrency(estimate.gstHigh)}</b><small>Extra as applicable</small></span>
                       <span>Estimated Project Duration <b>{estimate.weeks}</b><small>Depends on confirmed scope</small></span>
                       <span>Support <b>{estimate.support}</b><small>After go-live</small></span>
                       <span>AMC <b>{estimate.amc}</b><small>Optional annual support</small></span>
@@ -1403,26 +1649,26 @@ Interest: ${lead.interest}`;
                     <article>
                       <span>Minimum Budget</span>
                       <h4>Lean MVP</h4>
-                      <strong>{formatCurrency(estimate.minimum)} + GST</strong>
+                      <strong>{formatCurrency(estimate.minimum)}</strong>
                       <p>Essential launch with controlled scope and must-have workflows only.</p>
                     </article>
                     <article className="recommended">
                       <span>Recommended</span>
                       <h4>Professional Solution</h4>
-                      <strong>{formatCurrency(estimate.recommended)} + GST</strong>
+                      <strong>{formatCurrency(estimate.recommended)}</strong>
                       <p>Balanced scope for quality, security, scalability, integrations and maintainability.</p>
                     </article>
                     <article>
                       <span>Premium</span>
                       <h4>Advanced Solution</h4>
-                      <strong>{formatCurrency(estimate.premium)} + GST</strong>
+                      <strong>{formatCurrency(estimate.premium)}</strong>
                       <p>More polished UX, stronger architecture, automation, analytics and advanced integrations.</p>
                     </article>
                   </div>
                   <div className="ards-ai-result">
                     <span>Estimated Cost Range</span>
-                    <strong>{formatCurrency(estimate.low)} - {formatCurrency(estimate.high)} + GST</strong>
-                    <p>GST is extra as applicable. This is not fixed pricing; the estimate changes based on project complexity, features, users, integrations, timeline pressure, security requirements, scalability, hosting, testing depth and maintenance needs.</p>
+                    <strong>{formatCurrency(estimate.low)} - {formatCurrency(estimate.high)}</strong>
+                    <p>This is not fixed pricing; the estimate changes based on project complexity, features, users, integrations, timeline pressure, security requirements, scalability, hosting, testing depth and maintenance needs.</p>
                   </div>
                 </div>
 
@@ -1432,7 +1678,7 @@ Interest: ${lead.interest}`;
                       <span>Step 5</span>
                       <h4>Negotiation mode</h4>
                     </div>
-                    <p>Thank you for sharing your budget. Our recommended solution is approximately {formatCurrency(estimate.recommended)} + GST. Based on your budget of {estimator.budget}, we can recommend a Phase-1 MVP that includes the most essential features. Additional features can be implemented in future phases as your business grows.</p>
+                    <p>Thank you for sharing your budget. Our recommended solution is approximately {formatCurrency(estimate.recommended)}. Based on your budget of {estimator.budget}, we can recommend a Phase-1 MVP that includes the most essential features. Additional features can be implemented in future phases as your business grows.</p>
                     <div className="estimator-negotiation-columns">
                       <div>
                         <b>Features Included</b>
@@ -1450,8 +1696,8 @@ Interest: ${lead.interest}`;
                       </div>
                     </div>
                     <div className="ards-ai-mini-table">
-                      <span>Phase 1 MVP <b>{formatCurrency(estimate.phaseOne)} + GST</b></span>
-                      <span>Estimated Future Cost <b>{formatCurrency(estimate.futureUpgrade)} + GST</b></span>
+                      <span>Phase 1 MVP <b>{formatCurrency(estimate.phaseOne)}</b></span>
+                      <span>Estimated Future Cost <b>{formatCurrency(estimate.futureUpgrade)}</b></span>
                       <span>Suggested Action <b>MVP first</b></span>
                     </div>
                   </div>
@@ -1464,7 +1710,7 @@ Interest: ${lead.interest}`;
                   </div>
                   <div className="estimator-recommendation">
                     <p><b>Business analysis:</b> {estimator.business || 'Your business'} needs a {estimator.subtype} with a controlled scope, practical launch path and room for future upgrades.</p>
-                    <p><b>Recommended solution:</b> {estimator.type} delivered as a {estimate.complexity.toLowerCase()} project with phased implementation. Estimated budget: {formatCurrency(estimate.low)} - {formatCurrency(estimate.high)} + GST.</p>
+                    <p><b>Recommended solution:</b> {estimator.type} delivered as a {estimate.complexity.toLowerCase()} project with phased implementation. Estimated budget: {formatCurrency(estimate.low)} - {formatCurrency(estimate.high)}.</p>
                     <p><b>Estimated ROI:</b> {estimate.roi}</p>
                     <p><b>Priority list:</b> {estimate.priority.join(', ')}.</p>
                     <p><b>Features to postpone:</b> {(estimate.postpone.length ? estimate.postpone : ['Advanced automation', 'Extra integrations']).join(', ')}.</p>
@@ -1472,25 +1718,25 @@ Interest: ${lead.interest}`;
                 </div>
 
                 <div className="estimator-final">
-                  <p><b>Disclaimer:</b><br />This is an AI-generated budgetary estimate based on the information provided. The final quotation, project scope, implementation timeline, and commercial proposal will be confirmed after a detailed discussion with the ARDS consulting team. All prices are exclusive of GST unless otherwise stated.</p>
+                  <p><b>Disclaimer:</b><br />This is an AI-generated budgetary estimate based on the information provided. The final quotation, project scope, implementation timeline, and commercial proposal will be confirmed after a detailed discussion with the ARDS consulting team.</p>
                   <div className="estimator-contact-strip">
                     <span>Website: <b>www.ards.in</b></span>
                     <span>Email: <b>business@ards.in</b></span>
                     <span>Phone: <b>+91 9308579699</b></span>
                   </div>
                   <div className="ards-ai-handoff">
-                    <a href={whatsAppUrl(`I want a free consultation for ${estimator.type}. Estimated range: ${formatCurrency(estimate.low)} - ${formatCurrency(estimate.high)} + GST`)} target="_blank" rel="noreferrer"><CalendarClock /> Schedule Free Consultation</a>
-                    <a href={`mailto:business@ards.in?subject=${encodeURIComponent('Detailed ARDS project proposal request')}&body=${encodeURIComponent(`Service: ${estimator.type}\nSubtype: ${estimator.subtype}\nEstimated range: ${formatCurrency(estimate.low)} - ${formatCurrency(estimate.high)} + GST\nBudget: ${estimator.budget}`)}`}><FileText /> Download Detailed Proposal</a>
-                    <a href={whatsAppUrl(`Please call me back for ${estimator.type} project estimation.`)} target="_blank" rel="noreferrer"><Users /> Request Callback</a>
-                    <a href={whatsAppUrl(`I want to discuss my ${estimator.type} estimate with ARDS.`)} target="_blank" rel="noreferrer"><MessageCircle /> Chat on WhatsApp</a>
-                    <a href={`mailto:business@ards.in?subject=${encodeURIComponent('ARDS sales enquiry')}&body=${encodeURIComponent(`Hello ARDS Sales Team,\n\nI want to discuss ${estimator.type}.\nEstimated range: ${formatCurrency(estimate.low)} - ${formatCurrency(estimate.high)} + GST\nPhone: `)}`}><Mail /> Contact ARDS Sales Team</a>
+                    <a href={whatsAppUrl(`I want a free consultation for ${estimator.type}. Estimated range: ${formatCurrency(estimate.low)} - ${formatCurrency(estimate.high)}`)} target="_blank" rel="noreferrer"><CalendarClock aria-hidden="true" /> Schedule Free Consultation</a>
+                    <a href={`mailto:business@ards.in?subject=${encodeURIComponent('Detailed ARDS project proposal request')}&body=${encodeURIComponent(`Service: ${estimator.type}\nSubtype: ${estimator.subtype}\nEstimated range: ${formatCurrency(estimate.low)} - ${formatCurrency(estimate.high)}\nBudget: ${estimator.budget}`)}`}><FileText aria-hidden="true" /> Download Detailed Proposal</a>
+                    <a href={whatsAppUrl(`Please call me back for ${estimator.type} project estimation.`)} target="_blank" rel="noreferrer"><Users aria-hidden="true" /> Request Callback</a>
+                    <a href={whatsAppUrl(`I want to discuss my ${estimator.type} estimate with ARDS.`)} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Chat on WhatsApp</a>
+                    <a href={`mailto:business@ards.in?subject=${encodeURIComponent('ARDS sales enquiry')}&body=${encodeURIComponent(`Hello ARDS Sales Team,\n\nI want to discuss ${estimator.type}.\nEstimated range: ${formatCurrency(estimate.low)} - ${formatCurrency(estimate.high)}\nPhone: `)}`}><Mail aria-hidden="true" /> Contact ARDS Sales Team</a>
                   </div>
                 </div>
               </section>
             )}
 
             {mode === 'proposal' && (
-              <section className="ards-ai-tool">
+              <section className="ards-ai-tool" id="ards-ai-tabpanel-proposal" role="tabpanel" aria-labelledby="ards-ai-tab-proposal">
                 <h3>AI Proposal Generator</h3>
                 {[
                   ['company', 'Company Name'],
@@ -1503,7 +1749,7 @@ Interest: ${lead.interest}`;
                     <input value={proposal[key]} onChange={(event) => setProposal((prev) => ({ ...prev, [key]: event.target.value }))} />
                   </label>
                 ))}
-                <button type="button" className="ards-ai-primary" onClick={generateProposal}><FileText /> Generate Proposal</button>
+                <button type="button" className="ards-ai-primary" onClick={generateProposal}><FileText aria-hidden="true" /> Generate Proposal</button>
                 {proposalText && (
                   <div className="ards-ai-proposal ards-ai-enterprise-proposal">
                     <div className="ards-ai-proposal-head">
@@ -1516,9 +1762,9 @@ Interest: ${lead.interest}`;
                     </div>
                     <iframe title="ARDS enterprise proposal preview" srcDoc={proposalText} />
                     <div className="ards-ai-inline-actions">
-                      <button type="button" onClick={printProposal}><Download /> Download PDF</button>
-                      <button type="button" onClick={downloadProposal}><FileText /> Download HTML</button>
-                      <button type="button" onClick={() => navigator.clipboard?.writeText(proposalText)}><Copy /> Copy HTML</button>
+                      <button type="button" onClick={printProposal}><Download aria-hidden="true" /> Download PDF</button>
+                      <button type="button" onClick={downloadProposal}><FileText aria-hidden="true" /> Download HTML</button>
+                      <button type="button" onClick={() => navigator.clipboard?.writeText(proposalText)}><Copy aria-hidden="true" /> Copy HTML</button>
                     </div>
                     <p className="ards-ai-pdf-note">Choose "Save as PDF" in the print dialog to download the proposal as a PDF.</p>
                   </div>
@@ -1527,15 +1773,15 @@ Interest: ${lead.interest}`;
             )}
 
             {mode === 'audit' && (
-              <section className="ards-ai-tool">
+              <section className="ards-ai-tool" id="ards-ai-tabpanel-audit" role="tabpanel" aria-labelledby="ards-ai-tab-audit">
                 <h3>Website Analyzer</h3>
                 <label>Website URL
-                  <input value={auditUrl} onChange={(event) => setAuditUrl(event.target.value)} placeholder="https://example.com" />
+                  <input type="url" inputMode="url" autoComplete="url" value={auditUrl} onChange={(event) => setAuditUrl(event.target.value)} placeholder="https://example.com" />
                 </label>
-                <button type="button" className="ards-ai-primary" onClick={runAudit}><Globe2 /> Analyze Website</button>
+                <button type="button" className="ards-ai-primary" onClick={runAudit}><Globe2 aria-hidden="true" /> Analyze Website</button>
                 {audit && (
-                  <div className="ards-ai-audit">
-                    <strong>{audit.score}/100 Lead Readiness</strong>
+                  <div className="ards-ai-audit" role="status">
+                    <strong>{Number.isFinite(audit.score) ? `${audit.score}/100 Lead Readiness` : 'Preliminary website intake'}</strong>
                     {audit.items.map((item) => (
                       <p key={item.label}><b>{item.label}:</b> {item.value}</p>
                     ))}
@@ -1545,49 +1791,52 @@ Interest: ${lead.interest}`;
             )}
 
             {mode === 'meeting' && (
-              <section className="ards-ai-tool">
+              <section className="ards-ai-tool" id="ards-ai-tabpanel-meeting" role="tabpanel" aria-labelledby="ards-ai-tab-meeting">
                 <h3>Book a Free Consultation</h3>
-                {[
-                  ['name', 'Name'],
-                  ['company', 'Company'],
-                  ['phone', 'Phone'],
-                  ['interest', 'Interest']
-                ].map(([key, label]) => (
-                  <label key={key}>{label}
-                    <input value={lead[key]} onChange={(event) => setLead((prev) => ({ ...prev, [key]: event.target.value }))} />
-                  </label>
-                ))}
+                <label>Name
+                  <input autoComplete="name" value={lead.name} onChange={(event) => setLead((prev) => ({ ...prev, name: event.target.value }))} />
+                </label>
+                <label>Company
+                  <input autoComplete="organization" value={lead.company} onChange={(event) => setLead((prev) => ({ ...prev, company: event.target.value }))} />
+                </label>
+                <label>Phone
+                  <input type="tel" inputMode="tel" autoComplete="tel" value={lead.phone} onChange={(event) => setLead((prev) => ({ ...prev, phone: event.target.value }))} />
+                </label>
+                <label>Interest
+                  <input value={lead.interest} onChange={(event) => setLead((prev) => ({ ...prev, interest: event.target.value }))} />
+                </label>
                 <div className="ards-ai-handoff">
-                  <a href={whatsAppUrl(leadText)} target="_blank" rel="noreferrer" onClick={saveMeetingRequest}><CheckCircle2 /> WhatsApp ARDS</a>
-                  <a href={`mailto:info@ards.in?subject=${encodeURIComponent('ARDS consultation request')}&body=${encodeURIComponent(leadText)}`} onClick={saveMeetingRequest}><Mail /> Email Request</a>
+                  <a href={whatsAppUrl(leadText)} target="_blank" rel="noreferrer" onClick={saveMeetingRequest}><CheckCircle2 aria-hidden="true" /> WhatsApp ARDS</a>
+                  <a href={`mailto:info@ards.in?subject=${encodeURIComponent('ARDS consultation request')}&body=${encodeURIComponent(leadText)}`} onClick={saveMeetingRequest}><Mail aria-hidden="true" /> Email Request</a>
                 </div>
               </section>
             )}
 
             {mode === 'intel' && (
-              <section className="ards-ai-tool">
-                <h3>Conversation Intelligence</h3>
-                <div className="ards-ai-score-ring" style={{ '--score': leadScore }}>
-                  <strong>{leadScore}</strong>
-                  <span>{leadStage(leadScore)}</span>
+              <section className="ards-ai-tool" id="ards-ai-tabpanel-intel" role="tabpanel" aria-labelledby="ards-ai-tab-intel">
+                <h3>Discovery Intelligence</h3>
+                <p className="ards-ai-model-note">Indicative signals based only on details shared in this chat. These are not measured business, security, or technology audit scores.</p>
+                <div className="ards-ai-score-ring" style={{ '--score': leadScore }} role="img" aria-label={`Lead score ${leadScore} out of 100, ${leadStage(leadScore)}`}>
+                  <strong aria-hidden="true">{leadScore}</strong>
+                  <span aria-hidden="true">{leadStage(leadScore)}</span>
                 </div>
                 <div className="ards-ai-score-grid">
                   {scores.map(([label, value]) => (
                     <div key={label}>
                       <span>{label}</span>
                       <b>{value}%</b>
-                      <i style={{ width: `${value}%` }} />
+                      <i style={{ width: `${value}%` }} aria-hidden="true" />
                     </div>
                   ))}
                 </div>
-                <div className="ards-ai-checklist">
+                <ul className="ards-ai-checklist">
                   {discoveryQuestions.map((question, index) => (
-                    <div key={question} className={completedDiscovery[index] ? 'done' : ''}>
-                      <CheckCircle2 />
-                      <span>{question}</span>
-                    </div>
+                    <li key={question} className={completedDiscovery[index] ? 'done' : ''}>
+                      <CheckCircle2 aria-hidden="true" />
+                      <span>{question}{completedDiscovery[index] ? ' — captured' : ' — still needed'}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
                 <div className="ards-ai-audit">
                   <p><b>Recommended solution:</b> {latestSolution.name}</p>
                   <p><b>Estimated range:</b> {latestSolution.range}</p>
@@ -1614,7 +1863,7 @@ Interest: ${lead.interest}`;
             )}
 
             {mode === 'architect' && (
-              <section className="ards-ai-tool">
+              <section className="ards-ai-tool" id="ards-ai-tabpanel-architect" role="tabpanel" aria-labelledby="ards-ai-tab-architect">
                 <h3>AI Solution Architect</h3>
                 <div className="ards-ai-audit">
                   <p><b>Blueprint for:</b> {blueprint.solution}</p>
@@ -1640,11 +1889,11 @@ Interest: ${lead.interest}`;
             )}
 
             {mode === 'demo' && (
-              <section className="ards-ai-tool">
+              <section className="ards-ai-tool" id="ards-ai-tabpanel-demo" role="tabpanel" aria-labelledby="ards-ai-tab-demo">
                 <h3>Interactive Solution Demo</h3>
-                <div className="ards-ai-grid">
+                <div className="ards-ai-grid" role="group" aria-label="Demo module">
                   {['ERP', 'Attendance', 'Hospital', 'Inventory', 'Analytics', 'AI Dashboard'].map((demo) => (
-                    <button key={demo} type="button" className={activeDemo === demo ? 'active' : ''} onClick={() => setActiveDemo(demo)}>
+                    <button key={demo} type="button" aria-pressed={activeDemo === demo} className={activeDemo === demo ? 'active' : ''} onClick={() => setActiveDemo(demo)}>
                       {demo}
                     </button>
                   ))}
@@ -1655,7 +1904,7 @@ Interest: ${lead.interest}`;
                     <strong>{activeDemo}</strong>
                     <p>{demoCopy(activeDemo)}</p>
                   </div>
-                  <div className="ards-ai-demo-bars">
+                  <div className="ards-ai-demo-bars" aria-hidden="true">
                     {[72, 46, 88, 64, 93].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
                   </div>
                   <div className="ards-ai-demo-flow">
@@ -1666,8 +1915,8 @@ Interest: ${lead.interest}`;
             )}
 
             <footer className="ards-ai-footer">
-              <span><ShieldCheck /> ARDS knowledge mode</span>
-              <span><ImageIcon /> Upload PDF, docs, sheets, images</span>
+              <span><ShieldCheck aria-hidden="true" /> ARDS knowledge mode</span>
+              <span><ImageIcon aria-hidden="true" /> Upload PDF, docs, sheets, images</span>
             </footer>
           </motion.aside>
         )}

@@ -12,7 +12,7 @@
 .ards-ai-head h2{margin:8px 0 5px;font-size:25px;letter-spacing:-.045em;color:inherit}.ards-ai-head p{margin:0;color:#aebce0;font-size:12px;line-height:1.45}.is-light .ards-ai-head p{color:#64748b}
 .ards-ai-head button{width:36px;height:36px;border:1px solid #ffffff20;border-radius:12px;background:#ffffff10;color:inherit;display:grid;place-items:center;cursor:pointer}.ards-ai-head button svg{width:17px}
 .ards-ai-tabs{display:flex;gap:7px;padding:10px 12px;border-bottom:1px solid #ffffff12;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
-.ards-ai-tabs::-webkit-scrollbar,.ards-ai-industries::-webkit-scrollbar,.ards-ai-messages::-webkit-scrollbar{display:none}
+.ards-ai-tabs::-webkit-scrollbar,.ards-ai-industries::-webkit-scrollbar{display:none}
 .ards-ai-tabs button{border:1px solid transparent;border-radius:999px;background:#ffffff0d;color:inherit;padding:9px 13px;font:800 11px Inter;white-space:nowrap;cursor:pointer}.ards-ai-tabs button.active{background:#fff;color:#1e3a8a}
 .is-light .ards-ai-tabs button{background:#eaf0fb}.is-light .ards-ai-tabs button.active{background:#1e3a8a;color:white}
 .ards-ai-chat{min-height:0;display:flex;flex:1;flex-direction:column}.ards-ai-welcome{padding:13px 14px;border-bottom:1px solid #ffffff10}.ards-ai-welcome b{display:block;font-size:12px;margin-bottom:10px}
@@ -131,6 +131,7 @@
   scrollbar-width:thin;
   scrollbar-color:#93c5fd55 transparent;
   padding-bottom:22px;
+  scroll-behavior:smooth;
 }
 .ards-ai-chat-start{
   max-height:42dvh;
@@ -152,6 +153,7 @@
   overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;
   scroll-behavior:smooth;
+  scroll-padding-block:18px;
 }
 .ards-ai-message{
   display:grid;
@@ -226,6 +228,70 @@
 .estimator-pricing strong{overflow-wrap:anywhere}
 .estimator-analysis-grid span,.estimator-negotiation-grid span,.estimator-recommendation p{overflow-wrap:anywhere}
 
+/* Grounded GenAI conversation */
+.ards-ai-discovery{
+  flex:0 0 auto;
+  padding:10px 16px 11px;
+  border-bottom:1px solid #ffffff10;
+  background:#07132c80;
+}
+.is-light .ards-ai-discovery{background:#f8fafccc;border-color:#dbe3ef}
+.ards-ai-discovery>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ards-ai-discovery span{color:#c7d2fe;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.ards-ai-discovery b{color:#67e8f9;font-size:10px}
+.is-light .ards-ai-discovery span{color:#475569}.is-light .ards-ai-discovery b{color:#1d4ed8}
+.ards-ai-discovery-track{height:4px;margin:7px 0;border-radius:999px;overflow:hidden;background:#ffffff12}
+.is-light .ards-ai-discovery-track{background:#dbe3ef}
+.ards-ai-discovery-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#22d3ee,#3b82f6,#8b5cf6);transition:width .35s ease}
+.ards-ai-discovery small{display:block;color:#93a4c7;font-size:9px;line-height:1.35}
+.is-light .ards-ai-discovery small{color:#64748b}
+.ards-ai-response{
+  grid-column:2;
+  max-width:100%;
+  padding:14px 15px;
+  border:1px solid #ffffff15;
+  border-radius:18px 18px 18px 6px;
+  overflow-wrap:anywhere;
+  background:linear-gradient(145deg,#ffffff18,#ffffff0c);
+  box-shadow:0 12px 30px #02061718;
+}
+.is-light .ards-ai-response{color:#172033;background:#f8fafc;border-color:#dbe3ef}
+.ards-ai-response section+section{margin-top:12px;padding-top:11px;border-top:1px solid #ffffff0e}
+.is-light .ards-ai-response section+section{border-color:#e2e8f0}
+.ards-ai-response strong{display:block;margin-bottom:6px;color:#bfdbfe;font-size:11px;letter-spacing:.02em}
+.is-light .ards-ai-response strong{color:#1e40af}
+.ards-ai-response p{padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:12px!important;line-height:1.55!important}
+.ards-ai-response p+p{margin-top:5px!important}
+.ards-ai-response ul{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.ards-ai-response li{position:relative;padding-left:14px;color:#dbeafe;font-size:12px;line-height:1.5}
+.ards-ai-response li:before{content:'';position:absolute;left:0;top:.58em;width:5px;height:5px;border-radius:50%;background:#67e8f9}
+.is-light .ards-ai-response li{color:#334155}.is-light .ards-ai-response li:before{background:#2563eb}
+.ards-ai-evidence{grid-column:2;justify-self:start;display:inline-flex;align-items:center;margin:0 4px;color:#94a3b8;font-size:8px;font-weight:800;letter-spacing:.04em}
+.ards-ai-evidence.is-genai{color:#67e8f9}.is-light .ards-ai-evidence.is-genai{color:#0369a1}
+.ards-ai-suggestion-row{flex:0 0 auto;display:grid;grid-template-columns:minmax(0,1fr) 42px;align-items:center;border-top:1px solid #ffffff0e}
+.ards-ai-suggestion-row .ards-ai-suggestions{border-top:0;min-width:0;padding-right:6px}
+.ards-ai-reset{width:34px;height:34px;display:grid;place-items:center;border:1px solid #ffffff18;border-radius:11px;background:#ffffff0d;color:#cbd5e1;cursor:pointer;transition:background-color .18s ease,transform .18s ease}
+.ards-ai-reset:hover{transform:rotate(-20deg);background:#ffffff1c}.ards-ai-reset svg{width:15px}
+.is-light .ards-ai-reset{color:#475569;background:#eef4ff;border-color:#dbe3ef}
+.ards-ai-model-note{margin:0;padding:10px 12px;border:1px solid #fbbf2438;border-radius:12px;background:#f59e0b12;color:#fde68a;font-size:10px;line-height:1.5}
+.is-light .ards-ai-model-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.estimator-feature-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px}
+.estimator-feature-head>div:first-child{min-width:0}.estimator-feature-head b{display:block;color:#fff;font-size:12px}.estimator-feature-head span{display:block;margin-top:3px;color:#93c5fd;font-size:9px}
+.is-light .estimator-feature-head b{color:#172033}.is-light .estimator-feature-head span{color:#475569}
+.estimator-feature-head>div:last-child{display:flex;gap:6px;flex:0 0 auto}
+.estimator-feature-head button{min-height:32px;border:1px solid #60a5fa33;border-radius:10px;padding:7px 9px;background:#ffffff0d;color:#dbeafe;font-size:9px;font-weight:800;cursor:pointer}
+.estimator-feature-head button:first-child{background:#2563eb;color:#fff;border-color:#60a5fa}
+.is-light .estimator-feature-head button{background:#f8fafc;color:#1e3a8a;border-color:#dbe3ef}.is-light .estimator-feature-head button:first-child{background:#1d4ed8;color:#fff}
+.estimator-budget-guide{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px;margin:10px 0;padding:10px 11px;border:1px solid #67e8f92e;border-radius:13px;background:#0891b212}
+.estimator-budget-guide span{padding:6px 8px;border-radius:8px;background:#67e8f91f;color:#67e8f9;font-size:9px;font-weight:900;white-space:nowrap}.estimator-budget-guide p{margin:0;color:#cbd5e1;font-size:9px;line-height:1.4}
+.is-light .estimator-budget-guide{background:#ecfeff;border-color:#a5f3fc}.is-light .estimator-budget-guide span{background:#cffafe;color:#0e7490}.is-light .estimator-budget-guide p{color:#475569}
+.estimator-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.estimator-feature-grid button{display:grid;grid-template-columns:22px minmax(0,1fr);align-items:center;gap:8px;min-width:0;min-height:54px;padding:9px 10px;border:1px solid #ffffff16;border-radius:13px;background:#ffffff09;color:#dbeafe;text-align:left;cursor:pointer;transition:border-color .18s ease,background-color .18s ease,transform .18s ease}
+.estimator-feature-grid button:hover:not(:disabled){transform:translateY(-1px);border-color:#67e8f966}.estimator-feature-grid button svg{width:17px;color:#64748b}.estimator-feature-grid button span{min-width:0;font-size:10px;font-weight:800;line-height:1.25;overflow-wrap:anywhere}.estimator-feature-grid button small{display:block;margin-top:3px;color:#67e8f9;font-size:8px;font-weight:700}
+.estimator-feature-grid button.active{border-color:#67e8f9;background:linear-gradient(145deg,#0891b22b,#2563eb26);box-shadow:inset 0 0 0 1px #67e8f91f}.estimator-feature-grid button.active svg{color:#67e8f9;fill:#67e8f923}
+.estimator-feature-grid button.future{opacity:.5;cursor:not-allowed}.estimator-feature-grid button.future small{color:#94a3b8}.estimator-feature-grid button:disabled:not(.future){opacity:.62;cursor:not-allowed}
+.is-light .estimator-feature-grid button{background:#f8fafc;border-color:#dbe3ef;color:#172033}.is-light .estimator-feature-grid button.active{background:#eff6ff;border-color:#60a5fa}.is-light .estimator-feature-grid button small{color:#0369a1}
+
 @media(max-width:760px){
   .ards-ai-launcher{
     right:14px;
@@ -242,6 +308,11 @@
     border-radius:0;
     border:0;
   }
+  .ards-ai-discovery{padding-inline:12px}
+  .ards-ai-response{padding:12px 13px}
+  .estimator-feature-head{align-items:flex-start;flex-direction:column}
+  .estimator-budget-guide{grid-template-columns:1fr}.estimator-budget-guide span{justify-self:start}
+  .estimator-feature-grid{grid-template-columns:1fr}
   .ards-ai-head{
     min-height:92px;
     padding:14px 14px 12px;
@@ -423,6 +494,51 @@
 /* Consultant-grade dropdown controls */
 .ards-ai-tool label{
   position:relative;
+}
+.ards-ai-panel *{
+  -webkit-tap-highlight-color:transparent;
+}
+.ards-ai-tabs,
+.ards-ai-chat-start,
+.ards-ai-messages,
+.ards-ai-suggestions,
+.ards-ai-tool{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+.ards-ai-tool::-webkit-scrollbar,
+.ards-ai-messages::-webkit-scrollbar,
+.ards-ai-chat-start::-webkit-scrollbar{
+  width:8px;
+}
+.ards-ai-tool::-webkit-scrollbar-track,
+.ards-ai-messages::-webkit-scrollbar-track,
+.ards-ai-chat-start::-webkit-scrollbar-track{
+  background:transparent;
+}
+.ards-ai-tool::-webkit-scrollbar-thumb,
+.ards-ai-messages::-webkit-scrollbar-thumb,
+.ards-ai-chat-start::-webkit-scrollbar-thumb{
+  border:2px solid transparent;
+  border-radius:999px;
+  background:linear-gradient(180deg,#67e8f9,#7c3aed) border-box;
+  background-clip:padding-box,border-box;
+}
+.ards-ai-tabs::-webkit-scrollbar,
+.ards-ai-suggestions::-webkit-scrollbar,
+.ards-ai-industries::-webkit-scrollbar{
+  height:6px;
+}
+.ards-ai-tabs::-webkit-scrollbar-thumb,
+.ards-ai-suggestions::-webkit-scrollbar-thumb,
+.ards-ai-industries::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:#67e8f966;
+}
+.is-light .ards-ai-tool::-webkit-scrollbar-thumb,
+.is-light .ards-ai-messages::-webkit-scrollbar-thumb,
+.is-light .ards-ai-chat-start::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#93c5fd,#c4b5fd) border-box;
 }
 .ards-ai-tool input,
 .ards-ai-tool select{

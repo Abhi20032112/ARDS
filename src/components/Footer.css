@@ -5,4 +5,7 @@
 @media(prefers-reduced-motion:reduce){.light-footer *{animation:none!important}}
 .lf-bottom{grid-template-columns:1fr auto}
 @media(max-width:720px){.lf-bottom{grid-template-columns:1fr}}
+.footer-wave,.footer-blob,.newsletter-card:before,.newsletter-shape,.newsletter-form button:after,.consult-btn i{pointer-events:none}
+.light-footer-inner{z-index:2}
+.light-footer a,.light-footer button,.light-footer input{position:relative;z-index:1}
 .light-footer .footer-wave path{animation:footerWave 9s ease-in-out infinite alternate;transform-origin:center bottom}.lf-logo img{animation:footerLogoFloat 4.5s ease-in-out infinite}.newsletter-card{transition:transform .35s ease,box-shadow .35s ease}.newsletter-card:hover{transform:translateY(-5px);box-shadow:0 32px 85px rgba(30,64,175,.13)}.lf-column,.lf-contact,.lf-company{transition:transform .3s ease}.lf-column:hover,.lf-contact:hover{transform:translateY(-3px)}.newsletter-form button{position:relative;overflow:hidden}.newsletter-form button:after{content:'';position:absolute;inset:-60% auto -60% -40%;width:28%;background:#ffffff40;transform:rotate(20deg);animation:footerShimmer 3.5s ease-in-out infinite}@keyframes footerWave{to{transform:scaleY(.82) translateY(5px)}}@keyframes footerLogoFloat{50%{transform:translateY(-4px) rotate(-3deg)}}@keyframes footerShimmer{50%,100%{left:125%}}

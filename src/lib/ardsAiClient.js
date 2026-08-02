@@ -1,121 +1,150 @@
+import { supabase } from '@/lib/supabase';
+
 const delay = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
 
 const knowledge = [
-  ['website', 'Website Development', 'A premium website should do more than look good. ARDS would build a fast, mobile-first, SEO-ready website with clear service pages, enquiry forms, WhatsApp actions, analytics, and conversion-focused content.'],
-  ['erp', 'ERP Solutions', 'An ERP should become the operating system of the business: users, roles, departments, approvals, billing, inventory, reports, and management dashboards in one place.'],
-  ['school', 'School ERP', 'For a school, ARDS would digitize admissions, fees, attendance, exams, transport, parent communication, staff payroll, and reports. The goal is less register work and better visibility.'],
-  ['college', 'College ERP', 'For a college, the best fit is admissions, departments, fees, exams, library, LMS, student portal, IQAC/NAAC dashboards, and alumni workflows.'],
-  ['hospital', 'Hospital ERP', 'For healthcare, ARDS would connect OPD/IPD, billing, lab, pharmacy, inventory, doctor schedules, patient records, and dashboards to reduce leakage and improve patient flow.'],
-  ['automation', 'AI Automation', 'AI automation is useful where documents, approvals, reports, reminders, attendance, CRM follow-ups, or repetitive work consume team time. ARDS would begin with workflow mapping, then automate the highest-leakage areas first.'],
-  ['cloud', 'Cloud Solutions', 'A cloud plan should cover hosting, backups, deployment, monitoring, security, storage, and scale. ARDS would design this around reliability and maintainability.'],
-  ['marketing', 'Digital Marketing', 'Digital marketing should connect SEO, campaigns, landing pages, analytics, lead capture, and CRM follow-up so every enquiry is measurable.'],
-  ['inventory', 'Inventory Management', 'Inventory automation should track stock movement, purchases, vendors, reorder alerts, warehouse/location control, and leakage reports.'],
-  ['hrms', 'HRMS', 'HRMS should centralize employee records, attendance, leave, payroll, documents, approvals, and HR reports.'],
-  ['crm', 'CRM', 'CRM should capture leads, assign owners, remind follow-ups, track pipeline stages, and report conversion quality.'],
-  ['manufacturing', 'Manufacturing ERP', 'Manufacturing ERP should cover production planning, purchase, inventory, QC, dispatch, vendors, cost tracking, and dashboards.'],
-  ['attendance', 'Attendance System', 'An attendance system can use face, QR, device, or app-based capture with reports, leave sync, alerts, and HR/ERP integration.']
+  ['website', 'Website Development', 'a fast, mobile-first website with clear service journeys, lead capture, analytics, and an SEO-ready content structure'],
+  ['school', 'School ERP', 'admissions, fees, attendance, exams, transport, parent communication, payroll, and management reporting'],
+  ['college', 'College ERP', 'admissions, departments, fees, exams, library, LMS, student portal, and IQAC/NAAC reporting'],
+  ['hospital', 'Hospital ERP', 'OPD/IPD, billing, lab, pharmacy, inventory, scheduling, patient records, and management dashboards'],
+  ['manufacturing', 'Manufacturing ERP', 'production planning, purchasing, inventory, quality control, dispatch, vendors, costing, and reporting'],
+  ['automation', 'AI Automation', 'document processing, approvals, reminders, CRM follow-ups, reporting, and other repetitive workflows'],
+  ['mobile', 'Mobile App Development', 'focused mobile journeys, authentication, notifications, API integration, analytics, and reliable release management'],
+  ['cloud', 'Cloud Solutions', 'hosting, deployment, backups, monitoring, security, storage, disaster recovery, and scaling'],
+  ['marketing', 'Digital Marketing', 'SEO, campaigns, landing pages, analytics, lead capture, and CRM follow-up'],
+  ['inventory', 'Inventory Management', 'stock movement, purchases, vendors, reorder alerts, warehouse controls, and leakage reporting'],
+  ['hrms', 'HRMS', 'employee records, attendance, leave, payroll, documents, approvals, and HR reporting'],
+  ['crm', 'CRM', 'lead capture, ownership, follow-up reminders, pipeline stages, and conversion reporting'],
+  ['erp', 'ERP Solutions', 'roles, departments, approvals, billing, inventory, reports, dashboards, and integrations']
+];
+
+const signals = [
+  ['business type', /school|college|hospital|clinic|manufactur|factory|retail|logistics|hotel|government|construction|agency|company|startup/i],
+  ['scale', /\d+\s*(users|employees|students|beds|branches|locations|departments|customers)|users|employees|students|beds|branches/i],
+  ['current process', /excel|manual|paper|register|existing|currently|software|erp|website|app|cloud|server/i],
+  ['pain point', /problem|challenge|delay|duplicate|leakage|slow|manual|error|inventory|billing|reporting|security/i],
+  ['timeline or budget', /budget|timeline|deadline|urgent|week|month|lakh|crore|₹|cost|price|launch|go.live/i]
 ];
 
 function matchKnowledge(input) {
-  const lower = input.toLowerCase();
-  return knowledge.find(([key]) => lower.includes(key)) || knowledge[1];
+  const lower = String(input || '').toLowerCase();
+  return knowledge.find(([key]) => lower.includes(key)) || knowledge[knowledge.length - 1];
 }
 
-function buildRichReply(message) {
-  const [, title, copy] = matchKnowledge(message);
-  return `${title} Recommendation
+function buildGroundedFallback(message, history = []) {
+  const conversation = [...history, { role: 'user', text: message }]
+    .filter((item) => item?.role === 'user')
+    .map((item) => item.text)
+    .join(' ');
+  const [, title, scope] = matchKnowledge(conversation);
+  const known = signals.filter(([, pattern]) => pattern.test(conversation)).map(([label]) => label);
+  const missing = signals.filter(([, pattern]) => !pattern.test(conversation)).map(([label]) => label);
 
-${copy}
+  if (missing.length && known.length < 3) {
+    const questionBySignal = {
+      'business type': 'What type of organisation is this, and what does it sell or deliver?',
+      scale: 'Approximately how many users, employees, branches, students, beds, or locations are involved?',
+      'current process': 'How is this handled today: Excel, paper, existing software, or another system?',
+      'pain point': 'What is the single biggest delay, error, or revenue risk in the current process?',
+      'timeline or budget': 'What launch window and approximate budget range should I design around?'
+    };
+    return {
+      reply: `Understanding so far\n\nI can see a possible need for ${title}, but there is not enough evidence yet for a responsible recommendation.\n\nWhat I know\n- ${known.length ? known.join('\n- ') : 'Only the initial service interest'}\n\nNext question\n${questionBySignal[missing[0]]}\n\nWhy I am asking\nThis changes the architecture, delivery effort, and realistic budget range.`,
+      confidence: known.length <= 1 ? 'Early discovery' : 'Developing brief'
+    };
+  }
 
-Suggested ARDS approach:
-- Discovery: map users, departments, current tools, and pain points.
-- Solution design: confirm modules, roles, dashboards, integrations, and data migration.
-- Build plan: launch the highest-value workflow first, then expand in phases.
-- ROI focus: reduce manual work, leakage, delays, duplicate entries, and reporting gaps.
-
-Indicative timeline: 4 - 16 weeks depending on scope.
-Next best step: share users, current process, must-have modules, and launch timeline.`;
-}
-
-export async function sendConsultantMessage({ message }) {
-  await delay(500);
   return {
-    reply: buildRichReply(message),
-    suggestions: ['Tell me more', 'Estimate Cost', 'Generate Proposal', 'Book Demo', 'View Services', 'Contact Expert']
+    reply: `Consultant assessment\n\nRecommended direction\n${title}, initially focused on ${scope}.\n\nWhy this fits\n- It addresses the operating signals you shared.\n- A phased launch limits delivery risk and validates adoption early.\n- Integrations and data migration should be confirmed before scope approval.\n\nAssumptions to validate\n- User roles and approval rules are not fully confirmed.\n- Existing data quality and third-party API access require discovery.\n- Any cost or timeline is budgetary until the scope is signed off.\n\nRecommended next step\nRun a 45-minute discovery session to map the highest-value workflow, users, integrations, success metric, and Phase 1 boundary.`,
+    confidence: missing.length ? 'Directional recommendation' : 'Discovery-ready'
   };
+}
+
+export async function sendConsultantMessage({ message, history = [], lead = {} }) {
+  const safeHistory = history
+    .filter((item) => item?.text && (item.role === 'user' || item.role === 'ai'))
+    .slice(-10)
+    .map(({ role, text }) => ({ role, text: String(text).slice(0, 3000) }));
+
+  try {
+    const { data, error } = await supabase.functions.invoke('alpenrose-consultant', {
+      body: {
+        message: String(message).slice(0, 4000),
+        history: safeHistory,
+        context: {
+          name: String(lead.name || '').slice(0, 80),
+          company: String(lead.company || '').slice(0, 120),
+          interest: String(lead.interest || '').slice(0, 120)
+        }
+      }
+    });
+
+    if (error || !data?.reply) throw error || new Error('Invalid consultant response');
+    return {
+      reply: data.reply,
+      suggestions: Array.isArray(data.suggestions) ? data.suggestions.slice(0, 4) : undefined,
+      confidence: data.confidence || 'AI-assisted analysis',
+      source: 'genai'
+    };
+  } catch (error) {
+    console.info('Alpenrose GenAI unavailable; using grounded consultant fallback.', error);
+    await delay(280);
+    const fallback = buildGroundedFallback(message, history);
+    return {
+      ...fallback,
+      suggestions: ['Answer next question', 'Estimate Cost', 'Book Demo', 'Contact Expert'],
+      source: 'fallback'
+    };
+  }
 }
 
 export async function analyzeBusiness({ message }) {
-  await delay(450);
-  return {
-    score: 74,
-    maturity: 68,
-    readiness: 81,
-    risks: ['Manual dependency', 'Reporting delay', 'Follow-up leakage'],
-    message: buildRichReply(message || 'business automation')
-  };
+  const result = buildGroundedFallback(message || 'business automation');
+  await delay(220);
+  return { message: result.reply, confidence: result.confidence };
 }
 
 export async function estimateCost(form) {
-  await delay(250);
-  const base = { Website: 75000, ERP: 350000, 'Mobile App': 250000, Cloud: 125000, AI: 250000, CRM: 180000, Inventory: 180000, Hospital: 450000, School: 300000 }[form.type] || 150000;
+  await delay(200);
+  const base = { Website: 75000, ERP: 350000, 'Mobile App': 250000, Cloud: 125000, 'AI Automation': 250000, CRM: 180000, Inventory: 180000, Hospital: 450000, School: 300000 }[form.type] || 150000;
   const low = Math.round(base + form.features.length * 45000 + Math.max(0, Number(form.users || 0) - 25) * 1200 + Number(form.integrations || 0) * 55000);
   return { low, high: Math.round(low * 1.75), weeks: form.timeline === 'Urgent' ? '3 - 8 weeks' : '6 - 14 weeks' };
 }
 
 export async function generateProposalDraft(proposal) {
-  await delay(450);
-  const subject = `${proposal.industry} ${proposal.requirements}`;
-  const [, title] = matchKnowledge(subject);
+  await delay(300);
+  const [, title] = matchKnowledge(`${proposal.industry} ${proposal.requirements}`);
   return {
-    text: `ARDS Digital Transformation Proposal
-
-Client: ${proposal.company || 'Prospective Client'}
-Industry: ${proposal.industry || 'To be confirmed'}
-
-Recommended Solution
-${title}
-
-Scope
-${proposal.requirements || 'Discovery, solution design, development, deployment, training, and support.'}
-
-Commercial Direction
-${proposal.budget || 'Final estimate after discovery'}
-
-Timeline
-${proposal.timeline || 'Phased delivery based on confirmed modules'}
-
-Next Step
-Schedule a consultation to confirm users, modules, integrations, data migration, hosting, and support.`
+    text: `Recommended direction: ${title}. This budgetary draft must be validated against users, workflows, integrations, migration, security, hosting, support, and acceptance criteria before a final quotation is issued.`
   };
 }
 
 export async function analyzeWebsite(url) {
-  await delay(350);
+  await delay(300);
   const secure = String(url).startsWith('https://');
   return {
-    score: secure ? 86 : 68,
+    score: null,
     items: [
-      { label: 'Security signal', value: secure ? 'HTTPS detected' : 'Use HTTPS for trust and SEO' },
-      { label: 'SEO readiness', value: 'Review metadata, structured content, schema, local SEO, and page speed' },
-      { label: 'Lead conversion', value: 'Add strong CTAs, WhatsApp, enquiry forms, proof, and analytics events' },
-      { label: 'ARDS recommendation', value: 'Run a conversion-focused redesign and SEO foundation sprint' }
+      { label: 'Security signal', value: secure ? 'HTTPS is present' : 'HTTPS was not detected in the submitted URL' },
+      { label: 'Audit limitation', value: 'This quick check does not crawl the website or measure Core Web Vitals.' },
+      { label: 'Recommended review', value: 'Run Lighthouse, inspect mobile journeys, metadata, schema, accessibility, forms, and analytics events.' },
+      { label: 'Next step', value: 'ARDS can complete a measured technical and conversion audit using the live URL.' }
     ]
   };
 }
 
 export async function analyzeDocumentFile(file) {
-  await delay(400);
+  await delay(300);
   return {
     filename: file.name,
     size_kb: Math.round(file.size / 1024),
-    category: 'Frontend document intake',
-    extracted_signals: ['Requirement document', 'Scope mapping required', 'Proposal-ready input'],
-    recommendations: ['Confirm project type, users, deadline, modules, integrations, and budget range.']
+    category: 'Document received, content not yet extracted',
+    extracted_signals: ['File metadata captured', 'No unsupported claim of document reading'],
+    recommendations: ['Share the key requirements in chat or connect a secure document extraction service.']
   };
 }
 
 export async function bookMeeting(lead) {
-  await delay(250);
+  await delay(200);
   return { status: 'ready', handoff: `Name: ${lead.name}\nCompany: ${lead.company}\nPhone: ${lead.phone}\nInterest: ${lead.interest}` };
 }

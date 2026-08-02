@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useLocation} from 'react-router-dom';
 import {motion} from 'framer-motion';
 import {Facebook,Instagram,Linkedin,MessageCircle,ArrowRight,MapPin,Mail,Phone,Globe2,Clock3,Send,Check} from 'lucide-react';
 import logo from '@/assets/logo.png';
+import {servicePath} from '@/data/serviceDetails';
 import './Footer.css';
 
 const services=['Website Development','Mobile App Development','AI Automation','ERP Solutions','Business Automation','Cloud Solutions','Custom Software','Digital Marketing','Cyber Security','Web Hosting'];
@@ -16,9 +17,22 @@ const socials=[
 ];
 const reveal={initial:{opacity:0,y:24},whileInView:{opacity:1,y:0},viewport:{once:true,margin:'-60px'},transition:{duration:.55,ease:[.22,1,.36,1]}};
 
+const footerServicePath=name=>{
+ if(name==='University ERP')return '/services/college-erp';
+ if(name==='Inventory Management')return '/services/inventory';
+ if(name==='Hostel Management')return '/services/custom-software';
+ return servicePath(name);
+};
+
 export default function Footer(){
  const [email,setEmail]=useState(''),[sent,setSent]=useState(false);
+ const location=useLocation();
  const subscribe=e=>{e.preventDefault();setSent(true);setEmail('');setTimeout(()=>setSent(false),2500)};
+ const handleInternalLink=event=>{
+  if(event.currentTarget.getAttribute('href')===location.pathname){
+   window.scrollTo({top:0,behavior:'smooth'});
+  }
+ };
  return <footer className="light-footer">
   <div className="footer-wave" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 74C218 10 416 12 650 66c255 58 491 51 790-39v93H0Z"/></svg></div>
   <div className="footer-mesh"/><div className="footer-blob fb-one"/><div className="footer-blob fb-two"/><div className="footer-dots"/>
@@ -31,18 +45,18 @@ export default function Footer(){
 
    <div className="light-footer-grid">
     <motion.div className="lf-company" {...reveal}>
-     <Link to="/" className="lf-logo"><img src={logo} alt="Alpenrose Digital Solutions logo"/><span><b>Alpenrose</b><strong>Digital Solutions</strong></span></Link>
+     <Link to="/" className="lf-logo" onClick={handleInternalLink}><img src={logo} alt="Alpenrose Digital Solutions logo"/><span><b>Alpenrose</b><strong>Digital Solutions</strong></span></Link>
      <p className="lf-tagline">Empowering Businesses Through Innovative Digital Transformations</p>
      <p className="lf-description">We build AI-powered software, ERP solutions, websites, mobile applications, cloud platforms, and automation systems that help organizations grow faster and smarter.</p>
      <div className="lf-socials">{socials.map(([name,Icon,url],i)=><motion.a href={url} aria-label={name} target={url.startsWith('http')?'_blank':undefined} rel="noreferrer" key={name} whileHover={{scale:1.12,rotate:i%2?5:-5,y:-3}}><Icon/></motion.a>)}</div>
     </motion.div>
-    <motion.div className="lf-column" {...reveal} transition={{...reveal.transition,delay:.06}}><h3>Services</h3>{services.map(x=><Link className="lf-link" to="/services" key={x}>{x}</Link>)}</motion.div>
-    <motion.div className="lf-column" {...reveal} transition={{...reveal.transition,delay:.12}}><h3>ERP Solutions</h3>{erp.map(x=><Link className="lf-link" to="/services" key={x}>{x}</Link>)}</motion.div>
-    <motion.div className="lf-column" {...reveal} transition={{...reveal.transition,delay:.18}}><h3>Quick Links</h3>{quick.map(([x,url])=><Link className="lf-link" to={url} key={x}>{x}</Link>)}</motion.div>
-    <motion.div className="lf-contact" {...reveal} transition={{...reveal.transition,delay:.24}}><h3>Contact</h3><a href="https://maps.google.com/?q=Patna+Bihar" target="_blank" rel="noreferrer"><span><MapPin/></span><div><small>Office</small><b>Patna, Bihar, India</b></div></a><a href="tel:+919308579699"><span><Phone/></span><div><small>Call</small><b>+91 9308579699</b></div></a><a href="mailto:business@ards.in"><span><Mail/></span><div><small>Email</small><b>business@ards.in</b></div></a><a href="https://ards.in"><span><Globe2/></span><div><small>Website</small><b>www.ards.in</b></div></a><div className="business-hours"><Clock3/><div><small>Business Hours</small><b>Monday–Saturday</b><span>9:00 AM – 6:00 PM</span></div></div><Link className="consult-btn" to="/contact"><i/>Book Free Consultation <ArrowRight/></Link></motion.div>
+    <motion.div className="lf-column" {...reveal} transition={{...reveal.transition,delay:.06}}><h3>Services</h3>{services.map(x=><Link className="lf-link" to={footerServicePath(x)} onClick={handleInternalLink} key={x}>{x}</Link>)}</motion.div>
+    <motion.div className="lf-column" {...reveal} transition={{...reveal.transition,delay:.12}}><h3>ERP Solutions</h3>{erp.map(x=><Link className="lf-link" to={footerServicePath(x)} onClick={handleInternalLink} key={x}>{x}</Link>)}</motion.div>
+    <motion.div className="lf-column" {...reveal} transition={{...reveal.transition,delay:.18}}><h3>Quick Links</h3>{quick.map(([x,url])=><Link className="lf-link" to={url} onClick={handleInternalLink} key={x}>{x}</Link>)}</motion.div>
+    <motion.div className="lf-contact" {...reveal} transition={{...reveal.transition,delay:.24}}><h3>Contact</h3><a href="https://maps.google.com/?q=Patna+Bihar" target="_blank" rel="noreferrer"><span><MapPin/></span><div><small>Office</small><b>Patna, Bihar, India</b></div></a><a href="tel:+919308579699"><span><Phone/></span><div><small>Call</small><b>+91 9308579699</b></div></a><a href="mailto:business@ards.in"><span><Mail/></span><div><small>Email</small><b>business@ards.in</b></div></a><a href="https://ards.in"><span><Globe2/></span><div><small>Website</small><b>www.ards.in</b></div></a><div className="business-hours"><Clock3/><div><small>Business Hours</small><b>Monday–Saturday</b><span>9:00 AM – 6:00 PM</span></div></div><Link className="consult-btn" to="/contact" onClick={handleInternalLink}><i/>Book Free Consultation <ArrowRight/></Link></motion.div>
    </div>
    <div className="lf-divider"/>
-   <div className="lf-bottom"><span>© 2026 Alpenrose Digital Solutions. All Rights Reserved.</span><div><Link to="/privacy-policy">Privacy Policy</Link><Link to="/terms-conditions">Terms</Link><a href="/sitemap.xml">Sitemap</a></div></div>
+    <div className="lf-bottom"><span>© 2026 Alpenrose Digital Solutions. All Rights Reserved.</span><div><Link to="/privacy-policy" onClick={handleInternalLink}>Privacy Policy</Link><Link to="/terms-conditions" onClick={handleInternalLink}>Terms</Link><a href="/sitemap.xml">Sitemap</a></div></div>
   </div>
  </footer>
 }
